@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PMSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="SupplierShipment">
+    <Key>
+      <PropertyRef Name="ShipCode" />
+    </Key>
+    <Property Name="SupplierShipmentOID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ShipCode" Type="varchar" MaxLength="16" Nullable="false" />
+    <Property Name="InventoryCode" Type="varchar" MaxLength="40" Nullable="false" />
+    <Property Name="OrderID" Type="varchar" MaxLength="14" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="CreateEmployeeID" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="LastModifiedDate" Type="datetime" />
+    <Property Name="LastModifiedEmployeeID" Type="varchar" MaxLength="10" />
+    <Property Name="Remark" Type="nvarchar" MaxLength="128" />
+  </EntityType>
+  <EntityType Name="SupplierShipmentDtl">
+    <Key>
+      <PropertyRef Name="SupplierShipmentDtlOID" />
+    </Key>
+    <Property Name="SupplierShipmentDtlOID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ShipCode" Type="varchar" MaxLength="16" Nullable="false" />
+    <Property Name="InventoryCode" Type="varchar" MaxLength="40" Nullable="false" />
+    <Property Name="ShipQuantity" Type="int" Nullable="false" />
+    <Property Name="Remark" Type="nvarchar" MaxLength="128" />
+  </EntityType>
+  <EntityType Name="SupplierStock">
+    <Key>
+      <PropertyRef Name="SupplierStockOID" />
+    </Key>
+    <Property Name="SupplierStockOID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PartNumber" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="PartName" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="PartSpec" Type="nvarchar" MaxLength="30" />
+    <Property Name="InventoryCode" Type="varchar" MaxLength="40" Nullable="false" />
+    <Property Name="UnitsInStock" Type="int" Nullable="false" />
+    <Property Name="UnitsOnStockOutOrder" Type="int" />
+    <Property Name="UnitsOnStockInOrder" Type="int" />
+    <Property Name="Shelf life" Type="datetime" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="CreateEmployeeID" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="LastModifiedDate" Type="datetime" />
+    <Property Name="LastModifiedEmployeeID" Type="varchar" MaxLength="10" />
+  </EntityType>
+  <EntityContainer Name="PMSModelStoreContainer">
+    <EntitySet Name="SupplierShipment" EntityType="Self.SupplierShipment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SupplierShipmentDtl" EntityType="Self.SupplierShipmentDtl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SupplierStock" EntityType="Self.SupplierStock" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="PMSModelStoreContainer" CdmEntityContainer="PMSEntities">
+    <EntitySetMapping Name="SupplierStock">
+      <EntityTypeMapping TypeName="PMSModel.SupplierStock">
+        <MappingFragment StoreEntitySet="SupplierStock">
+          <ScalarProperty Name="SupplierStockOID" ColumnName="SupplierStockOID" />
+          <ScalarProperty Name="PartNumber" ColumnName="PartNumber" />
+          <ScalarProperty Name="PartName" ColumnName="PartName" />
+          <ScalarProperty Name="PartSpec" ColumnName="PartSpec" />
+          <ScalarProperty Name="InventoryCode" ColumnName="InventoryCode" />
+          <ScalarProperty Name="UnitsInStock" ColumnName="UnitsInStock" />
+          <ScalarProperty Name="UnitsOnStockOutOrder" ColumnName="UnitsOnStockOutOrder" />
+          <ScalarProperty Name="UnitsOnStockInOrder" ColumnName="UnitsOnStockInOrder" />
+          <ScalarProperty Name="Shelf_life" ColumnName="Shelf life" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CreateEmployeeID" ColumnName="CreateEmployeeID" />
+          <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+          <ScalarProperty Name="LastModifiedEmployeeID" ColumnName="LastModifiedEmployeeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

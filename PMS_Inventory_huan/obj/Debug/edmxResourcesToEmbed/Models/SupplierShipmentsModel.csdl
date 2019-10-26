@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PMSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="SupplierShipment">
+    <Key>
+      <PropertyRef Name="ShipCode" />
+    </Key>
+    <Property Name="SupplierShipmentOID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ShipCode" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="InventoryCode" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="OrderID" Type="String" MaxLength="14" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreateEmployeeID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="LastModifiedEmployeeID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Remark" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityContainer Name="PMSEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="SupplierShipment" EntityType="Self.SupplierShipment" />
+    <EntitySet Name="SupplierStock" EntityType="PMSModel.SupplierStock" />
+    <EntitySet Name="SupplierShipmentDtl" EntityType="PMSModel.SupplierShipmentDtl" />
+  </EntityContainer>
+  <EntityType Name="SupplierStock">
+    <Key>
+      <PropertyRef Name="SupplierStockOID" />
+    </Key>
+    <Property Name="SupplierStockOID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PartNumber" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="PartName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="PartSpec" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="InventoryCode" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="UnitsInStock" Type="Int32" Nullable="false" />
+    <Property Name="UnitsOnStockOutOrder" Type="Int32" />
+    <Property Name="UnitsOnStockInOrder" Type="Int32" />
+    <Property Name="Shelf_life" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreateEmployeeID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="LastModifiedEmployeeID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="SupplierShipmentDtl">
+    <Key>
+      <PropertyRef Name="SupplierShipmentDtlOID" />
+    </Key>
+    <Property Name="SupplierShipmentDtlOID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ShipCode" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Name="InventoryCode" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="ShipQuantity" Type="Int32" Nullable="false" />
+    <Property Name="Remark" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+  </EntityType>
+</Schema>

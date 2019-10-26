@@ -1,0 +1,67 @@
+﻿@model PMS_Inventory_huan.Models.ShipNotice
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ShipNotice</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ShipNoticeOID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShipNoticeOID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PurchaseOrderID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PurchaseOrderID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShipDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShipDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployeeID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmployeeID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CompanyCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CompanyCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SupplierAccountID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SupplierAccountID)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ShipNoticeID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

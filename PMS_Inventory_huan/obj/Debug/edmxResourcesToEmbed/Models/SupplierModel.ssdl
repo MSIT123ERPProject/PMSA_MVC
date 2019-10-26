@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PMSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="SourceList">
+    <Key>
+      <PropertyRef Name="SourceListOID" />
+    </Key>
+    <Property Name="SourceListOID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PartNumber" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="Batch" Type="int" Nullable="false" />
+    <Property Name="Discount" Type="decimal" Precision="3" Scale="2" Nullable="false" />
+    <Property Name="DiscountBeginDate" Type="datetime" />
+    <Property Name="DiscountEndDate" Type="datetime" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="UnitsInStock" Type="int" />
+  </EntityType>
+  <EntityContainer Name="PMSModelStoreContainer">
+    <EntitySet Name="SourceList" EntityType="Self.SourceList" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

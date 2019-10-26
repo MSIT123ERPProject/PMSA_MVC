@@ -1,0 +1,78 @@
+﻿@model PMS_Inventory_huan.Models.PurchaseOrder
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@PMS_Inventory_huan.Resources.AppResource.ShipNotice</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <h4>@PMS_Inventory_huan.Resources.AppResource.Ship</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.PurchaseOrderID, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <p class="form-control">@ViewBag.PurchaseOrderID</p>
+            @Html.ValidationMessageFor(model => model.PurchaseOrderID, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.Label(PMS_Inventory_huan.Resources.AppResource.ShipmentAmount, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <p class="form-control">@ViewBag.amount</p> 
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.ReceiverName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <p class="form-control">@ViewBag.ReceiverName</p>
+            @Html.ValidationMessageFor(model => model.ReceiverName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ReceiverTel, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <p class="form-control">@ViewBag.ReceiverTel</p>
+            @Html.ValidationMessageFor(model => model.ReceiverTel, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.ReceiverMobile, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <p class="form-control">@ViewBag.ReceiverMobile</p>
+            @Html.ValidationMessageFor(model => model.ReceiverMobile, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ReceiptAddress, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <p class="form-control">@ViewBag.ReceiptAddress</p>
+            @Html.ValidationMessageFor(model => model.ReceiptAddress, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            @Html.ActionLink(PMS_Inventory_huan.Resources.AppResource.ShipCheck, "shipCheck", new { purchaseOrderID = Model.PurchaseOrderID })
+            <a href="@Url.Action("shipCheck","ShipNotices")"><input type="submit" value=@PMS_Inventory_huan.Resources.AppResource.ShipCheck class="btn btn-default" /></a>
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

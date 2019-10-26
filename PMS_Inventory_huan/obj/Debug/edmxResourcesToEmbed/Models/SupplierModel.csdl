@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PMSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="SourceList">
+    <Key>
+      <PropertyRef Name="SourceListOID" />
+    </Key>
+    <Property Name="SourceListOID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PartNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Batch" Type="Int32" Nullable="false" />
+    <Property Name="Discount" Type="Decimal" Precision="3" Scale="2" Nullable="false" />
+    <Property Name="DiscountBeginDate" Type="DateTime" Precision="3" />
+    <Property Name="DiscountEndDate" Type="DateTime" Precision="3" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="UnitsInStock" Type="Int32" />
+  </EntityType>
+  <EntityContainer Name="PMSEntities2" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="SourceList" EntityType="Self.SourceList" />
+  </EntityContainer>
+</Schema>

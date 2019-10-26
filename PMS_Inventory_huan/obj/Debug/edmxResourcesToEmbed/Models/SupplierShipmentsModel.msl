@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="PMSModelStoreContainer" CdmEntityContainer="PMSEntities1">
+    <EntitySetMapping Name="SupplierShipment">
+      <EntityTypeMapping TypeName="PMSModel.SupplierShipment">
+        <MappingFragment StoreEntitySet="SupplierShipment">
+          <ScalarProperty Name="SupplierShipmentOID" ColumnName="SupplierShipmentOID" />
+          <ScalarProperty Name="ShipCode" ColumnName="ShipCode" />
+          <ScalarProperty Name="InventoryCode" ColumnName="InventoryCode" />
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CreateEmployeeID" ColumnName="CreateEmployeeID" />
+          <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+          <ScalarProperty Name="LastModifiedEmployeeID" ColumnName="LastModifiedEmployeeID" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SupplierStock">
+      <EntityTypeMapping TypeName="PMSModel.SupplierStock">
+        <MappingFragment StoreEntitySet="SupplierStock">
+          <ScalarProperty Name="LastModifiedEmployeeID" ColumnName="LastModifiedEmployeeID" />
+          <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+          <ScalarProperty Name="CreateEmployeeID" ColumnName="CreateEmployeeID" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="Shelf_life" ColumnName="Shelf life" />
+          <ScalarProperty Name="UnitsOnStockInOrder" ColumnName="UnitsOnStockInOrder" />
+          <ScalarProperty Name="UnitsOnStockOutOrder" ColumnName="UnitsOnStockOutOrder" />
+          <ScalarProperty Name="UnitsInStock" ColumnName="UnitsInStock" />
+          <ScalarProperty Name="InventoryCode" ColumnName="InventoryCode" />
+          <ScalarProperty Name="PartSpec" ColumnName="PartSpec" />
+          <ScalarProperty Name="PartName" ColumnName="PartName" />
+          <ScalarProperty Name="PartNumber" ColumnName="PartNumber" />
+          <ScalarProperty Name="SupplierStockOID" ColumnName="SupplierStockOID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SupplierShipmentDtl">
+      <EntityTypeMapping TypeName="PMSModel.SupplierShipmentDtl">
+        <MappingFragment StoreEntitySet="SupplierShipmentDtl">
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="ShipQuantity" ColumnName="ShipQuantity" />
+          <ScalarProperty Name="InventoryCode" ColumnName="InventoryCode" />
+          <ScalarProperty Name="ShipCode" ColumnName="ShipCode" />
+          <ScalarProperty Name="SupplierShipmentDtlOID" ColumnName="SupplierShipmentDtlOID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

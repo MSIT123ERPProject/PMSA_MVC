@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs" Space="C-S">
+  <Alias Key="Model" Value="InventoryForSupplierModel" />
+  <Alias Key="Target" Value="InventoryForSupplierModel.Store" />
+  <EntityContainerMapping CdmEntityContainer="InventoryForSupplierModelContainer" StorageEntityContainer="InventoryForSupplierModelStoreContainer">
+    <EntitySetMapping Name="SupplierStock">
+      <EntityTypeMapping TypeName="InventoryForSupplierModel.SupplierStock">
+        <MappingFragment StoreEntitySet="SupplierStock">
+          <ScalarProperty Name="LastModifiedEmployeeID" ColumnName="LastModifiedEmployeeID" />
+          <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+          <ScalarProperty Name="CreateEmployeeID" ColumnName="CreateEmployeeID" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="Shelf_life" ColumnName="Shelf life" />
+          <ScalarProperty Name="UnitsOnStockInOrder" ColumnName="UnitsOnStockInOrder" />
+          <ScalarProperty Name="UnitsOnStockOutOrder" ColumnName="UnitsOnStockOutOrder" />
+          <ScalarProperty Name="UnitsInStock" ColumnName="UnitsInStock" />
+          <ScalarProperty Name="InventoryCode" ColumnName="InventoryCode" />
+          <ScalarProperty Name="PartSpec" ColumnName="PartSpec" />
+          <ScalarProperty Name="PartName" ColumnName="PartName" />
+          <ScalarProperty Name="PartNumber" ColumnName="PartNumber" />
+          <ScalarProperty Name="SupplierStockOID" ColumnName="SupplierStockOID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

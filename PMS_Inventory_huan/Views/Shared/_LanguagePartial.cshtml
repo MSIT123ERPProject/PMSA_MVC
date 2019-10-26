@@ -1,0 +1,29 @@
+﻿
+@*<ul class="nav navbar-nav navbar-right">
+    <li>
+        @Html.ActionLink("中文", "SetLanguage", "Account", new { cultureName = "zh-TW" })
+    </li>
+    <li>
+        @Html.ActionLink("日本語", "SetLanguage", "Account", new { cultureName = "ja" }, new { @class = "btn btn-primary", @id = "navbrand" })
+    </li>
+    <li>
+        @Html.ActionLink("English", "SetLanguage", "Account", new { cultureName = "en-US" }, new { @class = "btn btn-primary", @id = "navbrand" })
+    </li>
+</ul>*@
+
+
+<li class="nav-item">
+    <a class="nav-link" href="@Url.Action("SetLanguage", "Account", new { cultureName = "zh-TW" })">
+        <span>中文</span>
+    </a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href=" @Url.Action("SetLanguage", "Account", new { cultureName = "ja" })">
+        <span>日本語</span>
+    </a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="@Url.Action( "SetLanguage", "Account", new { cultureName = "en-US" })">
+        <span>English</span>
+    </a>
+</li>

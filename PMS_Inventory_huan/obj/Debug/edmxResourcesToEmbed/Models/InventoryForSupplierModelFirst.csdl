@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="InventoryForSupplierModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+  <EntityContainer Name="InventoryForSupplierModelContainer" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="SupplierStock" EntityType="InventoryForSupplierModel.SupplierStock" />
+  </EntityContainer>
+  <EntityType Name="SupplierStock">
+    <Key>
+      <PropertyRef Name="SupplierStockOID" />
+    </Key>
+    <Property Name="SupplierStockOID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PartNumber" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="PartName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="PartSpec" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="InventoryCode" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="UnitsInStock" Type="Int32" Nullable="false" />
+    <Property Name="UnitsOnStockOutOrder" Type="Int32" />
+    <Property Name="UnitsOnStockInOrder" Type="Int32" />
+    <Property Name="Shelf_life" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreateEmployeeID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="LastModifiedEmployeeID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+  </EntityType>
+</Schema>
