@@ -35,6 +35,13 @@ namespace layoutTest
                         "~/Scripts/sbTemplate_js/sb-admin.js",
                         "~/Scripts/dataTables_js/dataTables.bootstrap4.js",
                         "~/Scripts/dataTables_js/jquery.dataTables.js"));
+            //sweetAlertTest
+            bundles.Add(new ScriptBundle("~/bundles/sweetalertJS").Include(
+                "~/scripts/sweetAlert/sweetalert2.all.js"
+                ));
+            bundles.Add(new StyleBundle("~/bundles/sweetalertCSS").Include(
+                "~/Content/sweetAlert/sweetalert2.css"
+                ));
         }
     }
 }

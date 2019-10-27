@@ -19,7 +19,7 @@ namespace PMS_Inventory_huan.Resources {
     // 類別透過 ResGen 或 Visual Studio 這類工具。
     // 若要加入或移除成員，請編輯您的 .ResX 檔，然後重新執行 ResGen
     // (利用 /str 選項)，或重建您的 VS 專案。
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class AppResource {
@@ -138,6 +138,24 @@ namespace PMS_Inventory_huan.Resources {
         public static string EmployeeID {
             get {
                 return ResourceManager.GetString("EmployeeID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 Inventory 的當地語系化字串。
+        /// </summary>
+        public static string Inventory {
+            get {
+                return ResourceManager.GetString("Inventory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 InventoryDtls 的當地語系化字串。
+        /// </summary>
+        public static string InventoryDtls {
+            get {
+                return ResourceManager.GetString("InventoryDtls", resourceCulture);
             }
         }
         
@@ -408,6 +426,15 @@ namespace PMS_Inventory_huan.Resources {
         public static string UnshippedOrder {
             get {
                 return ResourceManager.GetString("UnshippedOrder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 WarehouseInfoes 的當地語系化字串。
+        /// </summary>
+        public static string WarehouseInfoes {
+            get {
+                return ResourceManager.GetString("WarehouseInfoes", resourceCulture);
             }
         }
     }

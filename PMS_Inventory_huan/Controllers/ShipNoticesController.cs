@@ -106,7 +106,7 @@ namespace PMS_Inventory_huan.Controllers
                 amount = amount + (int)x.Total;
             }
 
-            //TempData.Add("purchaseOrderID", purchaseOrder.PurchaseOrderID);
+            ViewBag.failMessage = Convert.ToString(TempData["failMessage"]);
             ViewBag.PurchaseOrderID = purchaseOrder.PurchaseOrderID;
             ViewBag.ReceiverName = purchaseOrder.ReceiverName;
             ViewBag.ReceiverTel = purchaseOrder.ReceiverTel;
@@ -140,6 +140,7 @@ namespace PMS_Inventory_huan.Controllers
         }
 
         //出貨確認Controller，要修改採購單狀態、以及貨源清單庫存數量
+        [HttpPost]
         public ActionResult shipCheck(string purchaseOrderID)
         {
             if (purchaseOrderID != null)
@@ -166,20 +167,6 @@ namespace PMS_Inventory_huan.Controllers
                         {
                             sourceListTemp.Add(j.SourceListID);
                             PurchaseOrderDtlCodeTemp.Add(i.PurchaseOrderDtlCode);
-                            //SourceList sourceList = db.SourceList.Find(j.SourceListID);
-                            //PurchaseOrderDtl purchaseOrderDtl = db.PurchaseOrderDtl.Find(i.PurchaseOrderDtlCode);
-                            //int temp = sourceList.UnitsInStock - purchaseOrderDtl.TotalPartQty;
-                            //if (temp >= 0)
-                            //{
-                            //    sourceList.UnitsInStock = temp;
-                            //    Content($"<script> alert('{PMS_Inventory_huan.Resources.AppResource.ShipSucceeded}')</script>");
-                            //}
-                            //else
-                            //{
-                            //    return Content("<script> alert('StocksIsNotEnough')</script>");
-                            //}
-                            //db.Entry(sourceList).State = EntityState.Modified;
-                            //db.SaveChanges();
                         }
                     }
                 }
@@ -191,15 +178,25 @@ namespace PMS_Inventory_huan.Controllers
                     if (temp >= 0)
                     {
                         sourceList.UnitsInStock = temp;
-                        Content($"<script> alert('{PMS_Inventory_huan.Resources.AppResource.ShipSucceeded}')</script>");
+
+
                     }
-                    //else
-                    //{
-                    //    return Content("<script> alert('StocksIsNotEnough')</script>");
-                    //}
+                    else
+                    {
+                        TempData.Add("failMessage", $"<script>Swal.fire('{PMS_Inventory_huan.Resources.AppResource.NoStock}')</script>");
+                        PurchaseOrder po = db.PurchaseOrder.Find(purchaseOrderID);
+                        var query = from nn in db.PurchaseOrderDtl where nn.PurchaseOrderID == purchaseOrderID select nn;
+                        int amount = 0;
+                        foreach (var x in query)
+                        {
+                            amount = amount + (int)x.Total;
+                        }
+                        ViewBag.amount = amount;
+                        return RedirectToAction("Edit", "ShipNotices", new { id = purchaseOrderID });
+                    }
                     db.Entry(sourceList).State = EntityState.Modified;
                     //db.Entry(purchaseOrderDtl).State = EntityState.Modified;
-                    db.SaveChanges();
+                    // db.SaveChanges();
                 }
                 //修改採購單狀態
                 PurchaseOrder purchaseOrder = db.PurchaseOrder.Find(purchaseOrderID);

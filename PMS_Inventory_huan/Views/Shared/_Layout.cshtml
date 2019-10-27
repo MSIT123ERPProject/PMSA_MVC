@@ -1,12 +1,18 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
+
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/sweetalertJS")
+    @Styles.Render("~/bundles/sweetalertCSS")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/allpluginjs")
     <!-- Optional: include a polyfill for ES6 Promises for IE11 -->
     @*<script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>*@
 </head>
@@ -78,68 +84,105 @@
                     <a class="dropdown-item" href="blank.html">Blank Page</a>
                 </div>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="@Url.Action("Contact", "Home")">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>連絡人</span>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>@PMS_Inventory_huan.Resources.AppResource.Inventory</span>
                 </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="@Url.Action("Contact", "Home")">
+                <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+                    <h6 class="dropdown-header">Login Screens:</h6>
+                    <a class="dropdown-item" href="~/Views/Account/Login.cshtml">Login</a>
+                    <a class="dropdown-item" href="register.cshtml">Register</a>
+                    <a class="dropdown-item" href="forgot-password.cshtml">Forgot Password</a>
+                    <div class="dropdown-divider"></div>
+                    <h6 class="dropdown-header">@PMS_Inventory_huan.Resources.AppResource.Inventory</h6>
+                    <a class="nav-link" href="@Url.Action("Index", "WarehouseInfoes")">
+                        @PMS_Inventory_huan.Resources.AppResource.WarehouseInfoes
                     <i class="fas fa-fw fa-table"></i>
-                    <span>加油*\^o^/*</span>
-                </a>
-            </li>
-            @Html.Partial("_LanguagePartial")
-        </ul>
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
-            <div class="container-fluid">
-                <!-- Breadcrumbs-->
-                <!-- Icon Cards-->
-                <!-- Area Chart Example-->
-                @RenderBody()
+                    <a class="nav-link" href="@Url.Action("Index", "InventoryDtls")">
+                        @PMS_Inventory_huan.Resources.AppResource.InventoryDtls
+                        <i class="fas fa-fw fa-table"></i>
+                        @*<a class="dropdown-item" href="~/Views/SupplierShipments/Index.cshtml">庫存管理(供應商)</a>*@
+                        <a class="dropdown-item" href="404.html">404 Page</a>
+                        <a class="dropdown-item" href="blank.html">Blank Page</a>
             </div>
-            <!-- /.container-fluid -->
-            <!-- Sticky Footer -->
-            <footer class="sticky-footer">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>&copy; @DateTime.Now.Year</span>&copy;-&copy;<span>@PMS_Inventory_huan.Resources.AppResource.chokobo</span>
-                    </div>
-                </div>
-            </footer>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="@Url.Action("Contact", "Home")">
+                <i class="fas fa-fw fa-chart-area"></i>
+                <span>連絡人</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="@Url.Action("Contact", "Home")">
+                <i class="fas fa-fw fa-table"></i>
+                <span>加油*\^o^/*</span>
+            </a>
+        </li>
+        @Html.Partial("_LanguagePartial")
+    </ul>
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+        <div class="container-fluid">
+            <!-- Breadcrumbs-->
+            <!-- Icon Cards-->
+            <!-- Area Chart Example-->
+            @RenderBody()
         </div>
-        <!-- /.content-wrapper -->
+        <!-- /.container-fluid -->
+        <!-- Sticky Footer -->
+        <footer class="sticky-footer">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span>&copy; @DateTime.Now.Year</span>&copy;-&copy;<span>@PMS_Inventory_huan.Resources.AppResource.chokobo</span>
+                </div>
+            </div>
+        </footer>
     </div>
-    <!-- /#wrapper -->
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
-                </div>
+    <!-- /.content-wrapper -->
+</div>
+<!-- /#wrapper -->
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+<!-- Logout Modal-->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-primary" href="login.html">Logout</a>
             </div>
         </div>
-    </div> 
+    </div>
+</div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/allpluginjs")
 
-    @RenderSection("scripts", required: false)
+
+@RenderSection("scripts", required: false)
+
+<script>
+    $('#dataTable').dataTable({
+        "language": {
+            "processing": "努力加載中",
+            "emptyTable": "無資料",
+            "info": "顯示 第 _PAGE_ 頁-總共 _PAGES_ 頁",
+            "lengthMenu": "每頁顯示 _MENU_ 條記錄",
+            "search": "搜尋:",
+            "paginate": {
+                "previous": "上一頁",
+                "next": "下一頁"
+            }
+        }
+    });
+</script>
 </body>
 </html>

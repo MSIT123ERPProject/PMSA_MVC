@@ -12,7 +12,6 @@ namespace PMS_Inventory_huan.Models
         public string PartNumber { get; set; }
         [Display(Name = "QtyPerUnit", ResourceType = typeof(AppResource))]
         public int QtyPerUnit { get; set; }
-
         public Nullable<int> MOQ { get; set; }
         [Display(Name = "UnitPrice", ResourceType = typeof(AppResource))]
         public int UnitPrice { get; set; }

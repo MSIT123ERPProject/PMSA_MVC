@@ -234,4 +234,13 @@
   <data name="Supplier" xml:space="preserve">
     <value>供應商</value>
   </data>
+  <data name="Inventory" xml:space="preserve">
+    <value>倉管</value>
+  </data>
+  <data name="WarehouseInfoes" xml:space="preserve">
+    <value>倉庫資訊</value>
+  </data>
+  <data name="InventoryDtls" xml:space="preserve">
+    <value>庫存明細</value>
+  </data>
 </root>

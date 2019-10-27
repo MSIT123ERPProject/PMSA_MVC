@@ -172,7 +172,7 @@
     <Property Name="PurchaseRequisitionID" Type="varchar" MaxLength="20" Nullable="false" />
     <Property Name="PurchaseRequisitionDtlCode" Type="varchar" MaxLength="20" Nullable="false" />
     <Property Name="PurchaseOrderID" Type="varchar" MaxLength="20" Nullable="false" />
-    <Property Name="PurchaseOrderDtlCode" Type="varchar" MaxLength="21" Nullable="false" />
+    <Property Name="PurchaseOrderDtlCode" Type="varchar" MaxLength="20" Nullable="false" />
   </EntityType>
   <EntityType Name="PRPORelationTemp">
     <Key>
@@ -206,13 +206,14 @@
       <PropertyRef Name="PurchaseOrderDtlCode" />
     </Key>
     <Property Name="PurchaseOrderDtlOID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="PurchaseOrderDtlCode" Type="varchar" MaxLength="21" Nullable="false" />
+    <Property Name="PurchaseOrderDtlCode" Type="varchar" MaxLength="20" Nullable="false" />
     <Property Name="PurchaseOrderID" Type="varchar" MaxLength="20" Nullable="false" />
     <Property Name="PartNumber" Type="varchar" MaxLength="8" Nullable="false" />
     <Property Name="PartName" Type="nvarchar" MaxLength="30" Nullable="false" />
     <Property Name="PartSpec" Type="nvarchar" MaxLength="40" />
     <Property Name="QtyPerUnit" Type="int" Nullable="false" />
     <Property Name="TotalPartQty" Type="int" Nullable="false" />
+    <Property Name="OriginalUnitPrice" Type="int" Nullable="false" />
     <Property Name="Discount" Type="decimal" Precision="3" Scale="2" Nullable="false" />
     <Property Name="PurchaseUnitPrice" Type="int" Nullable="false" />
     <Property Name="Qty" Type="int" Nullable="false" />
@@ -272,7 +273,7 @@
     <Property Name="PurchaseOrderReceiveDtlOID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="PurchaseOrderReceiveDtlCode" Type="varchar" MaxLength="20" Nullable="false" />
     <Property Name="PurchaseOrderReceiveID" Type="varchar" MaxLength="20" Nullable="false" />
-    <Property Name="PurchaseOrderDtlCode" Type="varchar" MaxLength="21" Nullable="false" />
+    <Property Name="PurchaseOrderDtlCode" Type="varchar" MaxLength="20" Nullable="false" />
     <Property Name="PurchaseQty" Type="int" Nullable="false" />
     <Property Name="PurchaseAmount" Type="int" Nullable="false" />
     <Property Name="RejectQty" Type="int" Nullable="false" />
@@ -368,7 +369,7 @@
     </Key>
     <Property Name="ShipNoticeDtlOID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="ShipNoticeID" Type="varchar" MaxLength="20" Nullable="false" />
-    <Property Name="PurchaseOrderDtlCode" Type="varchar" MaxLength="21" Nullable="false" />
+    <Property Name="PurchaseOrderDtlCode" Type="varchar" MaxLength="20" Nullable="false" />
     <Property Name="ShipQty" Type="int" Nullable="false" />
     <Property Name="ShipAmount" Type="int" Nullable="false" />
     <Property Name="EXP" Type="datetime" />

@@ -235,4 +235,13 @@
   <data name="Supplier" xml:space="preserve">
     <value>Supplier</value>
   </data>
+  <data name="Inventory" xml:space="preserve">
+    <value>Inventory</value>
+  </data>
+  <data name="WarehouseInfoes" xml:space="preserve">
+    <value>WarehouseInfoes</value>
+  </data>
+  <data name="InventoryDtls" xml:space="preserve">
+    <value>InventoryDtls</value>
+  </data>
 </root>

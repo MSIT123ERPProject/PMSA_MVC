@@ -42,6 +42,7 @@ namespace PMS_Inventory_huan.Models
         public Nullable<System.DateTime> ArrivedDate { get; set; }
         public Nullable<int> POChangedOID { get; set; }
         public string SourceListID { get; set; }
+        public int OriginalUnitPrice { get; set; }
     
         public virtual Part Part { get; set; }
         public virtual POChanged POChanged { get; set; }

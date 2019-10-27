@@ -647,7 +647,7 @@
     <Property Name="PurchaseRequisitionID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
     <Property Name="PurchaseRequisitionDtlCode" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
     <Property Name="PurchaseOrderID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-    <Property Name="PurchaseOrderDtlCode" Type="String" Nullable="false" MaxLength="21" FixedLength="false" Unicode="false" />
+    <Property Name="PurchaseOrderDtlCode" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="PurchaseOrder" Relationship="PMSAModel.FK_PRPORelation_PurchaseOrder" FromRole="PRPORelation" ToRole="PurchaseOrder" />
     <NavigationProperty Name="PurchaseOrderDtl" Relationship="PMSAModel.FK_PRPORelation_PurchaseOrderDtl" FromRole="PRPORelation" ToRole="PurchaseOrderDtl" />
     <NavigationProperty Name="PurchaseRequisition" Relationship="PMSAModel.FK_PRPORelation_PurchaseRequisition" FromRole="PRPORelation" ToRole="PurchaseRequisition" />
@@ -696,7 +696,7 @@
       <PropertyRef Name="PurchaseOrderDtlCode" />
     </Key>
     <Property Name="PurchaseOrderDtlOID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="PurchaseOrderDtlCode" Type="String" Nullable="false" MaxLength="21" FixedLength="false" Unicode="false" />
+    <Property Name="PurchaseOrderDtlCode" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
     <Property Name="PurchaseOrderID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
     <Property Name="PartNumber" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
     <Property Name="PartName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
@@ -722,6 +722,7 @@
     <NavigationProperty Name="SourceList" Relationship="PMSAModel.FK_PurchaseOrderDtl_SourceList" FromRole="PurchaseOrderDtl" ToRole="SourceList" />
     <NavigationProperty Name="PurchaseOrderReceiveDtl" Relationship="PMSAModel.FK_PurchaseOrderReceiveDtl_PurchaseOrderDtl" FromRole="PurchaseOrderDtl" ToRole="PurchaseOrderReceiveDtl" />
     <NavigationProperty Name="ShipNoticeDtl" Relationship="PMSAModel.FK_ShipNoticeDtl_PurchaseOrderDtl" FromRole="PurchaseOrderDtl" ToRole="ShipNoticeDtl" />
+    <Property Name="OriginalUnitPrice" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="PurchaseOrderDtlTemp">
     <Key>
@@ -781,7 +782,7 @@
     <Property Name="PurchaseOrderReceiveDtlOID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="PurchaseOrderReceiveDtlCode" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
     <Property Name="PurchaseOrderReceiveID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-    <Property Name="PurchaseOrderDtlCode" Type="String" Nullable="false" MaxLength="21" FixedLength="false" Unicode="false" />
+    <Property Name="PurchaseOrderDtlCode" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
     <Property Name="PurchaseQty" Type="Int32" Nullable="false" />
     <Property Name="PurchaseAmount" Type="Int32" Nullable="false" />
     <Property Name="RejectQty" Type="Int32" Nullable="false" />
@@ -891,7 +892,7 @@
     </Key>
     <Property Name="ShipNoticeDtlOID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="ShipNoticeID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-    <Property Name="PurchaseOrderDtlCode" Type="String" Nullable="false" MaxLength="21" FixedLength="false" Unicode="false" />
+    <Property Name="PurchaseOrderDtlCode" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
     <Property Name="ShipQty" Type="Int32" Nullable="false" />
     <Property Name="ShipAmount" Type="Int32" Nullable="false" />
     <Property Name="EXP" Type="DateTime" Precision="3" />

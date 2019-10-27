@@ -231,4 +231,13 @@
   <data name="Supplier" xml:space="preserve">
     <value>メーカー</value>
   </data>
+  <data name="Inventory" xml:space="preserve">
+    <value>在庫の管理</value>
+  </data>
+  <data name="WarehouseInfoes" xml:space="preserve">
+    <value>在庫の情報</value>
+  </data>
+  <data name="InventoryDtls" xml:space="preserve">
+    <value>在庫の詳細</value>
+  </data>
 </root>

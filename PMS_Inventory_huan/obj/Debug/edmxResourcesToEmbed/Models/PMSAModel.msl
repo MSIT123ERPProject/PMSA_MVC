@@ -251,6 +251,7 @@
     <EntitySetMapping Name="PurchaseOrderDtl">
       <EntityTypeMapping TypeName="PMSAModel.PurchaseOrderDtl">
         <MappingFragment StoreEntitySet="PurchaseOrderDtl">
+          <ScalarProperty Name="OriginalUnitPrice" ColumnName="OriginalUnitPrice" />
           <ScalarProperty Name="SourceListID" ColumnName="SourceListID" />
           <ScalarProperty Name="POChangedOID" ColumnName="POChangedOID" />
           <ScalarProperty Name="ArrivedDate" ColumnName="ArrivedDate" />
