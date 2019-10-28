@@ -30,6 +30,7 @@ namespace PMS_Inventory_huan.Models
         public string PartSpec { get; set; }
         public int QtyPerUnit { get; set; }
         public int TotalPartQty { get; set; }
+        public int OriginalUnitPrice { get; set; }
         public decimal Discount { get; set; }
         public int PurchaseUnitPrice { get; set; }
         public int Qty { get; set; }
@@ -42,7 +43,6 @@ namespace PMS_Inventory_huan.Models
         public Nullable<System.DateTime> ArrivedDate { get; set; }
         public Nullable<int> POChangedOID { get; set; }
         public string SourceListID { get; set; }
-        public int OriginalUnitPrice { get; set; }
     
         public virtual Part Part { get; set; }
         public virtual POChanged POChanged { get; set; }

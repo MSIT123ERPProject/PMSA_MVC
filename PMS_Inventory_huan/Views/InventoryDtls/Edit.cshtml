@@ -5,28 +5,21 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Edit</h2>
+<h2>修改</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>InventoryDtl</h4>
+        <h4>庫存明細</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.InventoryDtlOID, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.InventoryDtlOID, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.InventoryDtlOID, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
         @Html.HiddenFor(model => model.InventoryCode)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.WarehouseCode, "WarehouseCode", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.WarehouseCode, "倉庫名稱", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("WarehouseCode", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.WarehouseCode, "", new { @class = "text-danger" })
@@ -34,7 +27,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.InventoryCategoryCode, "InventoryCategoryCode", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.InventoryCategoryCode, "庫存分類名稱", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("InventoryCategoryCode", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.InventoryCategoryCode, "", new { @class = "text-danger" })
@@ -42,17 +35,19 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.SourceListID, "SourceListID", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.SourceListID, "貨源清單編號", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("SourceListID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("SourceListID", null, htmlAttributes: new { @class = "form-control", @disabled = "disabled" })
+                @Html.HiddenFor(model => model.SourceListID)
                 @Html.ValidationMessageFor(model => model.SourceListID, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.PartNumber, "PartNumber", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.PartNumber, "料件名稱", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("PartNumber", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("PartNumber", null, htmlAttributes: new { @class = "form-control", @disabled = "disabled" })
+                @Html.HiddenFor(model => model.PartNumber)
                 @Html.ValidationMessageFor(model => model.PartNumber, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -92,43 +87,47 @@
         <div class="form-group">
             @Html.LabelFor(model => model.CreateDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.CreateDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.CreateDate, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                @Html.HiddenFor(model => model.CreateDate)
                 @Html.ValidationMessageFor(model => model.CreateDate, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.CreateEmployeeID, "CreateEmployeeID", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("CreateEmployeeID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.CreateEmployeeID, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.CreateEmployeeID, "CreateEmployeeID", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("CreateEmployeeID", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.CreateEmployeeID, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
 
         @*<div class="form-group">
-            @Html.LabelFor(model => model.LastModifiedDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.LastModifiedDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.LastModifiedDate, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
+                @Html.LabelFor(model => model.LastModifiedDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.LastModifiedDate, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.LastModifiedDate, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.LastModifiedEmployeeID, "LastModifiedEmployeeID", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("LastModifiedEmployeeID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.LastModifiedEmployeeID, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.LastModifiedEmployeeID, "LastModifiedEmployeeID", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("LastModifiedEmployeeID", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.LastModifiedEmployeeID, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <button type="submit" class="btn btn-dark"><i class="fa fa-floppy-o"></i>儲存</button>
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    <a class="btn btn-warning" href='@Url.Action("Index")'>
+        <i class="fa fa-mail-reply"></i>@PMS_Inventory_huan.Resources.AppResource.BackToList
+    </a>
 </div>
+

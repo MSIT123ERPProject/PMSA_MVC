@@ -20,13 +20,13 @@ namespace PMS_Inventory_huan.Models
             this.InventoryDtl = new HashSet<InventoryDtl>();
             this.PartCategoryDtl = new HashSet<PartCategoryDtl>();
             this.ProductPart = new HashSet<ProductPart>();
-            this.PurchaseOrderDtl = new HashSet<PurchaseOrderDtl>();
             this.PurchaseOrderDtlTemp = new HashSet<PurchaseOrderDtlTemp>();
             this.PurchaseRequisitionDtl = new HashSet<PurchaseRequisitionDtl>();
             this.PurchaseRequisitionDtlTemp = new HashSet<PurchaseRequisitionDtlTemp>();
             this.SourceList = new HashSet<SourceList>();
             this.StockInDtl = new HashSet<StockInDtl>();
             this.StockOutDtl = new HashSet<StockOutDtl>();
+            this.PurchaseOrderDtl = new HashSet<PurchaseOrderDtl>();
         }
     
         public int PartOID { get; set; }
@@ -46,8 +46,6 @@ namespace PMS_Inventory_huan.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductPart> ProductPart { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PurchaseOrderDtl> PurchaseOrderDtl { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PurchaseOrderDtlTemp> PurchaseOrderDtlTemp { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PurchaseRequisitionDtl> PurchaseRequisitionDtl { get; set; }
@@ -59,5 +57,7 @@ namespace PMS_Inventory_huan.Models
         public virtual ICollection<StockInDtl> StockInDtl { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StockOutDtl> StockOutDtl { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PurchaseOrderDtl> PurchaseOrderDtl { get; set; }
     }
 }

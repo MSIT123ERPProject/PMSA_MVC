@@ -18,9 +18,9 @@ namespace PMS_Inventory_huan.Models
         public SourceList()
         {
             this.InventoryDtl = new HashSet<InventoryDtl>();
-            this.PurchaseOrderDtl = new HashSet<PurchaseOrderDtl>();
             this.PurchaseOrderDtlTemp = new HashSet<PurchaseOrderDtlTemp>();
             this.SourceListDtl = new HashSet<SourceListDtl>();
+            this.PurchaseOrderDtl = new HashSet<PurchaseOrderDtl>();
         }
     
         public string SourceListID { get; set; }
@@ -39,11 +39,11 @@ namespace PMS_Inventory_huan.Models
         public virtual ICollection<InventoryDtl> InventoryDtl { get; set; }
         public virtual Part Part { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PurchaseOrderDtl> PurchaseOrderDtl { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PurchaseOrderDtlTemp> PurchaseOrderDtlTemp { get; set; }
         public virtual SupplierInfo SupplierInfo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SourceListDtl> SourceListDtl { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PurchaseOrderDtl> PurchaseOrderDtl { get; set; }
     }
 }

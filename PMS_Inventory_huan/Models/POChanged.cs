@@ -17,8 +17,8 @@ namespace PMS_Inventory_huan.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public POChanged()
         {
-            this.PurchaseOrderDtl = new HashSet<PurchaseOrderDtl>();
             this.PurchaseOrderDtlTemp = new HashSet<PurchaseOrderDtlTemp>();
+            this.PurchaseOrderDtl = new HashSet<PurchaseOrderDtl>();
         }
     
         public int POChangedOID { get; set; }
@@ -30,8 +30,8 @@ namespace PMS_Inventory_huan.Models
     
         public virtual POChangedCategory POChangedCategory { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PurchaseOrderDtl> PurchaseOrderDtl { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PurchaseOrderDtlTemp> PurchaseOrderDtlTemp { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PurchaseOrderDtl> PurchaseOrderDtl { get; set; }
     }
 }

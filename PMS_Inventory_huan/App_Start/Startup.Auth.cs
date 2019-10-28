@@ -18,6 +18,7 @@ namespace PMS_Inventory_huan
             app.CreatePerOwinContext(ApplicationDbContext.Create);
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
             app.CreatePerOwinContext<ApplicationSignInManager>(ApplicationSignInManager.Create);
+            app.CreatePerOwinContext<ApplicationRoleManager>(ApplicationRoleManager.Create);
 
             // 讓應用程式使用 Cookie 儲存已登入使用者的資訊
             // 並使用 Cookie 暫時儲存使用者利用協力廠商登入提供者登入的相關資訊；
@@ -29,12 +30,15 @@ namespace PMS_Inventory_huan
                 Provider = new CookieAuthenticationProvider
                 {
                     // 讓應用程式在使用者登入時驗證安全性戳記。
-                    // 這是您變更密碼或將外部登入新增至帳戶時所使用的安全性功能。  
-                    OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<ApplicationUserManager, ApplicationUser>(
+                    // 這是您變更密碼或將外部登入新增至帳戶時所使用的安全性功能。
+                    OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<ApplicationUserManager, ApplicationUser, int>(
                         validateInterval: TimeSpan.FromMinutes(30),
-                        regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager))
+                        // THE NAMED ARGUMENT IS DIFFERENT:
+                        regenerateIdentityCallback: (manager, user) => user.GenerateUserIdentityAsync(manager),
+                        // Need to add THIS line because we added the third type argument (int) above:
+                        getUserIdCallback: (claim) => int.Parse(claim.GetUserId()))
                 }
-            });            
+            });
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
             // 讓應用程式在雙因素驗證程序中驗證第二個因素時暫時儲存使用者資訊。

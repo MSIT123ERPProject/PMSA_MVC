@@ -13,18 +13,21 @@ namespace PMS_Inventory_huan.Controllers
     public class SupplierStocksController : BaseController
     {
         private PMSAEntities db = new PMSAEntities();
-
+        private Utility utility = new Utility();
 
         public ActionResult Index()
         {
-            return View(db.SourceList);
+           string supplierCode= utility.GetSupplierAccountByAccountID("").SupplierCode;
+            var r = from n in db.SourceList where n.SupplierCode == supplierCode select n;
+            return View(r);
         }
 
         // GET: SupplierStocks
         [HttpPost]
         public ActionResult Index([Bind(Include = "PartNumber")] SourceList SourceList)
         {
-            IEnumerable<SourceList> result = db.SourceList.Where(s => s.PartNumber == SourceList.PartNumber);
+            string supplierCode = utility.GetSupplierAccountByAccountID("").SupplierCode;
+            IEnumerable<SourceList> result = db.SourceList.Where(s => s.PartNumber == SourceList.PartNumber && s.SupplierCode == supplierCode);
             return View(result);
         }
 
@@ -48,7 +51,7 @@ namespace PMS_Inventory_huan.Controllers
         //}
 
         // GET: SupplierStocks/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(string id)
         {
             if (id == null)
             {

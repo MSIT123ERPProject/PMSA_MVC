@@ -6,6 +6,8 @@ namespace PMS_Inventory_huan.Models
 {
     internal class SourceListMetaData
     {
+        [Display(Name = "SourceListOID",ResourceType =typeof(AppResource))]
+        public int SourceListOID { get; set; }
         [Display(Name = "SourceListID",ResourceType =typeof(AppResource))]
         public string SourceListID { get; set; }
         [Display(Name = "PartNumber", ResourceType = typeof(AppResource))]
@@ -21,9 +23,11 @@ namespace PMS_Inventory_huan.Models
         public int UnitsInStock { get; set; }
         [Display(Name = "UnitsOnOrder", ResourceType = typeof(AppResource))]
         public int UnitsOnOrder { get; set; }
+        [Display(Name = "SafetyQty", ResourceType = typeof(AppResource))]
         public Nullable<int> SafetyQty { get; set; }
+        [Display(Name = "EXP", ResourceType = typeof(AppResource))]
         public Nullable<int> EXP { get; set; }
-        public int SourceListOID { get; set; }
+
 
     }
 }

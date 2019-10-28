@@ -1,10 +1,12 @@
-﻿@model PMS_Inventory_huan.Models.PurchaseOrder
+﻿@model PMS_Inventory_huan.Models.PurchaseOrderViewModel
 
 @{
     ViewBag.Title = "Edit";
 
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+@Html.Raw(ViewBag.failMessage)
 
 <h2>@PMS_Inventory_huan.Resources.AppResource.ShipNotice</h2>
 @using (Html.BeginForm("shipCheck", "ShipNotices", new { purchaseOrderID = Model.PurchaseOrderID }))
@@ -63,31 +65,35 @@
             <div class="col-md-offset-2 col-md-10">
                 @*@Html.ActionLink(PMS_Inventory_huan.Resources.AppResource.ShipCheck, "shipCheck","ShipNotices", new {  purchaseOrderID = Model.PurchaseOrderID })*@
                 @*<button type="submit">Submit</button>*@
-                <a><input name="submit" type="submit" value=@PMS_Inventory_huan.Resources.AppResource.ShipCheck class="btn btn-primary" /></a>
+                <a><input id="submit" onclick="check()" name="submit" type="submit" value=@PMS_Inventory_huan.Resources.AppResource.ShipCheck class="btn btn-primary" /></a>
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink(PMS_Inventory_huan.Resources.AppResource.BackToList, "Index",new {@class="btn btn-primary" })
 </div>
 
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-    @ViewBag.failMessage
-    <script>Swal.fire("庫存不足")</script>
+    <script>
+    $(document).ready(function () {
+              $("#failMessage").html(@Model.failMessage)
+    });
+    </script>
+    @*<script>Swal.fire(`@PMS_Inventory_huan.Resources.AppResource.NoStock`)</script>*@
     @*<script>
             function check() {
                 $ajax({
                     type: 'POST',
-                    url: `@Url.Action("shipCheck", "ShipNotices")`,
-                    data: { purchaseOrderID = Model.PurchaseOrderID}
-                    }).done(function (result) {
+                    url: `@Url.Action("shipCheck", "ShipNotices",new {purchaseOrderID = Model.PurchaseOrderID })`,
 
-                    }).fail(function (err) {
-
+                }).done(function (result) {
+                    Swal.fire('Success');
+                }).fail(function (err) {
+                    Swal.fire('fail');
                     });
             }
         </script>*@

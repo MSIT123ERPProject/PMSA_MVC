@@ -9,6 +9,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using PMS_Inventory_huan.Models;
+using System.Data.Entity;
+using System.Security.Cryptography;
 
 namespace PMS_Inventory_huan.Controllers
 {
@@ -17,12 +19,11 @@ namespace PMS_Inventory_huan.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-        
+
         public AccountController()
         {
         }
 
-       
         [AllowAnonymous]
         public ActionResult SetLanguage(string cultureName)
         {
@@ -33,7 +34,7 @@ namespace PMS_Inventory_huan.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -45,9 +46,9 @@ namespace PMS_Inventory_huan.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -63,7 +64,7 @@ namespace PMS_Inventory_huan.Controllers
             }
         }
 
-        //
+        // 採購系統 ====================================================================================================================
         // GET: /Account/Login
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
@@ -86,15 +87,18 @@ namespace PMS_Inventory_huan.Controllers
 
             // 這不會計算為帳戶鎖定的登入失敗
             // 若要啟用密碼失敗來觸發帳戶鎖定，請變更為 shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var result = await SignInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
                     return RedirectToLocal(returnUrl);
+
                 case SignInStatus.LockedOut:
                     return View("Lockout");
+
                 case SignInStatus.RequiresVerification:
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+
                 case SignInStatus.Failure:
                 default:
                     ModelState.AddModelError("", "登入嘗試失試。");
@@ -127,22 +131,35 @@ namespace PMS_Inventory_huan.Controllers
                 return View(model);
             }
 
-            // 下列程式碼保護兩個因素碼不受暴力密碼破解攻擊。 
-            // 如果使用者輸入不正確的代碼來表示一段指定的時間，則使用者帳戶 
-            // 會有一段指定的時間遭到鎖定。 
+            // 下列程式碼保護兩個因素碼不受暴力密碼破解攻擊。
+            // 如果使用者輸入不正確的代碼來表示一段指定的時間，則使用者帳戶
+            // 會有一段指定的時間遭到鎖定。
             // 您可以在 IdentityConfig 中設定帳戶鎖定設定
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
                     return RedirectToLocal(model.ReturnUrl);
+
                 case SignInStatus.LockedOut:
                     return View("Lockout");
+
                 case SignInStatus.Failure:
                 default:
                     ModelState.AddModelError("", "代碼無效。");
                     return View(model);
             }
+        }
+
+        //註冊 【Admin】採購人員帳號管理=====================================================================================
+        public string generateFirstPwd()
+        {
+            //salt: 隨機位元組=>演算法=>計算後給值
+            RNGCryptoServiceProvider rngbyte = new RNGCryptoServiceProvider();
+            byte[] bytesalt = new byte[8];
+            rngbyte.GetBytes(bytesalt);
+            string salty = Convert.ToBase64String(bytesalt);
+            return salty;
         }
 
         //
@@ -162,17 +179,18 @@ namespace PMS_Inventory_huan.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await UserManager.CreateAsync(user, model.Password);
+                var user = new ApplicationUser { UserName = model.EmployeeID, Email = model.Email };
+                string pwd = generateFirstPwd();
+                var result = await UserManager.CreateAsync(user, pwd);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
                     // 如需如何進行帳戶確認及密碼重設的詳細資訊，請前往 https://go.microsoft.com/fwlink/?LinkID=320771
                     // 傳送包含此連結的電子郵件
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "確認您的帳戶", "請按一下此連結確認您的帳戶 <a href=\"" + callbackUrl + "\">這裏</a>");
+                    string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    await UserManager.SendEmailAsync(user.Id, "確認您的帳戶", $"請按一下此連結確認您的帳戶 <a href='{ callbackUrl}'>這裏</a> {pwd}");
 
                     return RedirectToAction("Index", "Home");
                 }
@@ -186,14 +204,14 @@ namespace PMS_Inventory_huan.Controllers
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]
-        public async Task<ActionResult> ConfirmEmail(string userId, string code)
+        public async Task<ActionResult> ConfirmEmail(int userId, string code)
         {
-            if (userId == null || code == null)
+            if (userId > 0 || code == null)
             {
-                return View("Error");
+                var result = await UserManager.ConfirmEmailAsync(userId, code);
+                return View(result.Succeeded ? "ConfirmEmail" : "Error");
             }
-            var result = await UserManager.ConfirmEmailAsync(userId, code);
-            return View(result.Succeeded ? "ConfirmEmail" : "Error");
+            return View("Error");
         }
 
         //
@@ -213,7 +231,7 @@ namespace PMS_Inventory_huan.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindByNameAsync(model.Email);
+                var user = await UserManager.FindByEmailAsync(model.Email);
                 if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
                 {
                     // 不顯示使用者不存在或未受確認
@@ -222,10 +240,10 @@ namespace PMS_Inventory_huan.Controllers
 
                 // 如需如何進行帳戶確認及密碼重設的詳細資訊，請前往 https://go.microsoft.com/fwlink/?LinkID=320771
                 // 傳送包含此連結的電子郵件
-                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-                // await UserManager.SendEmailAsync(user.Id, "重設密碼", "請按 <a href=\"" + callbackUrl + "\">這裏</a> 重設密碼");
-                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                await UserManager.SendEmailAsync(user.Id, "重設密碼", "請按 <a href=\"" + callbackUrl + "\">這裏</a> 重設密碼");
+                return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 
             // 如果執行到這裡，發生某項失敗，則重新顯示表單
@@ -299,13 +317,13 @@ namespace PMS_Inventory_huan.Controllers
         public async Task<ActionResult> SendCode(string returnUrl, bool rememberMe)
         {
             var userId = await SignInManager.GetVerifiedUserIdAsync();
-            if (userId == null)
+            if (userId > 0)
             {
-                return View("Error");
+                var userFactors = await UserManager.GetValidTwoFactorProvidersAsync(userId);
+                var factorOptions = userFactors.Select(purpose => new SelectListItem { Text = purpose, Value = purpose }).ToList();
+                return View(new SendCodeViewModel { Providers = factorOptions, ReturnUrl = returnUrl, RememberMe = rememberMe });
             }
-            var userFactors = await UserManager.GetValidTwoFactorProvidersAsync(userId);
-            var factorOptions = userFactors.Select(purpose => new SelectListItem { Text = purpose, Value = purpose }).ToList();
-            return View(new SendCodeViewModel { Providers = factorOptions, ReturnUrl = returnUrl, RememberMe = rememberMe });
+            return View("Error");
         }
 
         //
@@ -345,10 +363,13 @@ namespace PMS_Inventory_huan.Controllers
             {
                 case SignInStatus.Success:
                     return RedirectToLocal(returnUrl);
+
                 case SignInStatus.LockedOut:
                     return View("Lockout");
+
                 case SignInStatus.RequiresVerification:
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = false });
+
                 case SignInStatus.Failure:
                 default:
                     // 若使用者沒有帳戶，請提示使用者建立帳戶
@@ -403,7 +424,7 @@ namespace PMS_Inventory_huan.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login", "Account");
         }
 
         //
@@ -434,7 +455,56 @@ namespace PMS_Inventory_huan.Controllers
             base.Dispose(disposing);
         }
 
+        // Sup 供應商===================================================================================
+
+        //
+        // GET: /Account/Login
+        [AllowAnonymous]
+        public ActionResult SupLogin(string returnUrl)
+        {
+            ViewBag.ReturnUrl = returnUrl;
+            return View();
+        }
+
+        //
+        // POST: /Account/Login
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> SupLogin(LoginViewModel model, string returnUrl)
+        {
+            if (!ModelState.IsValid)
+            {
+                ApplicationUser user = new ApplicationUser();
+                //user.
+                return View(model);
+            }
+
+            // 這不會計算為帳戶鎖定的登入失敗
+            // 若要啟用密碼失敗來觸發帳戶鎖定，請變更為 shouldLockout: true
+            var result = await SignInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, shouldLockout: false);
+            switch (result)
+            {
+                case SignInStatus.Success:
+                    return RedirectToLocal(returnUrl);
+
+                case SignInStatus.LockedOut:
+                    return View("Lockout");
+
+                case SignInStatus.RequiresVerification:
+                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+
+                case SignInStatus.Failure:
+                default:
+                    ModelState.AddModelError("", "登入嘗試失試。");
+                    return View(model);
+            }
+        }
+
+        //===================================================================================
+
         #region Helper
+
         // 新增外部登入時用來當做 XSRF 保護
         private const string XsrfKey = "XsrfId";
 
@@ -491,6 +561,7 @@ namespace PMS_Inventory_huan.Controllers
                 context.HttpContext.GetOwinContext().Authentication.Challenge(properties, LoginProvider);
             }
         }
-        #endregion
+
+        #endregion Helper
     }
 }

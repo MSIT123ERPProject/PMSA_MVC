@@ -70,6 +70,15 @@ namespace PMS_Inventory_huan.Resources {
         }
         
         /// <summary>
+        ///   查詢類似 BackToList 的當地語系化字串。
+        /// </summary>
+        public static string BackToList {
+            get {
+                return ResourceManager.GetString("BackToList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查詢類似 Chinese 的當地語系化字串。
         /// </summary>
         public static string Chinese {
@@ -124,6 +133,15 @@ namespace PMS_Inventory_huan.Resources {
         }
         
         /// <summary>
+        ///   查詢類似 display 的當地語系化字串。
+        /// </summary>
+        public static string display {
+            get {
+                return ResourceManager.GetString("display", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查詢類似 Edit 的當地語系化字串。
         /// </summary>
         public static string Edit {
@@ -138,6 +156,24 @@ namespace PMS_Inventory_huan.Resources {
         public static string EmployeeID {
             get {
                 return ResourceManager.GetString("EmployeeID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 everyPage 的當地語系化字串。
+        /// </summary>
+        public static string everyPage {
+            get {
+                return ResourceManager.GetString("everyPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 EXP  的當地語系化字串。
+        /// </summary>
+        public static string EXP {
+            get {
+                return ResourceManager.GetString("EXP", resourceCulture);
             }
         }
         
@@ -178,11 +214,38 @@ namespace PMS_Inventory_huan.Resources {
         }
         
         /// <summary>
+        ///   查詢類似  的當地語系化字串。
+        /// </summary>
+        public static string ko {
+            get {
+                return ResourceManager.GetString("ko", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查詢類似 Login 的當地語系化字串。
         /// </summary>
         public static string Login {
             get {
                 return ResourceManager.GetString("Login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 nextPage 的當地語系化字串。
+        /// </summary>
+        public static string nextPage {
+            get {
+                return ResourceManager.GetString("nextPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 noData 的當地語系化字串。
+        /// </summary>
+        public static string noData {
+            get {
+                return ResourceManager.GetString("noData", resourceCulture);
             }
         }
         
@@ -205,6 +268,15 @@ namespace PMS_Inventory_huan.Resources {
         }
         
         /// <summary>
+        ///   查詢類似 page 的當地語系化字串。
+        /// </summary>
+        public static string page {
+            get {
+                return ResourceManager.GetString("page", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查詢類似 PartNumber 的當地語系化字串。
         /// </summary>
         public static string PartNumber {
@@ -219,6 +291,24 @@ namespace PMS_Inventory_huan.Resources {
         public static string Password {
             get {
                 return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 privousPage 的當地語系化字串。
+        /// </summary>
+        public static string privousPage {
+            get {
+                return ResourceManager.GetString("privousPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 processing 的當地語系化字串。
+        /// </summary>
+        public static string processing {
+            get {
+                return ResourceManager.GetString("processing", resourceCulture);
             }
         }
         
@@ -282,6 +372,42 @@ namespace PMS_Inventory_huan.Resources {
         public static string ReceiverTel {
             get {
                 return ResourceManager.GetString("ReceiverTel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 record 的當地語系化字串。
+        /// </summary>
+        public static string record {
+            get {
+                return ResourceManager.GetString("record", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 SafetyQty 的當地語系化字串。
+        /// </summary>
+        public static string SafetyQty {
+            get {
+                return ResourceManager.GetString("SafetyQty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 save 的當地語系化字串。
+        /// </summary>
+        public static string save {
+            get {
+                return ResourceManager.GetString("save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 search 的當地語系化字串。
+        /// </summary>
+        public static string search {
+            get {
+                return ResourceManager.GetString("search", resourceCulture);
             }
         }
         
@@ -358,6 +484,24 @@ namespace PMS_Inventory_huan.Resources {
         }
         
         /// <summary>
+        ///   查詢類似 SourceListOID 的當地語系化字串。
+        /// </summary>
+        public static string SourceListOID {
+            get {
+                return ResourceManager.GetString("SourceListOID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 status 的當地語系化字串。
+        /// </summary>
+        public static string status {
+            get {
+                return ResourceManager.GetString("status", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查詢類似 Stock 的當地語系化字串。
         /// </summary>
         public static string Stock {
@@ -390,6 +534,15 @@ namespace PMS_Inventory_huan.Resources {
         public static string SupplierAccountID {
             get {
                 return ResourceManager.GetString("SupplierAccountID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 total 的當地語系化字串。
+        /// </summary>
+        public static string total {
+            get {
+                return ResourceManager.GetString("total", resourceCulture);
             }
         }
         

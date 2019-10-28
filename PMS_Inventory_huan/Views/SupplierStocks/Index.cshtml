@@ -38,7 +38,6 @@
 <div class="card shadow mb-4">
     <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">@PMS_Inventory_huan.Resources.AppResource.Stock</h6>
-
     </div>
 
     <div class="card-body">
@@ -118,11 +117,10 @@
                         <td>
                             @Html.DisplayFor(model => item.UnitsInStock)
                         </td>
-
                         <td>
-                            @Html.ActionLink(PMS_Inventory_huan.Resources.AppResource.Edit, "Edit", new { id = item.SourceListID }) |
-                            @Html.ActionLink(PMS_Inventory_huan.Resources.AppResource.Details, "Details", new { id = item.SourceListID }) |
-                            @Html.ActionLink(PMS_Inventory_huan.Resources.AppResource.Delete, "Delete", new { id = item.SourceListID })
+                            @Html.ActionLink(PMS_Inventory_huan.Resources.AppResource.Edit, "Edit", new { id = item.SourceListID }, new { @class = "btn btn-primary" }) |
+                            @Html.ActionLink(PMS_Inventory_huan.Resources.AppResource.Details, "Details", new { id = item.SourceListID }, new { @class = "btn btn-primary" }) 
+                            @*@Html.ActionLink(PMS_Inventory_huan.Resources.AppResource.Delete, "Delete", new { id = item.SourceListID })*@
                         </td>
                     </tr>
                 }

@@ -10,7 +10,7 @@ using PMS_Inventory_huan.Models;
 
 namespace PMS_Inventory_huan.Controllers
 {
-    public class WarehouseInfoesController : Controller
+    public class WarehouseInfoesController : BaseController
     {
         private PMSAEntities db = new PMSAEntities();
 

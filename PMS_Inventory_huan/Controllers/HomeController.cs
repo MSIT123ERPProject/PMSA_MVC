@@ -1,4 +1,4 @@
-﻿using layoutTest;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +13,7 @@ namespace PMS_Inventory_huan.Controllers
     {
         public ActionResult Index()
         {
+            
             //檢查 cookies "PMS_Inventory_huan" 是否存在
             //不存在的話，將當前使用者語言存進cookies
             //HttpCookie c = Request.Cookies["PMS_Inventory_huan"];

@@ -45,3 +45,7 @@ footer.sticky-footer {
     margin-right: 10px;
     background-color: black;
 }
+
+.badge{
+    border-radius: 2px !important;
+}

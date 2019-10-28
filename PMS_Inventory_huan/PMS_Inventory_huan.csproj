@@ -201,21 +201,53 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InventoryDtlsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PurchaseRequisitionsController.cs" />
+    <Compile Include="Controllers\RolesAdminController.cs" />
     <Compile Include="Controllers\ShipNoticesController.cs" />
+    <Compile Include="Controllers\SourceListsController.cs" />
     <Compile Include="Controllers\SupplierStocksController.cs" />
+    <Compile Include="Controllers\UsersAdminController.cs" />
     <Compile Include="Controllers\WarehouseInfoesController.cs" />
+    <Compile Include="Dao\GetAccountID.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="MetaData\Employee.cs" />
+    <Compile Include="MetaData\EmployeeMetadata.cs" />
     <Compile Include="MetaData\InventoryDtl.cs" />
     <Compile Include="MetaData\InventoryDtlMetadata.cs" />
+    <Compile Include="MetaData\Part.cs" />
+    <Compile Include="MetaData\PartMetadata.cs" />
+    <Compile Include="MetaData\PartViewModel.cs" />
+    <Compile Include="MetaData\Product.cs" />
+    <Compile Include="MetaData\ProductMetadata.cs" />
     <Compile Include="MetaData\PurchaseOrderMetaData.cs" />
+    <Compile Include="MetaData\PurchaseRequisition.cs" />
+    <Compile Include="MetaData\PurchaseRequisitionDtl.cs" />
+    <Compile Include="MetaData\PurchaseRequisitionDtlMetadata.cs" />
+    <Compile Include="MetaData\PurchaseRequisitionMetadata.cs" />
     <Compile Include="MetaData\ShipNotice.cs" />
     <Compile Include="MetaData\ShipNoticeMetaData.cs" />
+    <Compile Include="MetaData\SignFlow.cs" />
+    <Compile Include="MetaData\SignFlowMetadata.cs" />
+    <Compile Include="MetaData\SourceListDtl.cs" />
+    <Compile Include="MetaData\SourceListDtlMetadata.cs" />
     <Compile Include="MetaData\SourceListMetaData.cs" />
+    <Compile Include="MetaData\SupplierInfo.cs" />
+    <Compile Include="MetaData\SupplierInfoMetadata.cs" />
     <Compile Include="MetaData\WarehouseInfo.cs" />
     <Compile Include="MetaData\WarehouseInfoMetadata.cs" />
+    <Compile Include="Migrations\201910280437457_v1.cs" />
+    <Compile Include="Migrations\201910280437457_v1.Designer.cs">
+      <DependentUpon>201910280437457_v1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910280934296_v11.cs" />
+    <Compile Include="Migrations\201910280934296_v11.Designer.cs">
+      <DependentUpon>201910280934296_v11.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AdminViewModel.cs" />
     <Compile Include="Models\AuthRole.cs">
       <DependentUpon>PMSAModel.tt</DependentUpon>
     </Compile>
@@ -323,6 +355,7 @@
     <Compile Include="Models\ShipNoticeDtl.cs">
       <DependentUpon>PMSAModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ShipNoticesViewModel.cs" />
     <Compile Include="Models\SignFlow.cs">
       <DependentUpon>PMSAModel.tt</DependentUpon>
     </Compile>
@@ -694,6 +727,37 @@
     <Content Include="Views\WarehouseInfoes\Details.cshtml" />
     <Content Include="Views\WarehouseInfoes\Edit.cshtml" />
     <Content Include="Views\WarehouseInfoes\Index.cshtml" />
+    <Content Include="Views\Account\_LoginLayout.cshtml" />
+    <Content Include="Views\Account\SupLogin.cshtml" />
+    <Content Include="Views\SourceLists\Create.cshtml" />
+    <Content Include="Views\SourceLists\CreateDtl.cshtml" />
+    <Content Include="Views\SourceLists\CreateDtl2.cshtml" />
+    <Content Include="Views\SourceLists\Details.cshtml" />
+    <Content Include="Views\SourceLists\DetailsDtl.cshtml" />
+    <Content Include="Views\SourceLists\Edit.cshtml" />
+    <Content Include="Views\SourceLists\EditDtl.cshtml" />
+    <Content Include="Views\SourceLists\Index.cshtml" />
+    <Content Include="Views\SourceLists\IndexDtl.cshtml" />
+    <Content Include="Views\PurchaseRequisitions\Create.cshtml" />
+    <Content Include="Views\PurchaseRequisitions\CreateDtl.cshtml" />
+    <Content Include="Views\PurchaseRequisitions\CreateDtl2.cshtml" />
+    <Content Include="Views\PurchaseRequisitions\Details.cshtml" />
+    <Content Include="Views\PurchaseRequisitions\DetailsDtl.cshtml" />
+    <Content Include="Views\PurchaseRequisitions\Edit.cshtml" />
+    <Content Include="Views\PurchaseRequisitions\EditDtl.cshtml" />
+    <Content Include="Views\PurchaseRequisitions\Index.cshtml" />
+    <Content Include="Views\PurchaseRequisitions\IndexDtl.cshtml" />
+    <Content Include="Views\RolesAdmin\Create.cshtml" />
+    <Content Include="Views\RolesAdmin\Delete.cshtml" />
+    <Content Include="Views\RolesAdmin\Details.cshtml" />
+    <Content Include="Views\RolesAdmin\Edit.cshtml" />
+    <Content Include="Views\RolesAdmin\Index.cshtml" />
+    <Content Include="Views\UsersAdmin\Create.cshtml" />
+    <Content Include="Views\UsersAdmin\Delete.cshtml" />
+    <Content Include="Views\UsersAdmin\Details.cshtml" />
+    <Content Include="Views\UsersAdmin\DisplayEmail.cshtml" />
+    <Content Include="Views\UsersAdmin\Edit.cshtml" />
+    <Content Include="Views\UsersAdmin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -734,6 +798,12 @@
     <Content Include="Controls\RESXManager\FilterControls\App_LocalResources\SearchByBrowsing.ascx.zh-TW.resx" />
     <Content Include="Controls\RESXManager\App_LocalResources\ToolTabs.ascx.zh-TW.resx" />
     <Content Include="Controls\RESXManager\FilterControls\App_LocalResources\SearchByText.ascx.zh-TW.resx" />
+    <EmbeddedResource Include="Migrations\201910280437457_v1.resx">
+      <DependentUpon>201910280437457_v1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910280934296_v11.resx">
+      <DependentUpon>201910280934296_v11.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\AppResource.zh-TW.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AppResource.zh-TW.Designer.cs</LastGenOutput>

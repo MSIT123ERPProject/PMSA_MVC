@@ -45,7 +45,6 @@ namespace PMS_Inventory_huan.Models
         public virtual DbSet<PRPORelation> PRPORelation { get; set; }
         public virtual DbSet<PRPORelationTemp> PRPORelationTemp { get; set; }
         public virtual DbSet<PurchaseOrder> PurchaseOrder { get; set; }
-        public virtual DbSet<PurchaseOrderDtl> PurchaseOrderDtl { get; set; }
         public virtual DbSet<PurchaseOrderDtlTemp> PurchaseOrderDtlTemp { get; set; }
         public virtual DbSet<PurchaseOrderReceive> PurchaseOrderReceive { get; set; }
         public virtual DbSet<PurchaseOrderReceiveDtl> PurchaseOrderReceiveDtl { get; set; }
@@ -67,5 +66,6 @@ namespace PMS_Inventory_huan.Models
         public virtual DbSet<SupplierInfo> SupplierInfo { get; set; }
         public virtual DbSet<SupplierRating> SupplierRating { get; set; }
         public virtual DbSet<WarehouseInfo> WarehouseInfo { get; set; }
+        public virtual DbSet<PurchaseOrderDtl> PurchaseOrderDtl { get; set; }
     }
 }

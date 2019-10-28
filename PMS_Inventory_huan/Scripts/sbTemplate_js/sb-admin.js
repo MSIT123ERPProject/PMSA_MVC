@@ -10,7 +10,7 @@
         $("#userwrap").toggleClass("d-block");
         $("#navbrand").toggleClass("d-none");
         $("#navbrand").toggleClass("d-block");
-        if ($(".sidebar").width() < 225) {
+        if ($(".sidebar").width() < 150) {
             $(".userwrap").addClass("d-none");
             $(".userwrap").removeClass("d-block");
             $("#navbrand").addClass("d-none");
@@ -19,7 +19,7 @@
     });
     resizeNav();
     function resizeNav() {
-        if ($(window).width() < 768 || $(".sidebar").width() < 225) {
+        if ($(window).width() < 768 || $(".sidebar").width() < 150) {
             $(".userwrap").addClass("d-none");
             $(".userwrap").removeClass("d-block");
             $("#navbrand").addClass("d-none");
@@ -56,11 +56,11 @@
             $('.scroll-to-top').fadeOut();
         }
 
-        if (scrollDistance < 60) {
-            $('.navbar').fadeIn();
-        } else {
-            $('.navbar').fadeOut();
-        }
+        //if (scrollDistance < 60) {
+        //    $('.navbar').fadeIn();
+        //} else {
+        //    $('.navbar').fadeOut();
+        //}
     });
 
     // Smooth scrolling using jQuery easing
@@ -71,11 +71,11 @@
         }, 1000, 'easeInOutExpo');
         event.preventDefault();
     });
-    $(document).on('click', 'li.navbar', function (event) {
-        var $anchor = $(this);
-        $('html, body').stop().animate({
-            scrollTop: $($anchor.attr('href')).offset().top
-        }, 1000, 'easeInOutExpo');
-        event.preventDefault();
-    });
+    //$(document).on('click', 'li.navbar', function (event) {
+    //    var $anchor = $(this);
+    //    $('html, body').stop().animate({
+    //        scrollTop: $($anchor.attr('href')).offset().top
+    //    }, 1000, 'easeInOutExpo');
+    //    event.preventDefault();
+    //});
 })(jQuery); // End of use strict

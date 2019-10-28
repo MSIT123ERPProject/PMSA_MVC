@@ -21,7 +21,7 @@ namespace PMS_Inventory_huan.Models
         public int ShipAmount { get; set; }
         public Nullable<System.DateTime> EXP { get; set; }
     
-        public virtual PurchaseOrderDtl PurchaseOrderDtl { get; set; }
         public virtual ShipNotice ShipNotice { get; set; }
+        public virtual PurchaseOrderDtl PurchaseOrderDtl { get; set; }
     }
 }

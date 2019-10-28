@@ -25,7 +25,6 @@
         <EntityTypeShape EntityType="PMSAModel.PRPORelation" Width="1.5" PointX="26.875" PointY="34.625" />
         <EntityTypeShape EntityType="PMSAModel.PRPORelationTemp" Width="1.5" PointX="21.625" PointY="28.875" />
         <EntityTypeShape EntityType="PMSAModel.PurchaseOrder" Width="1.5" PointX="22.375" PointY="47.75" />
-        <EntityTypeShape EntityType="PMSAModel.PurchaseOrderDtl" Width="1.5" PointX="24.625" PointY="20.125" />
         <EntityTypeShape EntityType="PMSAModel.PurchaseOrderDtlTemp" Width="1.5" PointX="19.375" PointY="8.875" />
         <EntityTypeShape EntityType="PMSAModel.PurchaseOrderReceive" Width="1.5" PointX="24.625" PointY="34.125" />
         <EntityTypeShape EntityType="PMSAModel.PurchaseOrderReceiveDtl" Width="1.5" PointX="26.875" PointY="29.5" />
@@ -74,7 +73,6 @@
         <AssociationConnector Association="PMSAModel.FK_Part_PartUnit" />
         <AssociationConnector Association="PMSAModel.FK_PartCategoryDtl_Part" />
         <AssociationConnector Association="PMSAModel.FK_ProductPart_Part" />
-        <AssociationConnector Association="PMSAModel.FK_PurchaseOrderDtl_Part" />
         <AssociationConnector Association="PMSAModel.FK_PurchaseOrderDtlTemp_Part" />
         <AssociationConnector Association="PMSAModel.FK_PurchaseRequisitionDtl_Part" />
         <AssociationConnector Association="PMSAModel.FK_PurchaseRequisitionDtlTemp_Part" />
@@ -83,13 +81,11 @@
         <AssociationConnector Association="PMSAModel.FK_StockOutDtl_Part" />
         <AssociationConnector Association="PMSAModel.FK_PartCategoryDtl_PartCategory" />
         <AssociationConnector Association="PMSAModel.FK_POChanged_POChangedCategory" />
-        <AssociationConnector Association="PMSAModel.FK_PurchaseOrderDtl_POChanged" />
         <AssociationConnector Association="PMSAModel.FK_PurchaseOrderDtlTemp_POChanged" />
         <AssociationConnector Association="PMSAModel.FK_ProductPart_Product" />
         <AssociationConnector Association="PMSAModel.FK_PurchaseRequisition_Product" />
         <AssociationConnector Association="PMSAModel.FK_PurchaseRequisitionTemp_Product" />
         <AssociationConnector Association="PMSAModel.FK_PRPORelation_PurchaseOrder" />
-        <AssociationConnector Association="PMSAModel.FK_PRPORelation_PurchaseOrderDtl" />
         <AssociationConnector Association="PMSAModel.FK_PRPORelation_PurchaseRequisition" />
         <AssociationConnector Association="PMSAModel.FK_PRPORelation_PurchaseRequisitionDtl" />
         <AssociationConnector Association="PMSAModel.FK_PRPORelationTemp_PurchaseOrderDtlTemp" />
@@ -97,11 +93,7 @@
         <AssociationConnector Association="PMSAModel.FK_PRPORelationTemp_PurchaseRequisition" />
         <AssociationConnector Association="PMSAModel.FK_PRPORelationTemp_PurchaseRequisitionDtl" />
         <AssociationConnector Association="PMSAModel.FK_PurchaseOrder_SignFlow" />
-        <AssociationConnector Association="PMSAModel.FK_PurchaseOrderDtl_PurchaseOrder" />
         <AssociationConnector Association="PMSAModel.FK_PurchaseOrderReceive_PurchaseOrder" />
-        <AssociationConnector Association="PMSAModel.FK_PurchaseOrderDtl_SourceList" />
-        <AssociationConnector Association="PMSAModel.FK_PurchaseOrderReceiveDtl_PurchaseOrderDtl" />
-        <AssociationConnector Association="PMSAModel.FK_ShipNoticeDtl_PurchaseOrderDtl" />
         <AssociationConnector Association="PMSAModel.FK_PurchaseOrderDtlTemp_PurchaseOrderTemp" />
         <AssociationConnector Association="PMSAModel.FK_PurchaseOrderDtlTemp_SourceList" />
         <AssociationConnector Association="PMSAModel.FK_PurchaseOrderReceive_SignFlow" />
@@ -131,6 +123,14 @@
         <AssociationConnector Association="PMSAModel.FK_ShipNotice_PurchaseOrder" />
         <AssociationConnector Association="PMSAModel.FK_ShipNotice_SupplierAccount" />
         <AssociationConnector Association="PMSAModel.FK_ShipNoticeDtl_ShipNotice" />
+        <EntityTypeShape EntityType="PMSAModel.PurchaseOrderDtl" Width="1.5" PointX="29.625" PointY="24.25" />
+        <AssociationConnector Association="PMSAModel.FK_PurchaseOrderDtl_Part" />
+        <AssociationConnector Association="PMSAModel.FK_PurchaseOrderDtl_POChanged" />
+        <AssociationConnector Association="PMSAModel.FK_PRPORelation_PurchaseOrderDtl" />
+        <AssociationConnector Association="PMSAModel.FK_PurchaseOrderDtl_PurchaseOrder" />
+        <AssociationConnector Association="PMSAModel.FK_PurchaseOrderDtl_SourceList" />
+        <AssociationConnector Association="PMSAModel.FK_PurchaseOrderReceiveDtl_PurchaseOrderDtl" />
+        <AssociationConnector Association="PMSAModel.FK_ShipNoticeDtl_PurchaseOrderDtl" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -21,8 +21,8 @@ namespace PMS_Inventory_huan.Models
         public string PurchaseOrderDtlCode { get; set; }
     
         public virtual PurchaseOrder PurchaseOrder { get; set; }
-        public virtual PurchaseOrderDtl PurchaseOrderDtl { get; set; }
         public virtual PurchaseRequisition PurchaseRequisition { get; set; }
         public virtual PurchaseRequisitionDtl PurchaseRequisitionDtl { get; set; }
+        public virtual PurchaseOrderDtl PurchaseOrderDtl { get; set; }
     }
 }

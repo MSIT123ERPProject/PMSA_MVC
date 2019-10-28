@@ -38,7 +38,6 @@
     <EntitySet Name="PRPORelation" EntityType="PMSAModel.PRPORelation" />
     <EntitySet Name="PRPORelationTemp" EntityType="PMSAModel.PRPORelationTemp" />
     <EntitySet Name="PurchaseOrder" EntityType="PMSAModel.PurchaseOrder" />
-    <EntitySet Name="PurchaseOrderDtl" EntityType="PMSAModel.PurchaseOrderDtl" />
     <EntitySet Name="PurchaseOrderDtlTemp" EntityType="PMSAModel.PurchaseOrderDtlTemp" />
     <EntitySet Name="PurchaseOrderReceive" EntityType="PMSAModel.PurchaseOrderReceive" />
     <EntitySet Name="PurchaseOrderReceiveDtl" EntityType="PMSAModel.PurchaseOrderReceiveDtl" />
@@ -168,10 +167,6 @@
       <End Role="Part" EntitySet="Part" />
       <End Role="ProductPart" EntitySet="ProductPart" />
     </AssociationSet>
-    <AssociationSet Name="FK_PurchaseOrderDtl_Part" Association="PMSAModel.FK_PurchaseOrderDtl_Part">
-      <End Role="Part" EntitySet="Part" />
-      <End Role="PurchaseOrderDtl" EntitySet="PurchaseOrderDtl" />
-    </AssociationSet>
     <AssociationSet Name="FK_PurchaseOrderDtlTemp_Part" Association="PMSAModel.FK_PurchaseOrderDtlTemp_Part">
       <End Role="Part" EntitySet="Part" />
       <End Role="PurchaseOrderDtlTemp" EntitySet="PurchaseOrderDtlTemp" />
@@ -204,10 +199,6 @@
       <End Role="POChangedCategory" EntitySet="POChangedCategory" />
       <End Role="POChanged" EntitySet="POChanged" />
     </AssociationSet>
-    <AssociationSet Name="FK_PurchaseOrderDtl_POChanged" Association="PMSAModel.FK_PurchaseOrderDtl_POChanged">
-      <End Role="POChanged" EntitySet="POChanged" />
-      <End Role="PurchaseOrderDtl" EntitySet="PurchaseOrderDtl" />
-    </AssociationSet>
     <AssociationSet Name="FK_PurchaseOrderDtlTemp_POChanged" Association="PMSAModel.FK_PurchaseOrderDtlTemp_POChanged">
       <End Role="POChanged" EntitySet="POChanged" />
       <End Role="PurchaseOrderDtlTemp" EntitySet="PurchaseOrderDtlTemp" />
@@ -226,10 +217,6 @@
     </AssociationSet>
     <AssociationSet Name="FK_PRPORelation_PurchaseOrder" Association="PMSAModel.FK_PRPORelation_PurchaseOrder">
       <End Role="PurchaseOrder" EntitySet="PurchaseOrder" />
-      <End Role="PRPORelation" EntitySet="PRPORelation" />
-    </AssociationSet>
-    <AssociationSet Name="FK_PRPORelation_PurchaseOrderDtl" Association="PMSAModel.FK_PRPORelation_PurchaseOrderDtl">
-      <End Role="PurchaseOrderDtl" EntitySet="PurchaseOrderDtl" />
       <End Role="PRPORelation" EntitySet="PRPORelation" />
     </AssociationSet>
     <AssociationSet Name="FK_PRPORelation_PurchaseRequisition" Association="PMSAModel.FK_PRPORelation_PurchaseRequisition">
@@ -260,25 +247,9 @@
       <End Role="SignFlow" EntitySet="SignFlow" />
       <End Role="PurchaseOrder" EntitySet="PurchaseOrder" />
     </AssociationSet>
-    <AssociationSet Name="FK_PurchaseOrderDtl_PurchaseOrder" Association="PMSAModel.FK_PurchaseOrderDtl_PurchaseOrder">
-      <End Role="PurchaseOrder" EntitySet="PurchaseOrder" />
-      <End Role="PurchaseOrderDtl" EntitySet="PurchaseOrderDtl" />
-    </AssociationSet>
     <AssociationSet Name="FK_PurchaseOrderReceive_PurchaseOrder" Association="PMSAModel.FK_PurchaseOrderReceive_PurchaseOrder">
       <End Role="PurchaseOrder" EntitySet="PurchaseOrder" />
       <End Role="PurchaseOrderReceive" EntitySet="PurchaseOrderReceive" />
-    </AssociationSet>
-    <AssociationSet Name="FK_PurchaseOrderDtl_SourceList" Association="PMSAModel.FK_PurchaseOrderDtl_SourceList">
-      <End Role="SourceList" EntitySet="SourceList" />
-      <End Role="PurchaseOrderDtl" EntitySet="PurchaseOrderDtl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_PurchaseOrderReceiveDtl_PurchaseOrderDtl" Association="PMSAModel.FK_PurchaseOrderReceiveDtl_PurchaseOrderDtl">
-      <End Role="PurchaseOrderDtl" EntitySet="PurchaseOrderDtl" />
-      <End Role="PurchaseOrderReceiveDtl" EntitySet="PurchaseOrderReceiveDtl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ShipNoticeDtl_PurchaseOrderDtl" Association="PMSAModel.FK_ShipNoticeDtl_PurchaseOrderDtl">
-      <End Role="PurchaseOrderDtl" EntitySet="PurchaseOrderDtl" />
-      <End Role="ShipNoticeDtl" EntitySet="ShipNoticeDtl" />
     </AssociationSet>
     <AssociationSet Name="FK_PurchaseOrderDtlTemp_PurchaseOrderTemp" Association="PMSAModel.FK_PurchaseOrderDtlTemp_PurchaseOrderTemp">
       <End Role="PurchaseOrderTemp" EntitySet="PurchaseOrderTemp" />
@@ -396,6 +367,35 @@
       <End Role="ShipNotice" EntitySet="ShipNotice" />
       <End Role="ShipNoticeDtl" EntitySet="ShipNoticeDtl" />
     </AssociationSet>
+    <EntitySet Name="PurchaseOrderDtl" EntityType="PMSAModel.PurchaseOrderDtl" />
+    <AssociationSet Name="FK_PurchaseOrderDtl_Part" Association="PMSAModel.FK_PurchaseOrderDtl_Part">
+      <End Role="Part" EntitySet="Part" />
+      <End Role="PurchaseOrderDtl" EntitySet="PurchaseOrderDtl" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PurchaseOrderDtl_POChanged" Association="PMSAModel.FK_PurchaseOrderDtl_POChanged">
+      <End Role="POChanged" EntitySet="POChanged" />
+      <End Role="PurchaseOrderDtl" EntitySet="PurchaseOrderDtl" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PRPORelation_PurchaseOrderDtl" Association="PMSAModel.FK_PRPORelation_PurchaseOrderDtl">
+      <End Role="PurchaseOrderDtl" EntitySet="PurchaseOrderDtl" />
+      <End Role="PRPORelation" EntitySet="PRPORelation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PurchaseOrderDtl_PurchaseOrder" Association="PMSAModel.FK_PurchaseOrderDtl_PurchaseOrder">
+      <End Role="PurchaseOrder" EntitySet="PurchaseOrder" />
+      <End Role="PurchaseOrderDtl" EntitySet="PurchaseOrderDtl" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PurchaseOrderDtl_SourceList" Association="PMSAModel.FK_PurchaseOrderDtl_SourceList">
+      <End Role="SourceList" EntitySet="SourceList" />
+      <End Role="PurchaseOrderDtl" EntitySet="PurchaseOrderDtl" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PurchaseOrderReceiveDtl_PurchaseOrderDtl" Association="PMSAModel.FK_PurchaseOrderReceiveDtl_PurchaseOrderDtl">
+      <End Role="PurchaseOrderDtl" EntitySet="PurchaseOrderDtl" />
+      <End Role="PurchaseOrderReceiveDtl" EntitySet="PurchaseOrderReceiveDtl" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ShipNoticeDtl_PurchaseOrderDtl" Association="PMSAModel.FK_ShipNoticeDtl_PurchaseOrderDtl">
+      <End Role="PurchaseOrderDtl" EntitySet="PurchaseOrderDtl" />
+      <End Role="ShipNoticeDtl" EntitySet="ShipNoticeDtl" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="SourceList">
     <Key>
@@ -413,11 +413,11 @@
     <Property Name="EXP" Type="Int32" />
     <NavigationProperty Name="InventoryDtl" Relationship="PMSAModel.FK_InventoryDtl_SourceList" FromRole="SourceList" ToRole="InventoryDtl" />
     <NavigationProperty Name="Part" Relationship="PMSAModel.FK_SourceList_Part" FromRole="SourceList" ToRole="Part" />
-    <NavigationProperty Name="PurchaseOrderDtl" Relationship="PMSAModel.FK_PurchaseOrderDtl_SourceList" FromRole="SourceList" ToRole="PurchaseOrderDtl" />
     <NavigationProperty Name="PurchaseOrderDtlTemp" Relationship="PMSAModel.FK_PurchaseOrderDtlTemp_SourceList" FromRole="SourceList" ToRole="PurchaseOrderDtlTemp" />
     <NavigationProperty Name="SupplierInfo" Relationship="PMSAModel.FK_SourceList_SupplierInfo" FromRole="SourceList" ToRole="SupplierInfo" />
     <NavigationProperty Name="SourceListDtl" Relationship="PMSAModel.FK_SourceListDtl_SourceList" FromRole="SourceList" ToRole="SourceListDtl" />
     <Property Name="SourceListOID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="PurchaseOrderDtl" Relationship="PMSAModel.FK_PurchaseOrderDtl_SourceList" FromRole="SourceList" ToRole="PurchaseOrderDtl" />
   </EntityType>
   <EntityType Name="AuthRole">
     <Key>
@@ -554,13 +554,13 @@
     <NavigationProperty Name="PartUnit" Relationship="PMSAModel.FK_Part_PartUnit" FromRole="Part" ToRole="PartUnit" />
     <NavigationProperty Name="PartCategoryDtl" Relationship="PMSAModel.FK_PartCategoryDtl_Part" FromRole="Part" ToRole="PartCategoryDtl" />
     <NavigationProperty Name="ProductPart" Relationship="PMSAModel.FK_ProductPart_Part" FromRole="Part" ToRole="ProductPart" />
-    <NavigationProperty Name="PurchaseOrderDtl" Relationship="PMSAModel.FK_PurchaseOrderDtl_Part" FromRole="Part" ToRole="PurchaseOrderDtl" />
     <NavigationProperty Name="PurchaseOrderDtlTemp" Relationship="PMSAModel.FK_PurchaseOrderDtlTemp_Part" FromRole="Part" ToRole="PurchaseOrderDtlTemp" />
     <NavigationProperty Name="PurchaseRequisitionDtl" Relationship="PMSAModel.FK_PurchaseRequisitionDtl_Part" FromRole="Part" ToRole="PurchaseRequisitionDtl" />
     <NavigationProperty Name="PurchaseRequisitionDtlTemp" Relationship="PMSAModel.FK_PurchaseRequisitionDtlTemp_Part" FromRole="Part" ToRole="PurchaseRequisitionDtlTemp" />
     <NavigationProperty Name="SourceList" Relationship="PMSAModel.FK_SourceList_Part" FromRole="Part" ToRole="SourceList" />
     <NavigationProperty Name="StockInDtl" Relationship="PMSAModel.FK_StockInDtl_Part" FromRole="Part" ToRole="StockInDtl" />
     <NavigationProperty Name="StockOutDtl" Relationship="PMSAModel.FK_StockOutDtl_Part" FromRole="Part" ToRole="StockOutDtl" />
+    <NavigationProperty Name="PurchaseOrderDtl" Relationship="PMSAModel.FK_PurchaseOrderDtl_Part" FromRole="Part" ToRole="PurchaseOrderDtl" />
   </EntityType>
   <EntityType Name="PartCategory">
     <Key>
@@ -604,8 +604,8 @@
     <Property Name="RequesterRole" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
     <Property Name="RequesterID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="POChangedCategory" Relationship="PMSAModel.FK_POChanged_POChangedCategory" FromRole="POChanged" ToRole="POChangedCategory" />
-    <NavigationProperty Name="PurchaseOrderDtl" Relationship="PMSAModel.FK_PurchaseOrderDtl_POChanged" FromRole="POChanged" ToRole="PurchaseOrderDtl" />
     <NavigationProperty Name="PurchaseOrderDtlTemp" Relationship="PMSAModel.FK_PurchaseOrderDtlTemp_POChanged" FromRole="POChanged" ToRole="PurchaseOrderDtlTemp" />
+    <NavigationProperty Name="PurchaseOrderDtl" Relationship="PMSAModel.FK_PurchaseOrderDtl_POChanged" FromRole="POChanged" ToRole="PurchaseOrderDtl" />
   </EntityType>
   <EntityType Name="POChangedCategory">
     <Key>
@@ -649,9 +649,9 @@
     <Property Name="PurchaseOrderID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
     <Property Name="PurchaseOrderDtlCode" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="PurchaseOrder" Relationship="PMSAModel.FK_PRPORelation_PurchaseOrder" FromRole="PRPORelation" ToRole="PurchaseOrder" />
-    <NavigationProperty Name="PurchaseOrderDtl" Relationship="PMSAModel.FK_PRPORelation_PurchaseOrderDtl" FromRole="PRPORelation" ToRole="PurchaseOrderDtl" />
     <NavigationProperty Name="PurchaseRequisition" Relationship="PMSAModel.FK_PRPORelation_PurchaseRequisition" FromRole="PRPORelation" ToRole="PurchaseRequisition" />
     <NavigationProperty Name="PurchaseRequisitionDtl" Relationship="PMSAModel.FK_PRPORelation_PurchaseRequisitionDtl" FromRole="PRPORelation" ToRole="PurchaseRequisitionDtl" />
+    <NavigationProperty Name="PurchaseOrderDtl" Relationship="PMSAModel.FK_PRPORelation_PurchaseOrderDtl" FromRole="PRPORelation" ToRole="PurchaseOrderDtl" />
   </EntityType>
   <EntityType Name="PRPORelationTemp">
     <Key>
@@ -686,43 +686,10 @@
     <NavigationProperty Name="Employee" Relationship="PMSAModel.FK_PurchaseOrder_Employee" FromRole="PurchaseOrder" ToRole="Employee" />
     <NavigationProperty Name="PRPORelation" Relationship="PMSAModel.FK_PRPORelation_PurchaseOrder" FromRole="PurchaseOrder" ToRole="PRPORelation" />
     <NavigationProperty Name="SignFlow" Relationship="PMSAModel.FK_PurchaseOrder_SignFlow" FromRole="PurchaseOrder" ToRole="SignFlow" />
-    <NavigationProperty Name="PurchaseOrderDtl" Relationship="PMSAModel.FK_PurchaseOrderDtl_PurchaseOrder" FromRole="PurchaseOrder" ToRole="PurchaseOrderDtl" />
     <NavigationProperty Name="PurchaseOrderReceive" Relationship="PMSAModel.FK_PurchaseOrderReceive_PurchaseOrder" FromRole="PurchaseOrder" ToRole="PurchaseOrderReceive" />
     <NavigationProperty Name="SupplierInfo" Relationship="PMSAModel.FK_PurchaseOrder_SupplierInfo" FromRole="PurchaseOrder" ToRole="SupplierInfo" />
     <NavigationProperty Name="ShipNotice" Relationship="PMSAModel.FK_ShipNotice_PurchaseOrder" FromRole="PurchaseOrder" ToRole="ShipNotice" />
-  </EntityType>
-  <EntityType Name="PurchaseOrderDtl">
-    <Key>
-      <PropertyRef Name="PurchaseOrderDtlCode" />
-    </Key>
-    <Property Name="PurchaseOrderDtlOID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="PurchaseOrderDtlCode" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-    <Property Name="PurchaseOrderID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-    <Property Name="PartNumber" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
-    <Property Name="PartName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
-    <Property Name="PartSpec" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
-    <Property Name="QtyPerUnit" Type="Int32" Nullable="false" />
-    <Property Name="TotalPartQty" Type="Int32" Nullable="false" />
-    <Property Name="Discount" Type="Decimal" Nullable="false" Precision="3" Scale="2" />
-    <Property Name="PurchaseUnitPrice" Type="Int32" Nullable="false" />
-    <Property Name="Qty" Type="Int32" Nullable="false" />
-    <Property Name="PurchasedQty" Type="Int32" Nullable="false" />
-    <Property Name="GoodsInTransitQty" Type="Int32" Nullable="false" />
-    <Property Name="Total" Type="Int32" />
-    <Property Name="DateRequired" Type="DateTime" Precision="3" />
-    <Property Name="CommittedArrivalDate" Type="DateTime" Precision="3" />
-    <Property Name="ShipDate" Type="DateTime" Precision="3" />
-    <Property Name="ArrivedDate" Type="DateTime" Precision="3" />
-    <Property Name="POChangedOID" Type="Int32" />
-    <Property Name="SourceListID" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="Part" Relationship="PMSAModel.FK_PurchaseOrderDtl_Part" FromRole="PurchaseOrderDtl" ToRole="Part" />
-    <NavigationProperty Name="POChanged" Relationship="PMSAModel.FK_PurchaseOrderDtl_POChanged" FromRole="PurchaseOrderDtl" ToRole="POChanged" />
-    <NavigationProperty Name="PRPORelation" Relationship="PMSAModel.FK_PRPORelation_PurchaseOrderDtl" FromRole="PurchaseOrderDtl" ToRole="PRPORelation" />
-    <NavigationProperty Name="PurchaseOrder" Relationship="PMSAModel.FK_PurchaseOrderDtl_PurchaseOrder" FromRole="PurchaseOrderDtl" ToRole="PurchaseOrder" />
-    <NavigationProperty Name="SourceList" Relationship="PMSAModel.FK_PurchaseOrderDtl_SourceList" FromRole="PurchaseOrderDtl" ToRole="SourceList" />
-    <NavigationProperty Name="PurchaseOrderReceiveDtl" Relationship="PMSAModel.FK_PurchaseOrderReceiveDtl_PurchaseOrderDtl" FromRole="PurchaseOrderDtl" ToRole="PurchaseOrderReceiveDtl" />
-    <NavigationProperty Name="ShipNoticeDtl" Relationship="PMSAModel.FK_ShipNoticeDtl_PurchaseOrderDtl" FromRole="PurchaseOrderDtl" ToRole="ShipNoticeDtl" />
-    <Property Name="OriginalUnitPrice" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="PurchaseOrderDtl" Relationship="PMSAModel.FK_PurchaseOrderDtl_PurchaseOrder" FromRole="PurchaseOrder" ToRole="PurchaseOrderDtl" />
   </EntityType>
   <EntityType Name="PurchaseOrderDtlTemp">
     <Key>
@@ -789,8 +756,8 @@
     <Property Name="AcceptQty" Type="Int32" Nullable="false" />
     <Property Name="RejectReason" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="Remark" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="PurchaseOrderDtl" Relationship="PMSAModel.FK_PurchaseOrderReceiveDtl_PurchaseOrderDtl" FromRole="PurchaseOrderReceiveDtl" ToRole="PurchaseOrderDtl" />
     <NavigationProperty Name="PurchaseOrderReceive" Relationship="PMSAModel.FK_PurchaseOrderReceiveDtl_PurchaseOrderReceive" FromRole="PurchaseOrderReceiveDtl" ToRole="PurchaseOrderReceive" />
+    <NavigationProperty Name="PurchaseOrderDtl" Relationship="PMSAModel.FK_PurchaseOrderReceiveDtl_PurchaseOrderDtl" FromRole="PurchaseOrderReceiveDtl" ToRole="PurchaseOrderDtl" />
   </EntityType>
   <EntityType Name="PurchaseOrderTemp">
     <Key>
@@ -896,8 +863,8 @@
     <Property Name="ShipQty" Type="Int32" Nullable="false" />
     <Property Name="ShipAmount" Type="Int32" Nullable="false" />
     <Property Name="EXP" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="PurchaseOrderDtl" Relationship="PMSAModel.FK_ShipNoticeDtl_PurchaseOrderDtl" FromRole="ShipNoticeDtl" ToRole="PurchaseOrderDtl" />
     <NavigationProperty Name="ShipNotice" Relationship="PMSAModel.FK_ShipNoticeDtl_ShipNotice" FromRole="ShipNoticeDtl" ToRole="ShipNotice" />
+    <NavigationProperty Name="PurchaseOrderDtl" Relationship="PMSAModel.FK_ShipNoticeDtl_PurchaseOrderDtl" FromRole="ShipNoticeDtl" ToRole="PurchaseOrderDtl" />
   </EntityType>
   <EntityType Name="SignFlow">
     <Key>
@@ -1404,18 +1371,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_PurchaseOrderDtl_Part">
-    <End Type="PMSAModel.Part" Role="Part" Multiplicity="1" />
-    <End Type="PMSAModel.PurchaseOrderDtl" Role="PurchaseOrderDtl" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Part">
-        <PropertyRef Name="PartNumber" />
-      </Principal>
-      <Dependent Role="PurchaseOrderDtl">
-        <PropertyRef Name="PartNumber" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_PurchaseOrderDtlTemp_Part">
     <End Type="PMSAModel.Part" Role="Part" Multiplicity="1" />
     <End Type="PMSAModel.PurchaseOrderDtlTemp" Role="PurchaseOrderDtlTemp" Multiplicity="*" />
@@ -1512,18 +1467,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_PurchaseOrderDtl_POChanged">
-    <End Type="PMSAModel.POChanged" Role="POChanged" Multiplicity="0..1" />
-    <End Type="PMSAModel.PurchaseOrderDtl" Role="PurchaseOrderDtl" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="POChanged">
-        <PropertyRef Name="POChangedOID" />
-      </Principal>
-      <Dependent Role="PurchaseOrderDtl">
-        <PropertyRef Name="POChangedOID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_PurchaseOrderDtlTemp_POChanged">
     <End Type="PMSAModel.POChanged" Role="POChanged" Multiplicity="0..1" />
     <End Type="PMSAModel.PurchaseOrderDtlTemp" Role="PurchaseOrderDtlTemp" Multiplicity="*" />
@@ -1581,18 +1524,6 @@
       </Principal>
       <Dependent Role="PRPORelation">
         <PropertyRef Name="PurchaseOrderID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_PRPORelation_PurchaseOrderDtl">
-    <End Type="PMSAModel.PurchaseOrderDtl" Role="PurchaseOrderDtl" Multiplicity="1" />
-    <End Type="PMSAModel.PRPORelation" Role="PRPORelation" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="PurchaseOrderDtl">
-        <PropertyRef Name="PurchaseOrderDtlCode" />
-      </Principal>
-      <Dependent Role="PRPORelation">
-        <PropertyRef Name="PurchaseOrderDtlCode" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1680,18 +1611,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_PurchaseOrderDtl_PurchaseOrder">
-    <End Type="PMSAModel.PurchaseOrder" Role="PurchaseOrder" Multiplicity="1" />
-    <End Type="PMSAModel.PurchaseOrderDtl" Role="PurchaseOrderDtl" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="PurchaseOrder">
-        <PropertyRef Name="PurchaseOrderID" />
-      </Principal>
-      <Dependent Role="PurchaseOrderDtl">
-        <PropertyRef Name="PurchaseOrderID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_PurchaseOrderReceive_PurchaseOrder">
     <End Type="PMSAModel.PurchaseOrder" Role="PurchaseOrder" Multiplicity="1" />
     <End Type="PMSAModel.PurchaseOrderReceive" Role="PurchaseOrderReceive" Multiplicity="*" />
@@ -1701,42 +1620,6 @@
       </Principal>
       <Dependent Role="PurchaseOrderReceive">
         <PropertyRef Name="PurchaseOrderID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_PurchaseOrderDtl_SourceList">
-    <End Type="PMSAModel.SourceList" Role="SourceList" Multiplicity="1" />
-    <End Type="PMSAModel.PurchaseOrderDtl" Role="PurchaseOrderDtl" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="SourceList">
-        <PropertyRef Name="SourceListID" />
-      </Principal>
-      <Dependent Role="PurchaseOrderDtl">
-        <PropertyRef Name="SourceListID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_PurchaseOrderReceiveDtl_PurchaseOrderDtl">
-    <End Type="PMSAModel.PurchaseOrderDtl" Role="PurchaseOrderDtl" Multiplicity="1" />
-    <End Type="PMSAModel.PurchaseOrderReceiveDtl" Role="PurchaseOrderReceiveDtl" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="PurchaseOrderDtl">
-        <PropertyRef Name="PurchaseOrderDtlCode" />
-      </Principal>
-      <Dependent Role="PurchaseOrderReceiveDtl">
-        <PropertyRef Name="PurchaseOrderDtlCode" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ShipNoticeDtl_PurchaseOrderDtl">
-    <End Type="PMSAModel.PurchaseOrderDtl" Role="PurchaseOrderDtl" Multiplicity="1" />
-    <End Type="PMSAModel.ShipNoticeDtl" Role="ShipNoticeDtl" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="PurchaseOrderDtl">
-        <PropertyRef Name="PurchaseOrderDtlCode" />
-      </Principal>
-      <Dependent Role="ShipNoticeDtl">
-        <PropertyRef Name="PurchaseOrderDtlCode" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -2085,6 +1968,123 @@
       </Principal>
       <Dependent Role="ShipNoticeDtl">
         <PropertyRef Name="ShipNoticeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="PurchaseOrderDtl">
+    <Key>
+      <PropertyRef Name="PurchaseOrderDtlCode" />
+    </Key>
+    <Property Name="PurchaseOrderDtlOID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PurchaseOrderDtlCode" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="PurchaseOrderID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="PartNumber" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+    <Property Name="PartName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="PartSpec" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+    <Property Name="QtyPerUnit" Type="Int32" Nullable="false" />
+    <Property Name="TotalPartQty" Type="Int32" Nullable="false" />
+    <Property Name="OriginalUnitPrice" Type="Int32" Nullable="false" />
+    <Property Name="Discount" Type="Decimal" Nullable="false" Precision="3" Scale="2" />
+    <Property Name="PurchaseUnitPrice" Type="Int32" Nullable="false" />
+    <Property Name="Qty" Type="Int32" Nullable="false" />
+    <Property Name="PurchasedQty" Type="Int32" Nullable="false" />
+    <Property Name="GoodsInTransitQty" Type="Int32" Nullable="false" />
+    <Property Name="Total" Type="Int32" />
+    <Property Name="DateRequired" Type="DateTime" Precision="3" />
+    <Property Name="CommittedArrivalDate" Type="DateTime" Precision="3" />
+    <Property Name="ShipDate" Type="DateTime" Precision="3" />
+    <Property Name="ArrivedDate" Type="DateTime" Precision="3" />
+    <Property Name="POChangedOID" Type="Int32" />
+    <Property Name="SourceListID" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Part" Relationship="PMSAModel.FK_PurchaseOrderDtl_Part" FromRole="PurchaseOrderDtl" ToRole="Part" />
+    <NavigationProperty Name="POChanged" Relationship="PMSAModel.FK_PurchaseOrderDtl_POChanged" FromRole="PurchaseOrderDtl" ToRole="POChanged" />
+    <NavigationProperty Name="PRPORelation" Relationship="PMSAModel.FK_PRPORelation_PurchaseOrderDtl" FromRole="PurchaseOrderDtl" ToRole="PRPORelation" />
+    <NavigationProperty Name="PurchaseOrder" Relationship="PMSAModel.FK_PurchaseOrderDtl_PurchaseOrder" FromRole="PurchaseOrderDtl" ToRole="PurchaseOrder" />
+    <NavigationProperty Name="SourceList" Relationship="PMSAModel.FK_PurchaseOrderDtl_SourceList" FromRole="PurchaseOrderDtl" ToRole="SourceList" />
+    <NavigationProperty Name="PurchaseOrderReceiveDtl" Relationship="PMSAModel.FK_PurchaseOrderReceiveDtl_PurchaseOrderDtl" FromRole="PurchaseOrderDtl" ToRole="PurchaseOrderReceiveDtl" />
+    <NavigationProperty Name="ShipNoticeDtl" Relationship="PMSAModel.FK_ShipNoticeDtl_PurchaseOrderDtl" FromRole="PurchaseOrderDtl" ToRole="ShipNoticeDtl" />
+  </EntityType>
+  <Association Name="FK_PurchaseOrderDtl_Part">
+    <End Type="PMSAModel.Part" Role="Part" Multiplicity="1" />
+    <End Type="PMSAModel.PurchaseOrderDtl" Role="PurchaseOrderDtl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Part">
+        <PropertyRef Name="PartNumber" />
+      </Principal>
+      <Dependent Role="PurchaseOrderDtl">
+        <PropertyRef Name="PartNumber" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PurchaseOrderDtl_POChanged">
+    <End Type="PMSAModel.POChanged" Role="POChanged" Multiplicity="0..1" />
+    <End Type="PMSAModel.PurchaseOrderDtl" Role="PurchaseOrderDtl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="POChanged">
+        <PropertyRef Name="POChangedOID" />
+      </Principal>
+      <Dependent Role="PurchaseOrderDtl">
+        <PropertyRef Name="POChangedOID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PRPORelation_PurchaseOrderDtl">
+    <End Type="PMSAModel.PurchaseOrderDtl" Role="PurchaseOrderDtl" Multiplicity="1" />
+    <End Type="PMSAModel.PRPORelation" Role="PRPORelation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PurchaseOrderDtl">
+        <PropertyRef Name="PurchaseOrderDtlCode" />
+      </Principal>
+      <Dependent Role="PRPORelation">
+        <PropertyRef Name="PurchaseOrderDtlCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PurchaseOrderDtl_PurchaseOrder">
+    <End Type="PMSAModel.PurchaseOrder" Role="PurchaseOrder" Multiplicity="1" />
+    <End Type="PMSAModel.PurchaseOrderDtl" Role="PurchaseOrderDtl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PurchaseOrder">
+        <PropertyRef Name="PurchaseOrderID" />
+      </Principal>
+      <Dependent Role="PurchaseOrderDtl">
+        <PropertyRef Name="PurchaseOrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PurchaseOrderDtl_SourceList">
+    <End Type="PMSAModel.SourceList" Role="SourceList" Multiplicity="1" />
+    <End Type="PMSAModel.PurchaseOrderDtl" Role="PurchaseOrderDtl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SourceList">
+        <PropertyRef Name="SourceListID" />
+      </Principal>
+      <Dependent Role="PurchaseOrderDtl">
+        <PropertyRef Name="SourceListID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PurchaseOrderReceiveDtl_PurchaseOrderDtl">
+    <End Type="PMSAModel.PurchaseOrderDtl" Role="PurchaseOrderDtl" Multiplicity="1" />
+    <End Type="PMSAModel.PurchaseOrderReceiveDtl" Role="PurchaseOrderReceiveDtl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PurchaseOrderDtl">
+        <PropertyRef Name="PurchaseOrderDtlCode" />
+      </Principal>
+      <Dependent Role="PurchaseOrderReceiveDtl">
+        <PropertyRef Name="PurchaseOrderDtlCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ShipNoticeDtl_PurchaseOrderDtl">
+    <End Type="PMSAModel.PurchaseOrderDtl" Role="PurchaseOrderDtl" Multiplicity="1" />
+    <End Type="PMSAModel.ShipNoticeDtl" Role="ShipNoticeDtl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PurchaseOrderDtl">
+        <PropertyRef Name="PurchaseOrderDtlCode" />
+      </Principal>
+      <Dependent Role="ShipNoticeDtl">
+        <PropertyRef Name="PurchaseOrderDtlCode" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

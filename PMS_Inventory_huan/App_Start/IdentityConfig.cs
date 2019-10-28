@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -19,7 +20,36 @@ namespace PMS_Inventory_huan
         public Task SendAsync(IdentityMessage message)
         {
             // 將您的電子郵件服務外掛到這裡以傳送電子郵件。
-            return Task.FromResult(0);
+            // Credentials:
+            var credentialUserName = "msit123erp@gmail.com";
+            var sentFrom = "msit123erp@gmail.com";
+            var pwd = "oymgctceybtlgcyo";
+
+            // Configure the client:
+            System.Net.Mail.SmtpClient client =
+                new System.Net.Mail.SmtpClient("smtp.gmail.com");
+
+            client.Port = 587;
+            client.DeliveryMethod = System.Net.Mail.SmtpDeliveryMethod.Network;
+            client.UseDefaultCredentials = false;
+
+            // Create the credentials:
+            System.Net.NetworkCredential credentials =
+                new System.Net.NetworkCredential(credentialUserName, pwd);
+
+            client.EnableSsl = true;
+            client.Credentials = credentials;
+
+            // Create the message:
+            var mail =
+                new System.Net.Mail.MailMessage(sentFrom, message.Destination);
+
+            mail.IsBodyHtml = true;
+            mail.Subject = message.Subject;
+            mail.Body = message.Body;
+
+            // Send:
+            return client.SendMailAsync(mail);
         }
     }
 
@@ -33,18 +63,25 @@ namespace PMS_Inventory_huan
     }
 
     // 設定此應用程式中使用的應用程式使用者管理員。UserManager 在 ASP.NET Identity 中定義且由應用程式中使用。
-    public class ApplicationUserManager : UserManager<ApplicationUser>
+    // *** PASS IN TYPE ARGUMENT TO BASE CLASS:
+    public class ApplicationUserManager : UserManager<ApplicationUser, int>
     {
-        public ApplicationUserManager(IUserStore<ApplicationUser> store)
+        // *** ADD INT TYPE ARGUMENT TO CONSTRUCTOR CALL:
+        public ApplicationUserManager(IUserStore<ApplicationUser, int> store)
             : base(store)
         {
         }
 
-        public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context) 
+        public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
         {
-            var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<ApplicationDbContext>()));
-            // 設定使用者名稱的驗證邏輯
-            manager.UserValidator = new UserValidator<ApplicationUser>(manager)
+            // *** PASS CUSTOM APPLICATION USER STORE AS CONSTRUCTOR ARGUMENT:
+            var manager = new ApplicationUserManager(
+                new ApplicationUserStore(context.Get<ApplicationDbContext>()));
+
+            // 設定使用者名稱的驗證邏輯 // Configure validation logic for usernames
+
+            // *** ADD INT TYPE ARGUMENT TO METHOD CALL:
+            manager.UserValidator = new UserValidator<ApplicationUser, int>(manager)
             {
                 AllowOnlyAlphanumericUserNames = false,
                 RequireUniqueEmail = true
@@ -67,11 +104,11 @@ namespace PMS_Inventory_huan
 
             // 註冊雙因素驗證提供者。此應用程式使用手機和電子郵件接收驗證碼以驗證使用者
             // 您可以撰寫專屬提供者，並將它外掛到這裡。
-            manager.RegisterTwoFactorProvider("電話代碼", new PhoneNumberTokenProvider<ApplicationUser>
+            manager.RegisterTwoFactorProvider("電話代碼", new PhoneNumberTokenProvider<ApplicationUser, int>
             {
                 MessageFormat = "您的安全碼為 {0}"
             });
-            manager.RegisterTwoFactorProvider("電子郵件代碼", new EmailTokenProvider<ApplicationUser>
+            manager.RegisterTwoFactorProvider("電子郵件代碼", new EmailTokenProvider<ApplicationUser, int>
             {
                 Subject = "安全碼",
                 BodyFormat = "您的安全碼為 {0}"
@@ -81,15 +118,88 @@ namespace PMS_Inventory_huan
             var dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null)
             {
-                manager.UserTokenProvider = 
-                    new DataProtectorTokenProvider<ApplicationUser>(dataProtectionProvider.Create("ASP.NET Identity"));
+                manager.UserTokenProvider =
+                    new DataProtectorTokenProvider<ApplicationUser, int>(dataProtectionProvider.Create("ASP.NET Identity"));
             }
             return manager;
         }
     }
 
-    // 設定在此應用程式中使用的應用程式登入管理員。
-    public class ApplicationSignInManager : SignInManager<ApplicationUser, string>
+    // Configure the RoleManager used in the application. RoleManager is defined in the ASP.NET Identity core assembly
+    // PASS CUSTOM APPLICATION ROLE AND INT AS TYPE ARGUMENTS TO BASE:
+    public class ApplicationRoleManager : RoleManager<ApplicationRole, int>
+    {
+        // PASS CUSTOM APPLICATION ROLE AND INT AS TYPE ARGUMENTS TO CONSTRUCTOR:
+        public ApplicationRoleManager(IRoleStore<ApplicationRole, int> roleStore)
+            : base(roleStore)
+        {
+        }
+
+        public static ApplicationRoleManager Create(IdentityFactoryOptions<ApplicationRoleManager> options, IOwinContext context)
+        {
+            return new ApplicationRoleManager(
+                new ApplicationRoleStore(context.Get<ApplicationDbContext>()));
+        }
+    }
+
+    // This is useful if you do not want to tear down the database each time you run the application.
+    // public class ApplicationDbInitializer : DropCreateDatabaseAlways<ApplicationDbContext>
+    // This example shows you how to create a new database if the Model changes
+    public class ApplicationDbInitializer : DropCreateDatabaseIfModelChanges<ApplicationDbContext>
+    {
+        protected override void Seed(ApplicationDbContext context)
+        {
+            //InitializeIdentityForEF(context);
+            base.Seed(context);
+        }
+
+        //Create User=Admin@Admin.com with password=Admin@123456 in the Admin role
+        public static void InitializeIdentityForEF(ApplicationDbContext context)
+        {
+            var userManager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            var roleManager = HttpContext.Current.GetOwinContext().Get<ApplicationRoleManager>();
+            const string password = "P@ssw0rd";
+            const string roleName = "Admin";
+
+            //Create Role Admin if it does not exist
+            var role = roleManager.FindByName(roleName);
+            if (role == null)
+            {
+                role = new ApplicationRole(roleName);
+                var roleresult = roleManager.Create(role);
+            }
+
+            var userAdmincheck = userManager.FindByName("Admin");
+            ApplicationUser user1 = null;
+            if (userAdmincheck == null)
+            {
+                user1 = new ApplicationUser
+                {
+                    EmployeeID = "T000000001",
+                    realName = "王資訊",
+                    UserName = "Admin",
+                    Email = "admin@example.com",
+                    AccountStatus = "E",
+                    CreateDate = DateTime.Now,
+                    ModifiedDate = DateTime.Now,
+                    SendLetterStatus = "Y",
+                    SendLetterDate = DateTime.Now
+                };
+                var result = userManager.Create(user1, password);
+                result = userManager.SetLockoutEnabled(user1.Id, false);
+            }
+
+            // Add user admin to Role Admin if not already added
+            var rolesForUser = userManager.GetRoles(user1.Id);
+            if (!rolesForUser.Contains(role.Name))
+            {
+                var result = userManager.AddToRole(user1.Id, role.Name);
+            }
+        }
+    }
+
+    // 設定在此應用程式中使用的應用程式登入管理員。// PASS INT AS TYPE ARGUMENT TO BASE INSTEAD OF STRING:
+    public class ApplicationSignInManager : SignInManager<ApplicationUser, int>
     {
         public ApplicationSignInManager(ApplicationUserManager userManager, IAuthenticationManager authenticationManager)
             : base(userManager, authenticationManager)

@@ -18,9 +18,9 @@ namespace PMS_Inventory_huan.Models
         public PurchaseOrder()
         {
             this.PRPORelation = new HashSet<PRPORelation>();
-            this.PurchaseOrderDtl = new HashSet<PurchaseOrderDtl>();
             this.PurchaseOrderReceive = new HashSet<PurchaseOrderReceive>();
             this.ShipNotice = new HashSet<ShipNotice>();
+            this.PurchaseOrderDtl = new HashSet<PurchaseOrderDtl>();
         }
     
         public int PurchaseOrderOID { get; set; }
@@ -41,11 +41,11 @@ namespace PMS_Inventory_huan.Models
         public virtual ICollection<PRPORelation> PRPORelation { get; set; }
         public virtual SignFlow SignFlow { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PurchaseOrderDtl> PurchaseOrderDtl { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PurchaseOrderReceive> PurchaseOrderReceive { get; set; }
         public virtual SupplierInfo SupplierInfo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ShipNotice> ShipNotice { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PurchaseOrderDtl> PurchaseOrderDtl { get; set; }
     }
 }

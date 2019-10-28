@@ -248,33 +248,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="PurchaseOrderDtl">
-      <EntityTypeMapping TypeName="PMSAModel.PurchaseOrderDtl">
-        <MappingFragment StoreEntitySet="PurchaseOrderDtl">
-          <ScalarProperty Name="OriginalUnitPrice" ColumnName="OriginalUnitPrice" />
-          <ScalarProperty Name="SourceListID" ColumnName="SourceListID" />
-          <ScalarProperty Name="POChangedOID" ColumnName="POChangedOID" />
-          <ScalarProperty Name="ArrivedDate" ColumnName="ArrivedDate" />
-          <ScalarProperty Name="ShipDate" ColumnName="ShipDate" />
-          <ScalarProperty Name="CommittedArrivalDate" ColumnName="CommittedArrivalDate" />
-          <ScalarProperty Name="DateRequired" ColumnName="DateRequired" />
-          <ScalarProperty Name="Total" ColumnName="Total" />
-          <ScalarProperty Name="GoodsInTransitQty" ColumnName="GoodsInTransitQty" />
-          <ScalarProperty Name="PurchasedQty" ColumnName="PurchasedQty" />
-          <ScalarProperty Name="Qty" ColumnName="Qty" />
-          <ScalarProperty Name="PurchaseUnitPrice" ColumnName="PurchaseUnitPrice" />
-          <ScalarProperty Name="Discount" ColumnName="Discount" />
-          <ScalarProperty Name="TotalPartQty" ColumnName="TotalPartQty" />
-          <ScalarProperty Name="QtyPerUnit" ColumnName="QtyPerUnit" />
-          <ScalarProperty Name="PartSpec" ColumnName="PartSpec" />
-          <ScalarProperty Name="PartName" ColumnName="PartName" />
-          <ScalarProperty Name="PartNumber" ColumnName="PartNumber" />
-          <ScalarProperty Name="PurchaseOrderID" ColumnName="PurchaseOrderID" />
-          <ScalarProperty Name="PurchaseOrderDtlCode" ColumnName="PurchaseOrderDtlCode" />
-          <ScalarProperty Name="PurchaseOrderDtlOID" ColumnName="PurchaseOrderDtlOID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="PurchaseOrderDtlTemp">
       <EntityTypeMapping TypeName="PMSAModel.PurchaseOrderDtlTemp">
         <MappingFragment StoreEntitySet="PurchaseOrderDtlTemp">
@@ -570,6 +543,33 @@
           <ScalarProperty Name="WarehouseName" ColumnName="WarehouseName" />
           <ScalarProperty Name="WarehouseCode" ColumnName="WarehouseCode" />
           <ScalarProperty Name="WarehouseInfoOID" ColumnName="WarehouseInfoOID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PurchaseOrderDtl">
+      <EntityTypeMapping TypeName="PMSAModel.PurchaseOrderDtl">
+        <MappingFragment StoreEntitySet="PurchaseOrderDtl">
+          <ScalarProperty Name="SourceListID" ColumnName="SourceListID" />
+          <ScalarProperty Name="POChangedOID" ColumnName="POChangedOID" />
+          <ScalarProperty Name="ArrivedDate" ColumnName="ArrivedDate" />
+          <ScalarProperty Name="ShipDate" ColumnName="ShipDate" />
+          <ScalarProperty Name="CommittedArrivalDate" ColumnName="CommittedArrivalDate" />
+          <ScalarProperty Name="DateRequired" ColumnName="DateRequired" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="GoodsInTransitQty" ColumnName="GoodsInTransitQty" />
+          <ScalarProperty Name="PurchasedQty" ColumnName="PurchasedQty" />
+          <ScalarProperty Name="Qty" ColumnName="Qty" />
+          <ScalarProperty Name="PurchaseUnitPrice" ColumnName="PurchaseUnitPrice" />
+          <ScalarProperty Name="Discount" ColumnName="Discount" />
+          <ScalarProperty Name="OriginalUnitPrice" ColumnName="OriginalUnitPrice" />
+          <ScalarProperty Name="TotalPartQty" ColumnName="TotalPartQty" />
+          <ScalarProperty Name="QtyPerUnit" ColumnName="QtyPerUnit" />
+          <ScalarProperty Name="PartSpec" ColumnName="PartSpec" />
+          <ScalarProperty Name="PartName" ColumnName="PartName" />
+          <ScalarProperty Name="PartNumber" ColumnName="PartNumber" />
+          <ScalarProperty Name="PurchaseOrderID" ColumnName="PurchaseOrderID" />
+          <ScalarProperty Name="PurchaseOrderDtlCode" ColumnName="PurchaseOrderDtlCode" />
+          <ScalarProperty Name="PurchaseOrderDtlOID" ColumnName="PurchaseOrderDtlOID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -12,12 +12,12 @@
     <option id="unship">未出貨</option>
 </select>
 }*@
-
+@Html.Raw(ViewBag.failMessage) 
 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
     <h2>@PMS_Inventory_huan.Resources.AppResource.ShipNotice</h2>
     <!-- Topbar Search -->
-    @using (Html.BeginForm("Index", "ShipNotices", FormMethod.Post, new { @class = "d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" }))
-    {  
+    @using (Html.BeginForm("Index", "ShipNotices", FormMethod.Get, new { @class = "d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" }))
+    {
         <div class="input-group">
             <input name="PurchaseOrderID" id="idSearh" type="text" class="form-control bg-light border-0 small" placeholder=@PMS_Inventory_huan.Resources.AppResource.PurchaseOrderID aria-label="Search" aria-describedby="basic-addon2">
             <div class="input-group-append">
@@ -26,6 +26,24 @@
                 </button>
             </div>
         </div>
+          <div class="input-group">
+            <input name="PurchaseOrderStatus" id="idSearh" type="text" class="form-control bg-light border-0 small" placeholder=@PMS_Inventory_huan.Resources.AppResource.status. aria-label="Search" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="submit">
+                    <i class="fas fa-search fa-sm"></i>
+                </button>
+            </div>
+        </div>
+    @*<span>
+        <div class="input-group">
+            <select id="shipment">
+                <option id="shipped" name="P">已答交</option>
+                <option id="unship">未出貨</option>
+            </select>
+        </div>
+    </span>*@
+        
+       
     }
 </nav>
 
@@ -83,9 +101,9 @@
                                 @Html.DisplayFor(model => item.ReceiptAddress)
                             </td>
                             <td>
-                                @Html.ActionLink(PMS_Inventory_huan.Resources.AppResource.Ship, "Edit", new { id = item.PurchaseOrderID }) |
-                                @Html.ActionLink(PMS_Inventory_huan.Resources.AppResource.Details, "Details", new { id = item.PurchaseOrderID }) |
-                                @Html.ActionLink(PMS_Inventory_huan.Resources.AppResource.Delete, "Delete", new { id = item.PurchaseOrderID })
+                                @Html.ActionLink(PMS_Inventory_huan.Resources.AppResource.Ship, "Edit", new { id = item.PurchaseOrderID }, new { @class = "btn btn-primary" }) |
+                                @Html.ActionLink(PMS_Inventory_huan.Resources.AppResource.Details, "Details", new { id = item.PurchaseOrderID }, new { @class = "btn btn-primary" }) 
+                                @*@Html.ActionLink(PMS_Inventory_huan.Resources.AppResource.Delete, "Delete", new { id = item.PurchaseOrderID })*@
                             </td>
                         </tr>
                     }

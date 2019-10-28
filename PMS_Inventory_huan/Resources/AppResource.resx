@@ -244,4 +244,55 @@
   <data name="InventoryDtls" xml:space="preserve">
     <value>InventoryDtls</value>
   </data>
+  <data name="BackToList" xml:space="preserve">
+    <value>BackToList</value>
+  </data>
+  <data name="processing" xml:space="preserve">
+    <value>processing</value>
+  </data>
+  <data name="noData" xml:space="preserve">
+    <value>noData</value>
+  </data>
+  <data name="display" xml:space="preserve">
+    <value>display</value>
+  </data>
+  <data name="page" xml:space="preserve">
+    <value>page</value>
+  </data>
+  <data name="total" xml:space="preserve">
+    <value>total</value>
+  </data>
+  <data name="everyPage" xml:space="preserve">
+    <value>everyPage</value>
+  </data>
+  <data name="search" xml:space="preserve">
+    <value>search</value>
+  </data>
+  <data name="privousPage" xml:space="preserve">
+    <value>privousPage</value>
+  </data>
+  <data name="nextPage" xml:space="preserve">
+    <value>nextPage</value>
+  </data>
+  <data name="record" xml:space="preserve">
+    <value>record</value>
+  </data>
+  <data name="ko" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="save" xml:space="preserve">
+    <value>save</value>
+  </data>
+  <data name="status" xml:space="preserve">
+    <value>status</value>
+  </data>
+  <data name="SafetyQty" xml:space="preserve">
+    <value>SafetyQty</value>
+  </data>
+  <data name="EXP" xml:space="preserve">
+    <value>EXP </value>
+  </data>
+  <data name="SourceListOID" xml:space="preserve">
+    <value>SourceListOID</value>
+  </data>
 </root>

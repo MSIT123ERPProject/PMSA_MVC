@@ -1,58 +1,65 @@
 ﻿@model PMS_Inventory_huan.Models.SourceList
 
-    @{
-        ViewBag.Title = "Details";
-        Layout = "~/Views/Shared/_Layout.cshtml";
-    }
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 
-    <h2>Details</h2>
 
-    <div>
-        <h4>SupplierStock</h4>
+<h2>@PMS_Inventory_huan.Resources.AppResource.Edit</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>@PMS_Inventory_huan.Resources.AppResource.InventoryManagementSupplier</h4>
         <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.SourceListID)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.SourceListID) 
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model=>model.PartNumber)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.PartNumber)
-            </dd>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.SourceListOID)
+        @Html.HiddenFor(model => model.SourceListID)
 
-            <dt>
-                @Html.DisplayNameFor(model => model.QtyPerUnit)
-            </dt>
+        <div class="form-group">
+            @Html.LabelFor(model => model.PartNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PartNumber, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.PartNumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
-            <dd>
-                @Html.DisplayFor(model => model.QtyPerUnit)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model=>model.UnitPrice)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model=>model.UnitPrice)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.UnitsOnOrder)
-            </dt>
+        <div class="form-group">
+            @Html.LabelFor(model => model.QtyPerUnit, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.QtyPerUnit, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.QtyPerUnit, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
-            <dd>
-                @Html.DisplayFor(model => model.UnitsOnOrder)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model=>model.UnitsInStock)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.UnitsInStock)
-            </dd>
-        </dl>
+        <div class="form-group">
+            @Html.LabelFor(model => model.UnitPrice, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.UnitPrice, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.UnitPrice, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UnitsOnOrder, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.UnitsOnOrder, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.UnitsOnOrder, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.UnitsInStock, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.UnitsInStock, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.UnitsInStock, "", new { @class = "text-danger" })
+            </div>
+        </div>
     </div>
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.SourceListID }) |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
+}
+<div>
+    @Html.ActionLink(PMS_Inventory_huan.Resources.AppResource.BackToList, "Index", new { @class = "btn btn-primary" })
+</div>

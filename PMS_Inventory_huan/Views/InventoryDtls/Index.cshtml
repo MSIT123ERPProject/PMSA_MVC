@@ -47,37 +47,37 @@
                 <tbody>
                     @foreach (var item in Model)
                     {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.WarehouseInfo.WarehouseName)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.InventoryCategory.InventoryCategoryName)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.SourceList.SourceListID)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Part.PartName)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.UnitsOnStockOutOrder)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.UnitsOnStockInOrder)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.UnitsInStock)
-                            </td>
-                            <td>
-                                <a class="btn btn-primary" href='@Url.Action("Edit", new { id = item.InventoryCode })'>
-                                    <i class="fa fa-edit">修改</i>
-                                </a>|
-                                <a class="btn btn-primary" href='@Url.Action("Details", new { id = item.InventoryCode })'>
-                                    <i class="fa fa-tasks">檢視</i>
-                                </a>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.WarehouseInfo.WarehouseName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.InventoryCategory.InventoryCategoryName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SourceList.SourceListID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Part.PartName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UnitsOnStockOutOrder)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UnitsOnStockInOrder)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UnitsInStock)
+                        </td>
+                        <td>
+                            <a class="btn btn-primary" href='@Url.Action("Edit", new { id = item.InventoryCode })'>
+                                <i class="fa fa-edit">修改</i>
+                            </a>|
+                            <a class="btn btn-primary" href='@Url.Action("Details", new { id = item.InventoryCode })'>
+                                <i class="fa fa-tasks">檢視</i>
+                            </a>
+                        </td>
+                    </tr>
                     }
                 </tbody>
             </table>
@@ -87,14 +87,14 @@
 </div>
 @section scripts
 {
-    <script>
-        $(document).ready(function () {
-            $('#dataTable').DataTable();
-        });
+<script>
+    $(document).ready(function () {
+        $('#dataTable').DataTable();
+    });
 
-        $('#myInput').on('keyup', function () {
-            table.search(this.value).draw();
-        });
-    </script>
+    $('#myInput').on('keyup', function () {
+        table.search(this.value).draw();
+    });
+</script>
 
 }

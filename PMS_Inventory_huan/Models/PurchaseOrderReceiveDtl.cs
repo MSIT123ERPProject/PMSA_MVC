@@ -25,7 +25,7 @@ namespace PMS_Inventory_huan.Models
         public string RejectReason { get; set; }
         public string Remark { get; set; }
     
-        public virtual PurchaseOrderDtl PurchaseOrderDtl { get; set; }
         public virtual PurchaseOrderReceive PurchaseOrderReceive { get; set; }
+        public virtual PurchaseOrderDtl PurchaseOrderDtl { get; set; }
     }
 }
