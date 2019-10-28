@@ -45,12 +45,12 @@ namespace PMS_Inventory_huan.Migrations
                     SecurityStamp = Guid.NewGuid().ToString("D")
                 };
                 context.Users.AddOrUpdate(x => x.Id, userBuyercheck);
-                // ∑sºW®§¶‚===================================================
+                // ∑sºW®§¶ÅE==================================================
                 //Create Role Buyer if it does not exist // ∑sºW Roles [Buyer]
                 var role1 = roleManager.FindByName("Buyer");
                 if (role1 == null)
                 {
-                    role1 = new ApplicationRole("Buyer", "±ƒ¡ ≠˚");
+                    role1 = new ApplicationRole("Buyer", "çÃçwàı");
                     var roleresult = roleManager.Create(role1);
                 }
                 // Add user admin to Role Buyer if not already added // ±N user ≥]©w¨∞ [Buyer]
@@ -68,7 +68,7 @@ namespace PMS_Inventory_huan.Migrations
                 userManagercheck = new ApplicationUser
                 {
                     EmployeeID = "CE00015",
-                    realName = "Ω≤©y≠^",
+                    realName = "‰ÔãXâp",
                     UserName = "CE00015",
                     Email = "s19943588@yahoo.com",
                     AccountStatus = "E",
@@ -81,12 +81,12 @@ namespace PMS_Inventory_huan.Migrations
                 };
                 context.Users.AddOrUpdate(x => x.Id, userManagercheck);
 
-                // ∑sºW®§¶‚===================================================
+                // ∑sºW®§¶ÅE==================================================
                 //Create Role Manager if it does not exist // ∑sºW Roles [Manager]
                 var role2 = roleManager.FindByName("Manager");
                 if (role2 == null)
                 {
-                    role2 = new ApplicationRole("Manager", "±ƒ¡ •D∫ﬁ");
+                    role2 = new ApplicationRole("Manager", "çÃçwéÂä«");
                     var roleresult = roleManager.Create(role2);
                 }
                 // Add user admin to Role Admin if not already added // ±N user ≥]©w¨∞ [Admin]
@@ -104,7 +104,7 @@ namespace PMS_Inventory_huan.Migrations
                 ApplicationUser user3 = new ApplicationUser
                 {
                     EmployeeID = "CE00014",
-                    realName = "ßıßgª®",
+                    realName = "óõåNçã",
                     UserName = "CE00014",
                     Email = "t2994645@yahoo.com",
                     AccountStatus = "E",
@@ -117,12 +117,12 @@ namespace PMS_Inventory_huan.Migrations
                 };
                 context.Users.AddOrUpdate(x => x.Id, user3);
 
-                // ∑sºW®§¶‚===================================================
+                // ∑sºW®§¶ÅE==================================================
                 //Create Role Admin if it does not exist // ∑sºW Roles [Admin]
                 var role3 = roleManager.FindByName("Warehouse");
                 if (role3 == null)
                 {
-                    role3 = new ApplicationRole("Warehouse", "≠‹∫ﬁ");
+                    role3 = new ApplicationRole("Warehouse", "ëqä«");
                     var roleresult = roleManager.Create(role3);
                 }
 
@@ -142,7 +142,7 @@ namespace PMS_Inventory_huan.Migrations
                 ApplicationUser user = new ApplicationUser
                 {
                     EmployeeID = "T000000001",
-                    realName = "§˝∏Í∞T",
+                    realName = "â§éëêu",
                     UserName = "Admin",
                     Email = "admin@example.com",
                     AccountStatus = "E",
@@ -155,12 +155,12 @@ namespace PMS_Inventory_huan.Migrations
                 };
                 context.Users.AddOrUpdate(x => x.Id, user);
 
-                // ∑sºW®§¶‚===================================================
+                // ∑sºW®§¶ÅE==================================================
                 //Create Role Admin if it does not exist // ∑sºW Roles [Admin]
                 var role = roleManager.FindByName("Admin");
                 if (role == null)
                 {
-                    role = new ApplicationRole("Admin", "®t≤Œ∫ﬁ≤z≠˚");
+                    role = new ApplicationRole("Admin", "ånìùä«óùàı");
                     var roleresult = roleManager.Create(role);
                 }
 
@@ -179,7 +179,7 @@ namespace PMS_Inventory_huan.Migrations
                 ApplicationUser user4 = new ApplicationUser
                 {
                     EmployeeID = "SE00001",
-                    realName = "™L¨F≠d",
+                    realName = "ó—ê≠óË",
                     UserName = "SE00001",
                     Email = "h1051235@gmail.com",
                     AccountStatus = "E",
@@ -192,12 +192,12 @@ namespace PMS_Inventory_huan.Migrations
                 };
                 context.Users.AddOrUpdate(x => x.Id, user4);
 
-                // ∑sºW®§¶‚===================================================
+                // ∑sºW®§¶ÅE==================================================
                 //Create Role Admin if it does not exist // ∑sºW Roles [Admin]
                 var role4 = roleManager.FindByName("Supplier");
                 if (role4 == null)
                 {
-                    role4 = new ApplicationRole("Supplier", "®—¿≥∞”");
+                    role4 = new ApplicationRole("Supplier", "ãüú‰è§");
                     var roleresult = roleManager.Create(role4);
                 }
 
