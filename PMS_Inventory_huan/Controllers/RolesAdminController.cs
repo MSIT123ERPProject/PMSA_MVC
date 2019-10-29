@@ -12,7 +12,7 @@ using System.Collections.Generic;
 namespace PMS_Inventory_huan.Controllers
 {
     [Authorize(Roles = "Admin")]
-    public class RolesAdminController : Controller
+    public class RolesAdminController : BaseController
     {
         public RolesAdminController()
         {

@@ -288,4 +288,13 @@
   <data name="EXP" xml:space="preserve">
     <value>セーブ期限</value>
   </data>
+  <data name="Parts" xml:space="preserve">
+    <value>パート</value>
+  </data>
+  <data name="Products" xml:space="preserve">
+    <value>部品</value>
+  </data>
+  <data name="PartsMangement" xml:space="preserve">
+    <value>パートの管理</value>
+  </data>
 </root>

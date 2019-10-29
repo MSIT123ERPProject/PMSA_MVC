@@ -295,4 +295,13 @@
   <data name="SourceListOID" xml:space="preserve">
     <value>SourceListOID</value>
   </data>
+  <data name="Parts" xml:space="preserve">
+    <value>Parts</value>
+  </data>
+  <data name="Products" xml:space="preserve">
+    <value>Products</value>
+  </data>
+  <data name="PartsMangement" xml:space="preserve">
+    <value>PartsMangement</value>
+  </data>
 </root>

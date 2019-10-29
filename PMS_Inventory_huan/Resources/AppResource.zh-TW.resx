@@ -294,4 +294,13 @@
   <data name="SourceListOID" xml:space="preserve">
     <value>貨源清單識別碼</value>
   </data>
+  <data name="Parts" xml:space="preserve">
+    <value>料件</value>
+  </data>
+  <data name="Products" xml:space="preserve">
+    <value>產品</value>
+  </data>
+  <data name="PartsMangement" xml:space="preserve">
+    <value>料件管理</value>
+  </data>
 </root>

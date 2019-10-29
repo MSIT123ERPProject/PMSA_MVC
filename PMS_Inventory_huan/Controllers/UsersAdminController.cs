@@ -13,7 +13,7 @@ using Microsoft.AspNet.Identity;
 namespace PMS_Inventory_huan.Controllers
 {
     [Authorize(Roles = "Admin")]
-    public class UsersAdminController : Controller
+    public class UsersAdminController : BaseController
     {
         public UsersAdminController()
         {

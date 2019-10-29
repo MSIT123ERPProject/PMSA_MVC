@@ -286,6 +286,24 @@ namespace PMS_Inventory_huan.Resources {
         }
         
         /// <summary>
+        ///   查詢類似 Parts 的當地語系化字串。
+        /// </summary>
+        public static string Parts {
+            get {
+                return ResourceManager.GetString("Parts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 PartsMangement 的當地語系化字串。
+        /// </summary>
+        public static string PartsMangement {
+            get {
+                return ResourceManager.GetString("PartsMangement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查詢類似 Password 的當地語系化字串。
         /// </summary>
         public static string Password {
@@ -309,6 +327,15 @@ namespace PMS_Inventory_huan.Resources {
         public static string processing {
             get {
                 return ResourceManager.GetString("processing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 Products 的當地語系化字串。
+        /// </summary>
+        public static string Products {
+            get {
+                return ResourceManager.GetString("Products", resourceCulture);
             }
         }
         

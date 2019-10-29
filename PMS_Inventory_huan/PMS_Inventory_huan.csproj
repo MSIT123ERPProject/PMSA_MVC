@@ -201,6 +201,8 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InventoryDtlsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PartsController.cs" />
+    <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\PurchaseRequisitionsController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
     <Compile Include="Controllers\ShipNoticesController.cs" />
@@ -218,6 +220,8 @@
     <Compile Include="MetaData\InventoryDtlMetadata.cs" />
     <Compile Include="MetaData\Part.cs" />
     <Compile Include="MetaData\PartMetadata.cs" />
+    <Compile Include="MetaData\PartUnit.cs" />
+    <Compile Include="MetaData\PartUnitMetadata.cs" />
     <Compile Include="MetaData\PartViewModel.cs" />
     <Compile Include="MetaData\Product.cs" />
     <Compile Include="MetaData\ProductMetadata.cs" />
@@ -758,6 +762,17 @@
     <Content Include="Views\UsersAdmin\DisplayEmail.cshtml" />
     <Content Include="Views\UsersAdmin\Edit.cshtml" />
     <Content Include="Views\UsersAdmin\Index.cshtml" />
+    <Content Include="Views\Parts\Create.cshtml" />
+    <Content Include="Views\Parts\Delete.cshtml" />
+    <Content Include="Views\Parts\Details.cshtml" />
+    <Content Include="Views\Parts\Edit.cshtml" />
+    <Content Include="Views\Parts\Index.cshtml" />
+    <Content Include="Views\Parts\_ShowPhotoPartial.cshtml" />
+    <Content Include="Views\Products\Create.cshtml" />
+    <Content Include="Views\Products\Delete.cshtml" />
+    <Content Include="Views\Products\Details.cshtml" />
+    <Content Include="Views\Products\Edit.cshtml" />
+    <Content Include="Views\Products\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
