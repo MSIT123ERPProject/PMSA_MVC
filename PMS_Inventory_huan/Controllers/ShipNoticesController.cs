@@ -16,15 +16,12 @@ namespace PMS_Inventory_huan.Controllers
         private PMSAEntities db = new PMSAEntities();
 
         //GET: ShipNotices
-        //public ActionResult purchaseOrderComfirmed(PurchaseOrder purchaseOrder)
+        //public ActionResult DisplayPurchaseOrderStatus(PurchaseOrder purchaseOrder)
         //{
-        //    string id = purchaseOrder.PurchaseOrderID;
-        //    string purchaseOrderStatus = "E";
-        //    if  ( id != null ) {
-        //        PurchaseOrder po = db.PurchaseOrder.Find(id);
-        //        po.PurchaseOrderStatus = purchaseOrderStatus;
-        //        db.Entry(po).State = EntityState.Modified;
-        //    }
+        //    var q = from n in db.POChangedCategory select n;
+        //    SelectList selectLists = new SelectList();
+        //    var s = q.Where(x=>(x.POChangedCategoryCode == "P" || x.POChangedCategoryCode=="E"|| x.POChangedCategoryCode=="S"));
+        //    return selectLists( q,s);
         //}
 
         //目前沒功能
@@ -46,33 +43,30 @@ namespace PMS_Inventory_huan.Controllers
             string statusApplied = "E";
             string statusShipped = "S";
             string SupplierCode = utility.GetSupplierAccountByAccountID("").SupplierCode;
-            if (purchaseOrder != null)
+            purchaseOrder = db.PurchaseOrder.Find(purchaseOrder.PurchaseOrderID);
+            if (purchaseOrder != null && (purchaseOrder.PurchaseOrderStatus == statusSended || purchaseOrder.PurchaseOrderStatus == statusApplied || purchaseOrder.PurchaseOrderStatus == statusShipped))
             {
-                if (purchaseOrder.PurchaseOrderStatus == statusSended || purchaseOrder.PurchaseOrderStatus == statusApplied || purchaseOrder.PurchaseOrderStatus == statusShipped)
-                {
-                    var p = from n in db.PurchaseOrder
-                            where n.PurchaseOrderID == purchaseOrder.PurchaseOrderID && n.SupplierCode == SupplierCode
-                            select n;
-                    var Order = db.PurchaseOrder.Where(n => n.PurchaseOrderID == purchaseOrder.PurchaseOrderID && n.SupplierCode == SupplierCode);
-                    return View(Order);
-                }
-                else
-                {
-                    ViewBag.failMessage = $"<script>Swal.fire('{ PMS_Inventory_huan.Resources.AppResource.noData }');</script>";
-                    //不知道為甚麼不能丟空的VIEW()
-                    var q = from n in db.PurchaseOrder where n.PurchaseOrderOID == null select n;
-                    return View( q );
-                }
-
+                var p = from n in db.PurchaseOrder
+                        where n.PurchaseOrderID == purchaseOrder.PurchaseOrderID && n.SupplierCode == SupplierCode
+                        select n;
+                var Order = db.PurchaseOrder.Where(n => n.PurchaseOrderID == purchaseOrder.PurchaseOrderID && n.SupplierCode == SupplierCode);
+                return View(Order);
             }
             else
             {
+                if (purchaseOrder != null)
+                {
+                    ViewBag.failMessage = $"<script>Swal.fire('{ PMS_Inventory_huan.Resources.AppResource.noData }');</script>";
+                }
+                //不知道為甚麼不能丟空的VIEW()
+                //var q = from n in db.PurchaseOrder where n.PurchaseOrderOID == null select n;
+                //return View(q);
 
+                //===========================預設為顯示已答交的訂單
                 var query = from n in db.PurchaseOrder
-                            where (n.PurchaseOrderStatus == "E" && n.SupplierCode == SupplierCode)
+                            where (n.PurchaseOrderStatus == statusSended && n.SupplierCode == SupplierCode)
                             select n;
-
-                var q = db.PurchaseOrder.Where(n => n.PurchaseOrderStatus == "E" && n.SupplierCode == SupplierCode);
+                var q = db.PurchaseOrder.Where(n => n.PurchaseOrderStatus == statusSended && n.SupplierCode == SupplierCode);
                 //ViewBag.PurchaseOrderStatus = new SelectList(,);
                 return View(query);
             }

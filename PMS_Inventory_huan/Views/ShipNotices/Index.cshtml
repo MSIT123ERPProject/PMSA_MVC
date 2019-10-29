@@ -6,13 +6,13 @@
 }
 @*已出貨以及為出貨按鈕還沒做出來*@
 @*@using (Html.BeginForm("purchaseOrderStatus", "ShipNotices", FormMethod.Post, new { @class = "d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" }))
-{
-<select id="shipment">
-    <option id="shipped" name="P">已出貨</option>
-    <option id="unship">未出貨</option>
-</select>
-}*@
-@Html.Raw(ViewBag.failMessage) 
+    {
+    <select id="shipment">
+        <option id="shipped" name="P">已出貨</option>
+        <option id="unship">未出貨</option>
+    </select>
+    }*@
+@Html.Raw(ViewBag.failMessage)
 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
     <h2>@PMS_Inventory_huan.Resources.AppResource.ShipNotice</h2>
     <!-- Topbar Search -->
@@ -26,24 +26,29 @@
                 </button>
             </div>
         </div>
-          <div class="input-group">
-            <input name="PurchaseOrderStatus" id="idSearh" type="text" class="form-control bg-light border-0 small" placeholder=@PMS_Inventory_huan.Resources.AppResource.status. aria-label="Search" aria-describedby="basic-addon2">
+        <div class="input-group">
+            @*<select id="shipment" class="form-control bg-light border-0 small">
+                <option id="shipped">已出貨</option>
+                <option id="unship">已答交</option>
+                <option id="sended">已送出</option>
+            </select>*@
+            <input name="PurchaseOrderStatus" id="idSearh2" type="text" class="form-control bg-light border-0 small" placeholder=@PMS_Inventory_huan.Resources.AppResource.status . aria-label="Search" aria-describedby="basic-addon2">
             <div class="input-group-append">
                 <button class="btn btn-primary" type="submit">
                     <i class="fas fa-search fa-sm"></i>
                 </button>
             </div>
         </div>
-    @*<span>
-        <div class="input-group">
-            <select id="shipment">
-                <option id="shipped" name="P">已答交</option>
-                <option id="unship">未出貨</option>
-            </select>
-        </div>
-    </span>*@
-        
-       
+        @*<span>
+                <div class="input-group">
+                    <select id="shipment">
+                        <option id="shipped" name="P">已答交</option>
+                        <option id="unship">未出貨</option>
+                    </select>
+                </div>
+            </span>*@
+
+
     }
 </nav>
 
@@ -102,7 +107,7 @@
                             </td>
                             <td>
                                 @Html.ActionLink(PMS_Inventory_huan.Resources.AppResource.Ship, "Edit", new { id = item.PurchaseOrderID }, new { @class = "btn btn-primary" }) |
-                                @Html.ActionLink(PMS_Inventory_huan.Resources.AppResource.Details, "Details", new { id = item.PurchaseOrderID }, new { @class = "btn btn-primary" }) 
+                                @Html.ActionLink(PMS_Inventory_huan.Resources.AppResource.Details, "Details", new { id = item.PurchaseOrderID }, new { @class = "btn btn-primary" })
                                 @*@Html.ActionLink(PMS_Inventory_huan.Resources.AppResource.Delete, "Delete", new { id = item.PurchaseOrderID })*@
                             </td>
                         </tr>
@@ -114,6 +119,7 @@
     </div>
 </nav>
 @section scripts{
+    @*想寫AJAX傳直 失敗了QQ*@
     <script>
                     $(document).ready(function () {
                         $("#dataTable").DataTable();
@@ -121,6 +127,12 @@
                           @Url.Action("Index","ShipNotices")
                                      });
                     });
+        function shipment() {
+            $.ajax({
+                url: "@Url.Action("Index","ShipNotices")",
+                data: JSON.stringify({purchaseOrderStatus = }),
+            });
+        }
     </script>
-   
+
 }

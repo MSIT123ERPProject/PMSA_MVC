@@ -7,7 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using PMS_Inventory_huan.Models;
-using PMS_Inventory_huan.Models;
+
 
 namespace PMS_Inventory_huan.Controllers
 {
