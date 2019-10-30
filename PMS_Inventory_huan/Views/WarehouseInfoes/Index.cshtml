@@ -35,10 +35,10 @@
                             <td>@Html.DisplayFor(modelItem => item.Address)</td>
                             <td>
                                 <a class="btn btn-primary" href='@Url.Action("Edit", new { id = item.WarehouseCode })'>
-                                    <i class="fa fa-edit">修改</i>
+                                    <i class="fa fa-edit"></i>修改
                                 </a>|
                                 <a class="btn btn-primary" href='@Url.Action("Details", new { id = item.WarehouseCode })'>
-                                    <i class="fa fa-tasks">檢視</i>
+                                    <i class="fa fa-tasks"></i>檢視
                                 </a>|
 
                                 <a name="click01" class="btn btn-danger" data-wc="@item.WarehouseCode"><i class="fa fa-close"></i> 刪除</a>
@@ -52,6 +52,7 @@
     </div>
     <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
 </div>
+
 @section scripts
 {
     <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
@@ -62,7 +63,7 @@
 
         });
 
-        
+
 
         $('#myInput').on('keyup', function () {
             table.search(this.value).draw();
@@ -101,9 +102,9 @@
                             alert("error");
                         }).always(function () {
                             setTimeout('A()', 2000);
-                            
+
                         });
-                    
+
                     }
                 })
         });

@@ -78,65 +78,84 @@
                             <span>首頁</span>
                         </a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-fw fa-folder"></i>
-                            <span>@PMS_Inventory_huan.Resources.AppResource.Supplier</span>
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-                            <h6 class="dropdown-header">@PMS_Inventory_huan.Resources.AppResource.InventoryManagementSupplier</h6>
-                            @Html.ActionLink(PMS_Inventory_huan.Resources.AppResource.ShipNotice, "Index", "ShipNotices", null, new { @class = "dropdown-item" })
-                            @Html.ActionLink(PMS_Inventory_huan.Resources.AppResource.InventoryManagementSupplier, "Index", "SupplierStocks", null, new { @class = "dropdown-item" })
-                            @*<a class="dropdown-item" href="~/Views/SupplierShipments/Index.cshtml">庫存管理(供應商)</a>*@
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-fw fa-folder"></i>
-                            <span>@PMS_Inventory_huan.Resources.AppResource.Inventory</span>
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-                            <h6 class="dropdown-header">@PMS_Inventory_huan.Resources.AppResource.Inventory</h6>
-                            <a class="dropdown-item" href="@Url.Action("Index", "WarehouseInfoes")">@PMS_Inventory_huan.Resources.AppResource.WarehouseInfoes</a>
-                            <a class="dropdown-item" href="@Url.Action("Index", "InventoryDtls")">@PMS_Inventory_huan.Resources.AppResource.InventoryDtls</a>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-fw fa-folder"></i>
-                            <span>管理員</span>
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-                            <h6 class="dropdown-header">管理員</h6>
-                            <a class="dropdown-item" href="@Url.Action("Create", "RolesAdmin")">角色管理</a>
-                            <a class="dropdown-item" href="@Url.Action("Create", "UsersAdmin")">採購員帳號管理</a>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-fw fa-folder"></i>
-                            <span>@PMS_Inventory_huan.Resources.AppResource.PartsMangement</span>
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-                            <h6 class="dropdown-header">@PMS_Inventory_huan.Resources.AppResource.PartsMangement</h6>
-                            <a class="dropdown-item" href="@Url.Action("Index", "Parts")">@PMS_Inventory_huan.Resources.AppResource.Parts</a>
-                            <a class="dropdown-item" href="@Url.Action("Index", "Products")">@PMS_Inventory_huan.Resources.AppResource.Products</a>
-                        </div>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("Index", "SourceLists")">
-                            <i class="fas fa-fw fa-table"></i>
-                            <span>貨源清單</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("Index", "PurchaseRequisitions")">
-                            <i class="fas fa-fw fa-table"></i>
-                            <span>請購單</span>
-                        </a>
-                    </li>
-
+                    @if (User.IsInRole("Supplier"))
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-fw fa-folder"></i>
+                                <span>@PMS_Inventory_huan.Resources.AppResource.Supplier</span>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+                                <h6 class="dropdown-header">@PMS_Inventory_huan.Resources.AppResource.InventoryManagementSupplier</h6>
+                                @Html.ActionLink(PMS_Inventory_huan.Resources.AppResource.ShipNotice, "Index", "ShipNotices", null, new { @class = "dropdown-item" })
+                                @Html.ActionLink(PMS_Inventory_huan.Resources.AppResource.InventoryManagementSupplier, "Index", "SupplierStocks", null, new { @class = "dropdown-item" })
+                                @*<a class="dropdown-item" href="~/Views/SupplierShipments/Index.cshtml">庫存管理(供應商)</a>*@
+                            </div>
+                        </li>
+                    }
+                    @if (User.IsInRole("Warehouse"))
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-fw fa-folder"></i>
+                                <span>@PMS_Inventory_huan.Resources.AppResource.Inventory</span>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+                                <h6 class="dropdown-header">@PMS_Inventory_huan.Resources.AppResource.Inventory</h6>
+                                <a class="dropdown-item" href="@Url.Action("Index", "WarehouseInfoes")">@PMS_Inventory_huan.Resources.AppResource.WarehouseInfoes</a>
+                                <a class="dropdown-item" href="@Url.Action("Index", "InventoryDtls")">@PMS_Inventory_huan.Resources.AppResource.InventoryDtls</a>
+                            </div>
+                        </li>
+                    }
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-fw fa-folder"></i>
+                                <span>管理員</span>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+                                <h6 class="dropdown-header">管理員</h6>
+                                <a class="dropdown-item" href="@Url.Action("Create", "RolesAdmin")">角色管理</a>
+                                <a class="dropdown-item" href="@Url.Action("Create", "UsersAdmin")">採購員帳號管理</a>
+                            </div>
+                        </li>
+                    }
+                    @if (User.IsInRole("Buyer"))
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-fw fa-folder"></i>
+                                <span>@PMS_Inventory_huan.Resources.AppResource.PartsMangement</span>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+                                <h6 class="dropdown-header">@PMS_Inventory_huan.Resources.AppResource.PartsMangement</h6>
+                                <a class="dropdown-item" href="@Url.Action("Index", "Parts")">@PMS_Inventory_huan.Resources.AppResource.Parts</a>
+                                <a class="dropdown-item" href="@Url.Action("Index", "Products")">@PMS_Inventory_huan.Resources.AppResource.Products</a>
+                            </div>
+                        </li>
+                    }
+                    @if (User.IsInRole("Buyer"))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Index", "SourceLists")">
+                                <i class="fas fa-fw fa-table"></i>
+                                <span>貨源清單</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Index", "PurchaseRequisitions")">
+                                <i class="fas fa-fw fa-table"></i>
+                                <span>請購單</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Index", "PurchaseOrders")">
+                                <i class="fas fa-fw fa-table"></i>
+                                <span>採購單</span>
+                            </a>
+                        </li>
+                    }
                     <li>
                         @Html.Partial("_LanguagePartial")
                     </li>

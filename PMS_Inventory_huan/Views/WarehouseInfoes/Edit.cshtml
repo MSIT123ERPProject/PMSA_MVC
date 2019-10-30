@@ -72,5 +72,7 @@
 }
 
     <div>
-        @Html.ActionLink(PMS_Inventory_huan.Resources.AppResource.BackToList, "Index")
+        <a class="btn btn-warning" href='@Url.Action("Index")'>
+            <i class="fa fa-mail-reply"></i>@PMS_Inventory_huan.Resources.AppResource.BackToList
+        </a>
     </div>

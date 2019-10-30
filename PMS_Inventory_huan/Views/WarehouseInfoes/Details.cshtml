@@ -57,5 +57,7 @@
     <a class="btn btn-primary" href='@Url.Action("Edit", new { id = Model.WarehouseCode })'>
         <i class="fa fa-edit">修改</i>
     </a>|
-    @Html.ActionLink("回列表", "Index")
+    <a class="btn btn-warning" href='@Url.Action("Index")'>
+        <i class="fa fa-mail-reply"></i>@PMS_Inventory_huan.Resources.AppResource.BackToList
+    </a>
 </p>

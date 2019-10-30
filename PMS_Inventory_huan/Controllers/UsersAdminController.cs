@@ -9,11 +9,12 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using System.Collections.Generic;
 
 namespace PMS_Inventory_huan.Controllers
 {
     [Authorize(Roles = "Admin")]
-    public class UsersAdminController : BaseController
+    public class UsersAdminController : Controller
     {
         public UsersAdminController()
         {
@@ -96,6 +97,7 @@ namespace PMS_Inventory_huan.Controllers
         {
             //Get the list of Roles
             ViewBag.RoleId = new SelectList(await RoleManager.Roles.ToListAsync(), "Name", "Name");
+            ViewBag.empID = new SelectList(db.Employee, "EmployeeID", "EmployeeID");
             return View();
         }
 
@@ -107,6 +109,38 @@ namespace PMS_Inventory_huan.Controllers
             rngbyte.GetBytes(bytesalt);
             string salty = Convert.ToBase64String(bytesalt);
             return salty;
+        }
+
+        private PMSAEntities db = new PMSAEntities();
+
+        [HttpPost]
+        public JsonResult GetUsersFromEmp(string EmpID)
+        {
+            List<System.Collections.Generic.KeyValuePair<string, string[]>> items = new List<KeyValuePair<string, string[]>>();
+
+            if (!string.IsNullOrWhiteSpace(EmpID))
+            {
+                var Emps = this.GetEmpID(EmpID);
+                if (Emps.Count() > 0)
+                {
+                    foreach (var Emp in Emps)
+                    {
+                        items.Add(new KeyValuePair<string, string[]>(
+                            Emp.EmployeeID.ToString(), new string[] { Emp.EmployeeID, Emp.Name, Emp.Email, Emp.Mobile, Emp.Tel }
+                        ));
+                    }
+                }
+            }
+            return this.Json(items);
+        }
+
+        private IEnumerable<Employee> GetEmpID(string EmpID)
+        {
+            using (PMSAEntities db = new PMSAEntities())
+            {
+                var query = db.Employee.Where(x => x.EmployeeID == EmpID);
+                return query.ToList();
+            }
         }
 
         //
@@ -167,7 +201,7 @@ namespace PMS_Inventory_huan.Controllers
                     UserManager.UserTokenProvider = new Microsoft.AspNet.Identity.Owin.DataProtectorTokenProvider<ApplicationUser, int>(provider.Create("TokenName"));
                     string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    await UserManager.SendEmailAsync(user.Id, "確認您的帳戶", $"<h1>請按一下此連結確認您的帳戶</h1> <a href='{callbackUrl}'> 這裏 {pwd}</a>");
+                    await UserManager.SendEmailAsync(user.Id, "確認您的帳戶", $"<h1>請按一下此連結確認您的帳戶</h1> <a href='{callbackUrl}'>這裏</a><h5>您好，您的密碼是：</h5><h5>{pwd}</h5>");
 
                     ViewBag.Link = callbackUrl;
                     return View("DisplayEmail");

@@ -5,51 +5,55 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @*已出貨以及為出貨按鈕還沒做出來*@
-@*@using (Html.BeginForm("purchaseOrderStatus", "ShipNotices", FormMethod.Post, new { @class = "d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" }))
+<div id="idStatus" class="col-sm-2">
+    @Html.DropDownList("url",new SelectList( new[]
     {
-    <select id="shipment">
-        <option id="shipped" name="P">已出貨</option>
-        <option id="unship">未出貨</option>
-    </select>
-    }*@
+    new SelectListItem { Text = "未答交",Value="P" },
+    new SelectListItem { Text = "未答交", Value = "E" },
+    new SelectListItem { Text = "未答交", Value = "S" }
+    },"Value","Text"),
+    new {id="idStatus", @class="form-control" }
+    )
+</div>
+
 @Html.Raw(ViewBag.failMessage)
 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
     <h2>@PMS_Inventory_huan.Resources.AppResource.ShipNotice</h2>
     <!-- Topbar Search -->
     @using (Html.BeginForm("Index", "ShipNotices", FormMethod.Get, new { @class = "d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" }))
-    {
-        <div class="input-group">
-            <input name="PurchaseOrderID" id="idSearh" type="text" class="form-control bg-light border-0 small" placeholder=@PMS_Inventory_huan.Resources.AppResource.PurchaseOrderID aria-label="Search" aria-describedby="basic-addon2">
-            <div class="input-group-append">
-                <button class="btn btn-primary" type="submit">
-                    <i class="fas fa-search fa-sm"></i>
-                </button>
-            </div>
+        {
+    <div class="input-group">
+        <input name="PurchaseOrderID" id="idSearh" type="text" class="form-control bg-light border-0 small" placeholder=@PMS_Inventory_huan.Resources.AppResource.PurchaseOrderID aria-label="Search" aria-describedby="basic-addon2">
+        <div class="input-group-append">
+            <button class="btn btn-primary" type="submit">
+                <i class="fas fa-search fa-sm"></i>
+            </button>
         </div>
-        <div class="input-group">
-            @*<select id="shipment" class="form-control bg-light border-0 small">
+    </div>
+    <div class="input-group">
+        @*<select id="shipment" class="form-control bg-light border-0 small">
                 <option id="shipped">已出貨</option>
                 <option id="unship">已答交</option>
                 <option id="sended">已送出</option>
             </select>*@
-            <input name="PurchaseOrderStatus" id="idSearh2" type="text" class="form-control bg-light border-0 small" placeholder=@PMS_Inventory_huan.Resources.AppResource.status . aria-label="Search" aria-describedby="basic-addon2">
-            <div class="input-group-append">
-                <button class="btn btn-primary" type="submit">
-                    <i class="fas fa-search fa-sm"></i>
-                </button>
-            </div>
+        <input name="PurchaseOrderStatus" id="idSearh2" type="text" class="form-control bg-light border-0 small" placeholder=@PMS_Inventory_huan.Resources.AppResource.status . aria-label="Search" aria-describedby="basic-addon2">
+        <div class="input-group-append">
+            <button class="btn btn-primary" type="submit">
+                <i class="fas fa-search fa-sm"></i>
+            </button>
         </div>
-        @*<span>
-                <div class="input-group">
-                    <select id="shipment">
-                        <option id="shipped" name="P">已答交</option>
-                        <option id="unship">未出貨</option>
-                    </select>
-                </div>
-            </span>*@
+    </div>
+    @*<span>
+            <div class="input-group">
+                <select id="shipment">
+                    <option id="shipped" name="P">已答交</option>
+                    <option id="unship">未出貨</option>
+                </select>
+            </div>
+        </span>*@
 
 
-    }
+        }
 </nav>
 
 <nav>
@@ -87,31 +91,33 @@
                         </tr>
                     </thead>
                     @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(model => item.PurchaseOrderID)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(model => item.ReceiverName)
-                            </td>
+                                        {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(model => item.PurchaseOrderID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.ReceiverName)
+                        </td>
 
-                            <td>
-                                @Html.DisplayFor(model => item.ReceiverTel)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(model => item.ReceiverMobile)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(model => item.ReceiptAddress)
-                            </td>
-                            <td>
-                                @Html.ActionLink(PMS_Inventory_huan.Resources.AppResource.Ship, "Edit", new { id = item.PurchaseOrderID }, new { @class = "btn btn-primary" }) |
-                                @Html.ActionLink(PMS_Inventory_huan.Resources.AppResource.Details, "Details", new { id = item.PurchaseOrderID }, new { @class = "btn btn-primary" })
-                                @*@Html.ActionLink(PMS_Inventory_huan.Resources.AppResource.Delete, "Delete", new { id = item.PurchaseOrderID })*@
-                            </td>
-                        </tr>
-                    }
+                        <td>
+                            @Html.DisplayFor(model => item.ReceiverTel)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.ReceiverMobile)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.ReceiptAddress)
+                        </td>
+                        <td>
+                            <a class="btn btn-primary" href="@Url.Action( "Edit", new { id = item.PurchaseOrderID })"><i class="fa fa-edit">@PMS_Inventory_huan.Resources.AppResource.Ship</i></a>|
+                            <a class="btn btn-info" href="@Url.Action("Details", new { id = item.PurchaseOrderID })"><i class="fa fa-tasks">@PMS_Inventory_huan.Resources.AppResource.Details</i></a>
+                            @*@Html.ActionLink(PMS_Inventory_huan.Resources.AppResource.Ship, "Edit", new { id = item.PurchaseOrderID }, new { @class = "btn btn-primary" }) |
+                                @Html.ActionLink(PMS_Inventory_huan.Resources.AppResource.Details, "Details", new { id = item.PurchaseOrderID }, new { @class = "btn btn-primary" })*@
+                            @*@Html.ActionLink(PMS_Inventory_huan.Resources.AppResource.Delete, "Delete", new { id = item.PurchaseOrderID })*@
+                        </td>
+                    </tr>
+                                        }
 
                 </table>
             </div>

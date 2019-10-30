@@ -2,14 +2,26 @@
 @{
     /**/
 
-    ViewBag.Title = "新增帳號";
+    ViewBag.Title = "帳號管理";
+}
+@section styles
+{
+    <style>
+        .empSearch, .wrapSearch {
+            border: 1px solid #eee;
+            padding: 10px 10px 30px 10px;
+            box-shadow: 1px 1px 5px #aaa;
+            margin-bottom: 30px;
+        }
+    </style>
 }
 
-<h2>@ViewBag.Title.</h2>
-<div class="form-group">
-    <h6>查詢員工編號</h6>
+<h2>@ViewBag.Title</h2>
+<div class="form-group empSearch">
+    <h6>1. 查詢員工編號</h6>
     <div class="col-md-10">
-        @Html.TextBoxFor(m => m.EmployeeID, new { @class = "form-control" })
+        @*Html.TextBoxFor(m => m.EmployeeID, new { @class = "form-control" })*@
+        @Html.DropDownList("empID", null, htmlAttributes: new { @class = "form-control", id = "empID" })
     </div>
 </div>
 
@@ -17,74 +29,75 @@
 {
     @Html.AntiForgeryToken()
     <h4>採購員帳號管理</h4>
-    <hr />
     @Html.ValidationSummary("", new { @class = "text-danger" })
+    <div class="wrapSearch">
 
-    <div class="form-group">
-        @Html.LabelFor(m => m.EmployeeID, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.EmployeeID, new { @class = "form-control" })
+        <div class="form-group">
+            @Html.LabelFor(m => m.EmployeeID, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.EmployeeID, new { @class = "form-control", id = "EmployeeID" })
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.realName, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.realName, new { @class = "form-control" })
+        <div class="form-group">
+            @Html.LabelFor(m => m.realName, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.realName, new { @class = "form-control", id = "realName" })
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+        <div class="form-group">
+            @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", id = "Email" })
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Mobile, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control" })
+        <div class="form-group">
+            @Html.LabelFor(m => m.Mobile, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control", id = "Mobile" })
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Tel, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Tel, new { @class = "form-control" })
+        <div class="form-group">
+            @Html.LabelFor(m => m.Tel, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Tel, new { @class = "form-control", id = "Tel" })
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">
-            角色
-        </label>
-        <div class="col-md-10">
-            @foreach (var item in (SelectList)ViewBag.RoleId)
-            {
-                switch (item.Value)
+        <div class="form-group">
+            <label class="col-md-2 control-label">
+                角色
+            </label>
+            <div class="col-md-10">
+                @foreach (var item in (SelectList)ViewBag.RoleId)
                 {
-                    case "Buyer":
-                        <label class="control-label">
-                            <input type="radio" name="SelectedRoles" value="@item.Value" class="checkbox-inline" checked />
-                            採購員
-                        </label>
-                        break;
-                    case "Manager":
-                        <label class="control-label">
-                            <input type="radio" name="SelectedRoles" value="@item.Value" class="checkbox-inline" />
-                            主管
-                        </label>
-                        break;
-                    case "Warehouse":
-                        <label class="control-label">
-                            <input type="radio" name="SelectedRoles" value="@item.Value" class="checkbox-inline" />
-                            倉管
-                        </label>
-                        break;
-                    case "Admin":
-                        <label class="control-label">
-                            <input type="radio" name="SelectedRoles" value="@item.Value" class="checkbox-inline" />
-                            管理員
-                        </label>
-                        break;
+                    switch (item.Value)
+                    {
+                        case "Buyer":
+                            <label class="control-label">
+                                <input type="radio" name="SelectedRoles" value="@item.Value" class="checkbox-inline" checked />
+                                採購員
+                            </label>
+                            break;
+                        case "Manager":
+                            <label class="control-label">
+                                <input type="radio" name="SelectedRoles" value="@item.Value" class="checkbox-inline" />
+                                主管
+                            </label>
+                            break;
+                        case "Warehouse":
+                            <label class="control-label">
+                                <input type="radio" name="SelectedRoles" value="@item.Value" class="checkbox-inline" />
+                                倉管
+                            </label>
+                            break;
+                        case "Admin":
+                            <label class="control-label">
+                                <input type="radio" name="SelectedRoles" value="@item.Value" class="checkbox-inline" />
+                                管理員
+                            </label>
+                            break;
+                    }
                 }
-            }
+            </div>
         </div>
     </div>
     <div class="form-group">
@@ -96,4 +109,46 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(document).ready(function () {
+            $('#empID').change(function () { ChangeEmpID(); });
+        });
+
+        function ChangeEmpID() {
+            //var selectedValue = $('#empID option:selected').val();
+            //console.log("hi");
+            //if ($.trim(selectedValue).length > 0) {
+            //    GetEmp(selectedValue);
+            //    console.log("hi222");
+            //    console.log(selectedValue);
+            //}
+            $('#EmployeeID').val("CE00003");
+            $('#realName').val("王芳瑜");
+            $('#Email').val("d9488164st@yahoo.com");
+            $('#Mobile').val("0981677131");
+            $('#Tel').val("03-5636788#12");
+        }
+
+        @*function GetEmp(EmployeeID) {
+            $.ajax({
+                url: '@Url.Action("GetUsersFromEmp", "UsersAdmin")',
+                data: { EmployeeID: EmployeeID },
+                type: 'post',
+                cache: false,
+                async: false,
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+                    if (data.length > 0) {
+                        console.log(data);
+                        $('#EmployeeID').val(data);
+                        $('#realName').val("zzzzzz");
+                        $('#Email').val(data[0][2]);
+                        $('#Mobile').val(data[0][3]);
+                        $('#Tel').val(data[0][4]);
+                    }
+                }
+            });
+        }*@
+    </script>
 }

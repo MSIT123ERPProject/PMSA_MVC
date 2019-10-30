@@ -27,6 +27,7 @@ namespace PMS_Inventory_huan
                       "~/Content/bootstrap.css",
                       "~/Content/fontawesome-all.min.css",
                       "~/Content/sbTemplate/sb-admin.css",
+                      "~/Content/font-awesome.css",
                       "~/Content/Site.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/allpluginjs").Include(
@@ -35,7 +36,8 @@ namespace PMS_Inventory_huan
 
             bundles.Add(new ScriptBundle("~/bundles/jqDataTables").Include(
                         "~/Scripts/dataTables_js/jquery.dataTables.js",
-                        "~/Scripts/dataTables_js/dataTables.bootstrap4.js"));
+                        "~/Scripts/dataTables_js/dataTables.bootstrap4.js",
+                        "~/Scripts/moment.js"));
 
             bundles.Add(new StyleBundle("~/Content/dataTablescss").Include(
                       "~/Content/dataTables_css/dataTables.bootstrap4.css"));

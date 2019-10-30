@@ -118,8 +118,10 @@
                             @Html.DisplayFor(model => item.UnitsInStock)
                         </td>
                         <td>
-                            @Html.ActionLink(PMS_Inventory_huan.Resources.AppResource.Edit, "Edit", new { id = item.SourceListID }, new { @class = "btn btn-primary" }) |
-                            @Html.ActionLink(PMS_Inventory_huan.Resources.AppResource.Details, "Details", new { id = item.SourceListID }, new { @class = "btn btn-primary" }) 
+                            <a class="btn btn-primary" href="@Url.Action( "Edit", new { id = item.SourceListID })"><i class="fa fa-edit">@PMS_Inventory_huan.Resources.AppResource.Edit</i></a>|
+                            <a class="btn btn-info" href="@Url.Action("Details", new { id = item.SourceListID })"><i class="fa fa-tasks">@PMS_Inventory_huan.Resources.AppResource.Details</i></a>
+                            @*@Html.ActionLink(PMS_Inventory_huan.Resources.AppResource.Edit, "Edit", new { id = item.SourceListID }, new { @class = "btn btn-primary" }) |
+                            @Html.ActionLink(PMS_Inventory_huan.Resources.AppResource.Details, "Details", new { id = item.SourceListID }, new { @class = "btn btn-info" })*@
                             @*@Html.ActionLink(PMS_Inventory_huan.Resources.AppResource.Delete, "Delete", new { id = item.SourceListID })*@
                         </td>
                     </tr>

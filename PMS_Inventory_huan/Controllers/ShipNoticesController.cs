@@ -91,6 +91,13 @@ namespace PMS_Inventory_huan.Controllers
             {
                 return HttpNotFound();
             }
+            var query = from n in db.PurchaseOrderDtl where n.PurchaseOrderID == id select n;
+            int amount = 0;
+            foreach (var x in query)
+            {
+                amount = amount + (int)x.Total;
+            }
+            ViewBag.amount = amount;
             return View(shipNotice);
         }
 

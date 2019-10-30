@@ -63,7 +63,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.UnitsOnStockOutOrder, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.UnitsOnStockOutOrder, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.UnitsOnStockOutOrder, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                @Html.HiddenFor(model => model.UnitsOnStockOutOrder)
                 @Html.ValidationMessageFor(model => model.UnitsOnStockOutOrder, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -71,7 +72,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.UnitsOnStockInOrder, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.UnitsOnStockInOrder, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.UnitsOnStockInOrder, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                @Html.HiddenFor(model => model.UnitsOnStockInOrder)
                 @Html.ValidationMessageFor(model => model.UnitsOnStockInOrder, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -100,6 +102,7 @@
                     @Html.ValidationMessageFor(model => model.CreateEmployeeID, "", new { @class = "text-danger" })
                 </div>
             </div>*@
+        @Html.HiddenFor(model => model.CreateEmployeeID)
 
         @*<div class="form-group">
                 @Html.LabelFor(model => model.LastModifiedDate, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -123,6 +126,7 @@
             </div>
         </div>
     </div>
+
 }
 
 <div>
