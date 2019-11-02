@@ -8,7 +8,7 @@
     var roleManager = new ApplicationRoleManager(roleStore);
     var userId = Convert.ToInt32(User.Identity.GetUserId());
     var user = context.Users.Find(userId);
-    var roleID = user.Roles.ToArray()[0].RoleId;
+    var roleID = 5; //user.Roles.ToArray()[0].RoleId;
     var userRole = context.Roles.Find(roleID);
 
 }

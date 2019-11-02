@@ -12,16 +12,16 @@ namespace PMS_Inventory_huan.Controllers
 {
     public class ShipNoticesController : BaseController
     {
+
         Utility utility = new Utility();
         private PMSAEntities db = new PMSAEntities();
 
         //GET: ShipNotices
-        //public ActionResult DisplayPurchaseOrderStatus(PurchaseOrder purchaseOrder)
+        [HttpPost]
+        //public ActionResult DisplayPurchaseOrderByStatus(string status)
         //{
-        //    var q = from n in db.POChangedCategory select n;
-        //    SelectList selectLists = new SelectList();
-        //    var s = q.Where(x=>(x.POChangedCategoryCode == "P" || x.POChangedCategoryCode=="E"|| x.POChangedCategoryCode=="S"));
-        //    return selectLists( q,s);
+
+
         //}
 
         //目前沒功能
@@ -36,9 +36,32 @@ namespace PMS_Inventory_huan.Controllers
             }
             return View();
         }
-
+        [HttpPost]
+        public ActionResult Index(string PurchaseOrderStatus)
+        {
+            string status = PurchaseOrderStatus;
+            return RedirectToAction("Index", new { PurchaseOrderStatus = status });
+        }
         public ActionResult Index(PurchaseOrder purchaseOrder)
         {
+            string status;
+            if (Request["PurchaseOrderStatus"] != null)
+            {
+                //檢查使用者是否有使用dropdownlist選擇訂單
+                status = Request["PurchaseOrderStatus"].ToString();
+            }
+            else
+            {
+                //如果沒輸入則找未答交的訂單
+                status = "P";
+            }
+
+            var query = from po in db.PurchaseOrder where (po.PurchaseOrderStatus == status && po.SupplierCode == "S00001") select po;
+            var query2 = from po in db.PurchaseOrder
+                         where po.PurchaseOrderStatus == status
+                         select po;
+            return View(query2);
+
             string statusSended = "P";
             string statusApplied = "E";
             string statusShipped = "S";
@@ -63,16 +86,14 @@ namespace PMS_Inventory_huan.Controllers
                 //return View(q);
 
                 //===========================預設為顯示已答交的訂單
-                var query = from n in db.PurchaseOrder
-                            where (n.PurchaseOrderStatus == statusSended && n.SupplierCode == SupplierCode)
-                            select n;
+                var quer = from n in db.PurchaseOrder
+                           where (n.PurchaseOrderStatus == statusSended && n.SupplierCode == SupplierCode)
+                           select n;
                 var q = db.PurchaseOrder.Where(n => n.PurchaseOrderStatus == statusSended && n.SupplierCode == SupplierCode);
                 //ViewBag.PurchaseOrderStatus = new SelectList(,);
-                return View(query);
+                return View(quer);
             }
-
         }
-
         //[HttpPost]
         //public ActionResult purchaseOrderStatus()
         //{
