@@ -98,8 +98,8 @@
             $('#dataTablePO').DataTable(
                 {
                     ajax: {
-                        url: "@Url.Action("GetPurchaseOrderList", "PurchaseOrders")",
-                        type: "get",
+                      url  : "@Url.Action("GetPurchaseOrderList", "PurchaseOrders")",
+                       type : "get",
                         datatype: "json"
                     },
                     language: {

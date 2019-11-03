@@ -17,12 +17,23 @@ namespace PMS_Inventory_huan.Controllers
         private PMSAEntities db = new PMSAEntities();
 
         //GET: ShipNotices
-        [HttpPost]
-        //public ActionResult DisplayPurchaseOrderByStatus(string status)
-        //{
+        public JsonResult GetPurchaseOrderList(string PurchaseOrderStatus)
+        {
+            string status = PurchaseOrderStatus;
 
-
-        //}
+            var query = from po in db.PurchaseOrder.AsEnumerable()
+                        where (po.PurchaseOrderStatus == status && po.SupplierCode == "S00001")
+                        select new PurchaseOrder
+                        {
+                            PurchaseOrderStatus = po.PurchaseOrderStatus,
+                            PurchaseOrderID = po.PurchaseOrderID,
+                            ReceiverName = po.ReceiverName,
+                            ReceiverTel = po.ReceiverTel,
+                            ReceiverMobile = po.ReceiverMobile,
+                            ReceiptAddress = po.ReceiptAddress
+                        };
+            return Json(new { data = query }, JsonRequestBehavior.AllowGet);
+        }
 
         //目前沒功能
         public ActionResult IndexUnshipped(PurchaseOrder purchaseOrder)
@@ -39,8 +50,21 @@ namespace PMS_Inventory_huan.Controllers
         [HttpPost]
         public ActionResult Index(string PurchaseOrderStatus)
         {
-            string status = PurchaseOrderStatus;
-            return RedirectToAction("Index", new { PurchaseOrderStatus = status });
+            string status;
+            if (Request["PurchaseOrderStatus"] != null)
+            {
+                //檢查使用者是否有使用dropdownlist選擇訂單
+                status = Request["PurchaseOrderStatus"].ToString();
+            }
+            else
+            {
+                //如果沒輸入則找未答交的訂單
+                status = "P";
+            }
+            var query = from po in db.PurchaseOrder
+                        where (po.PurchaseOrderStatus == status && po.SupplierCode == "S00001")
+                        select po;
+            return View(query);
         }
         public ActionResult Index(PurchaseOrder purchaseOrder)
         {
@@ -55,12 +79,10 @@ namespace PMS_Inventory_huan.Controllers
                 //如果沒輸入則找未答交的訂單
                 status = "P";
             }
-
-            var query = from po in db.PurchaseOrder where (po.PurchaseOrderStatus == status && po.SupplierCode == "S00001") select po;
-            var query2 = from po in db.PurchaseOrder
-                         where po.PurchaseOrderStatus == status
-                         select po;
-            return View(query2);
+            var query = from po in db.PurchaseOrder
+                        where (po.PurchaseOrderStatus == status && po.SupplierCode == "S00001")
+                        select po;
+            return View(query);
 
             string statusSended = "P";
             string statusApplied = "E";
