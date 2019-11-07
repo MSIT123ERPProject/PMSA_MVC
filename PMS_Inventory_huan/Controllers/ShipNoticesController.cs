@@ -84,43 +84,9 @@ namespace PMS_Inventory_huan.Controllers
                         select po;
             return View(query);
 
-            string statusSended = "P";
-            string statusApplied = "E";
-            string statusShipped = "S";
-            string SupplierCode = utility.GetSupplierAccountByAccountID("").SupplierCode;
-            purchaseOrder = db.PurchaseOrder.Find(purchaseOrder.PurchaseOrderID);
-            if (purchaseOrder != null && (purchaseOrder.PurchaseOrderStatus == statusSended || purchaseOrder.PurchaseOrderStatus == statusApplied || purchaseOrder.PurchaseOrderStatus == statusShipped))
-            {
-                var p = from n in db.PurchaseOrder
-                        where n.PurchaseOrderID == purchaseOrder.PurchaseOrderID && n.SupplierCode == SupplierCode
-                        select n;
-                var Order = db.PurchaseOrder.Where(n => n.PurchaseOrderID == purchaseOrder.PurchaseOrderID && n.SupplierCode == SupplierCode);
-                return View(Order);
-            }
-            else
-            {
-                if (purchaseOrder != null)
-                {
-                    ViewBag.failMessage = $"<script>Swal.fire('{ PMS_Inventory_huan.Resources.AppResource.noData }');</script>";
-                }
-                //不知道為甚麼不能丟空的VIEW()
-                //var q = from n in db.PurchaseOrder where n.PurchaseOrderOID == null select n;
-                //return View(q);
 
-                //===========================預設為顯示已答交的訂單
-                var quer = from n in db.PurchaseOrder
-                           where (n.PurchaseOrderStatus == statusSended && n.SupplierCode == SupplierCode)
-                           select n;
-                var q = db.PurchaseOrder.Where(n => n.PurchaseOrderStatus == statusSended && n.SupplierCode == SupplierCode);
-                //ViewBag.PurchaseOrderStatus = new SelectList(,);
-                return View(quer);
-            }
         }
-        //[HttpPost]
-        //public ActionResult purchaseOrderStatus()
-        //{
-        //    return View();
-        //}
+
 
         // GET: ShipNotices/Details/5
         public ActionResult Details(string id)
@@ -167,6 +133,8 @@ namespace PMS_Inventory_huan.Controllers
         }
 
         // GET: ShipNotices/Edit/5
+        //按下檢視後進入此方法
+        [ValidateInput(false)]
         public ActionResult Edit(string id)
         {
             PurchaseOrderViewModel purchaseOrderViewModel = new PurchaseOrderViewModel();
@@ -175,10 +143,11 @@ namespace PMS_Inventory_huan.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PurchaseOrder purchaseOrder = db.PurchaseOrder.Find(id);
+            //不知道為何找不到該ID的採購單，在INDEX的方法中明明有找出來並顯示在VIEW裡面，而同一筆卻在這找不到
+            PurchaseOrder purchaseOrder = db.PurchaseOrder.Where(x => x.PurchaseOrderID == id).SingleOrDefault();
             if (purchaseOrder == null)
             {
-                return HttpNotFound();
+                return HttpNotFound("purchaseOrder Not Found");
             }
             var query = from n in db.PurchaseOrderDtl where n.PurchaseOrderID == id select n;
             int amount = 0;
@@ -193,14 +162,35 @@ namespace PMS_Inventory_huan.Controllers
             purchaseOrderViewModel.ReceiverMobile = purchaseOrder.ReceiverMobile;
             purchaseOrderViewModel.ReceiptAddress = purchaseOrder.ReceiptAddress;
 
-            ViewBag.failMessage = Convert.ToString(TempData["failMessage"]);
-            ViewBag.PurchaseOrderID = purchaseOrder.PurchaseOrderID;
-            ViewBag.ReceiverName = purchaseOrder.ReceiverName;
-            ViewBag.ReceiverTel = purchaseOrder.ReceiverTel;
-            ViewBag.ReceiverMobile = purchaseOrder.ReceiverMobile;
-            ViewBag.ReceiptAddress = purchaseOrder.ReceiptAddress;
+            //ViewBag.failMessage = Convert.ToString(TempData["failMessage"]);
+            //ViewBag.PurchaseOrderID = purchaseOrder.PurchaseOrderID;
+            //ViewBag.ReceiverName = purchaseOrder.ReceiverName;
+            //ViewBag.ReceiverTel = purchaseOrder.ReceiverTel;
+            //ViewBag.ReceiverMobile = purchaseOrder.ReceiverMobile;
+            //ViewBag.ReceiptAddress = purchaseOrder.ReceiptAddress;
             ViewBag.amount = amount;
             return View(purchaseOrderViewModel);
+        }
+        //判斷如果是未答交的訂單的方法
+        public ActionResult purchaseOrderSended(string id)
+        {
+            PurchaseOrder purchaseOrder = db.PurchaseOrder.Find(id);
+            if (purchaseOrder == null)
+            {
+                return HttpNotFound("purchaseOrder Not Found or id is null");
+            }
+            PurchaseOrderViewModel purchaseOrderViewModel = new PurchaseOrderViewModel();
+            purchaseOrderViewModel.failMessage = Convert.ToString(TempData["failMessage"]);
+            purchaseOrderViewModel.PurchaseOrderID = purchaseOrder.PurchaseOrderID;
+            purchaseOrderViewModel.ReceiverName = purchaseOrder.ReceiverName;
+            purchaseOrderViewModel.ReceiverTel = purchaseOrder.ReceiverTel;
+            purchaseOrderViewModel.ReceiverMobile = purchaseOrder.ReceiverMobile;
+            purchaseOrderViewModel.ReceiptAddress = purchaseOrder.ReceiptAddress;
+            return View(purchaseOrderViewModel);
+        }
+        public ActionResult purchaseOrderAccepted(string id)
+        {
+
         }
 
         // POST: ShipNotices/Edit/5
