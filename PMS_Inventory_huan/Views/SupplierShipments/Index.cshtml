@@ -1,0 +1,112 @@
+﻿@model IEnumerable<PMS_Inventory_huan.Models.SupplierShipment>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+    <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+        <h2>@PMS_Inventory_huan.Resources.AppResource.ShipmentOrder</h2> 
+        <!-- Topbar Search -->
+        <!-- 這樣按下Submit後，會傳甚麼東西給Index????? -->
+        @using (Html.BeginForm("Index", "SupplierShipments", FormMethod.Post, new { @class = "d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" }))
+        {
+            <div class="input-group">
+                
+                <input id="idSearh" type="text" class="form-control bg-light border-0 small" placeholder="搜尋未出貨訂單" aria-label="Search" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit">
+                        <i class="fas fa-search fa-sm"></i>
+                    </button>
+                </div>
+            </div>
+        }
+        <!-- 舊寫法 -->
+        @*<form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+            <div class="input-group">
+                <input id="idSearh" type="text" class="form-control bg-light border-0 small" placeholder="用料號搜尋庫存" aria-label="Search" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit">
+                        <i class="fas fa-search fa-sm"></i>
+                    </button>
+
+                </div>
+            </div>
+        </form>*@
+    </nav>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">@PMS_Inventory_huan.Resources.AppResource.UnshippedOrder</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SupplierShipmentOID)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.InventoryCode)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.OrderID)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CreateDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CreateEmployeeID)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.LastModifiedDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.LastModifiedEmployeeID)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Remark)
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SupplierShipmentOID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.InventoryCode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OrderID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CreateDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CreateEmployeeID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LastModifiedDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LastModifiedEmployeeID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Remark)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.ShipCode }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.ShipCode }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.ShipCode })
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+    </div>
+</div>

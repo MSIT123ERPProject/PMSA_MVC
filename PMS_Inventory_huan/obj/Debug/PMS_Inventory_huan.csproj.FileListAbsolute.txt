@@ -1672,7 +1672,6 @@ C:\Users\a0204\OneDrive\Documents\PMSA_MVC\PMS_Inventory_huan\bin\roslyn\VBCSCom
 C:\Users\a0204\OneDrive\Documents\PMSA_MVC\PMS_Inventory_huan\bin\Antlr3.Runtime.dll
 C:\Users\a0204\OneDrive\Documents\PMSA_MVC\PMS_Inventory_huan\bin\EntityFramework.dll
 C:\Users\a0204\OneDrive\Documents\PMSA_MVC\PMS_Inventory_huan\bin\EntityFramework.SqlServer.dll
-C:\Users\a0204\OneDrive\Documents\PMSA_MVC\PMS_Inventory_huan\bin\ICSharpCode.SharpZipLib.dll
 C:\Users\a0204\OneDrive\Documents\PMSA_MVC\PMS_Inventory_huan\bin\Microsoft.AspNet.Identity.Core.dll
 C:\Users\a0204\OneDrive\Documents\PMSA_MVC\PMS_Inventory_huan\bin\Microsoft.AspNet.Identity.EntityFramework.dll
 C:\Users\a0204\OneDrive\Documents\PMSA_MVC\PMS_Inventory_huan\bin\Microsoft.AspNet.Identity.Owin.dll
@@ -1686,13 +1685,9 @@ C:\Users\a0204\OneDrive\Documents\PMSA_MVC\PMS_Inventory_huan\bin\Microsoft.Owin
 C:\Users\a0204\OneDrive\Documents\PMSA_MVC\PMS_Inventory_huan\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
 C:\Users\a0204\OneDrive\Documents\PMSA_MVC\PMS_Inventory_huan\bin\Microsoft.Owin.Security.OAuth.dll
 C:\Users\a0204\OneDrive\Documents\PMSA_MVC\PMS_Inventory_huan\bin\Microsoft.Owin.Security.Twitter.dll
-C:\Users\a0204\OneDrive\Documents\PMSA_MVC\PMS_Inventory_huan\bin\Microsoft.PowerShell.Commands.Utility.dll
 C:\Users\a0204\OneDrive\Documents\PMSA_MVC\PMS_Inventory_huan\bin\Microsoft.Web.Infrastructure.dll
 C:\Users\a0204\OneDrive\Documents\PMSA_MVC\PMS_Inventory_huan\bin\Newtonsoft.Json.dll
 C:\Users\a0204\OneDrive\Documents\PMSA_MVC\PMS_Inventory_huan\bin\Owin.dll
-C:\Users\a0204\OneDrive\Documents\PMSA_MVC\PMS_Inventory_huan\bin\RESXManager.Core.dll
-C:\Users\a0204\OneDrive\Documents\PMSA_MVC\PMS_Inventory_huan\bin\RESXManager.Presentation.PureNet.dll
-C:\Users\a0204\OneDrive\Documents\PMSA_MVC\PMS_Inventory_huan\bin\System.Management.Automation.dll
 C:\Users\a0204\OneDrive\Documents\PMSA_MVC\PMS_Inventory_huan\bin\System.Web.Helpers.dll
 C:\Users\a0204\OneDrive\Documents\PMSA_MVC\PMS_Inventory_huan\bin\System.Web.Mvc.dll
 C:\Users\a0204\OneDrive\Documents\PMSA_MVC\PMS_Inventory_huan\bin\System.Web.Optimization.dll
@@ -2277,3 +2272,5 @@ C:\Users\User\Desktop\C#20191022\工作\PMSA_MVC\PMS_Inventory_huan\obj\Debug\ja
 C:\Users\User\Desktop\C#20191022\工作\PMSA_MVC\PMS_Inventory_huan\obj\Debug\PMS_Inventory_huan.csproj.CopyComplete
 C:\Users\User\Desktop\C#20191022\工作\PMSA_MVC\PMS_Inventory_huan\obj\Debug\PMS_Inventory_huan.dll
 C:\Users\User\Desktop\C#20191022\工作\PMSA_MVC\PMS_Inventory_huan\obj\Debug\PMS_Inventory_huan.pdb
+C:\Users\a0204\OneDrive\Documents\PMSA_MVC\PMS_Inventory_huan\obj\Debug\PMS_Inventory_huan.Migrations.v1.resources
+C:\Users\a0204\OneDrive\Documents\PMSA_MVC\PMS_Inventory_huan\obj\Debug\PMS_Inventory_huan.Migrations.v11.resources
