@@ -12,7 +12,15 @@ namespace PMS_Inventory_huan.Controllers
 {
     public class ShipNoticesController : BaseController
     {
-        private PMSAEntities db = new PMSAEntities();
+        private PMSAEntities db;
+        string supplierAccount;
+        string supplierCode;
+        public ShipNoticesController()
+        {
+            db = new PMSAEntities();
+            supplierCode = "S00001";
+            supplierAccount = "SE00001";
+        }
 
         //GET: ShipNotices
         //此方法為幫助DATATABLE查訂單資料
@@ -21,7 +29,7 @@ namespace PMS_Inventory_huan.Controllers
             string status = PurchaseOrderStatus;
 
             var query = from po in db.PurchaseOrder.AsEnumerable()
-                        where (po.PurchaseOrderStatus == status && po.SupplierCode == "S00001")
+                        where (po.PurchaseOrderStatus == status && po.SupplierCode == supplierCode)
                         select new PurchaseOrder
                         {
                             PurchaseOrderStatus = po.PurchaseOrderStatus,
@@ -53,26 +61,26 @@ namespace PMS_Inventory_huan.Controllers
 
 
         // GET: ShipNotices/Details/5
-        //public ActionResult Details(string id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    PurchaseOrder shipNotice = db.PurchaseOrder.Find(id);
-        //    if (shipNotice == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    var query = from n in db.PurchaseOrderDtl where n.PurchaseOrderID == id select n;
-        //    int amount = 0;
-        //    foreach (var x in query)
-        //    {
-        //        amount = amount + (int)x.Total;
-        //    }
-        //    ViewBag.amount = amount;
-        //    return View(shipNotice);
-        //}
+        public ActionResult Details(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            PurchaseOrder shipNotice = db.PurchaseOrder.Find(id);
+            if (shipNotice == null)
+            {
+                return HttpNotFound();
+            }
+            var query = from n in db.PurchaseOrderDtl where n.PurchaseOrderID == id select n;
+            int amount = 0;
+            foreach (var x in query)
+            {
+                amount = amount + (int)x.Total;
+            }
+            ViewBag.amount = amount;
+            return View(shipNotice);
+        }
 
 
         //按下檢視後進入此方法
@@ -90,7 +98,7 @@ namespace PMS_Inventory_huan.Controllers
             }
             else if (purchaseOrder.PurchaseOrderStatus == "S")
             {
-                return RedirectToAction("detail", "ShipNotices", new { id });
+                return RedirectToAction("Details", "ShipNotices", new { id });
             }
             return HttpNotFound("Not Found");
             //===================================================================================
@@ -159,59 +167,82 @@ namespace PMS_Inventory_huan.Controllers
             PurchaseOrder purchaseOrder = db.PurchaseOrder.Find(id);
             return View(purchaseOrder);
         }
-        
+
+        [HttpGet]
         public ActionResult shipChecked(string id)
         {
             string purchaseOrderID = id;
-            if (purchaseOrderID != null)
+            if (purchaseOrderID == null)
             {
-                //修改貨源清單庫存數量              
-                var podquery = from pod in db.PurchaseOrderDtl
-                               join sl in db.SourceList on pod.SourceListID equals sl.SourceListID
-                               where pod.PurchaseOrderID == purchaseOrderID
-                               select new { pod.TotalPartQty, sl.UnitsInStock, pod.SourceListID, pod.PurchaseOrderID, pod.PurchaseOrderDtlCode };
-                foreach (var x in podquery)
-                {
-                    if (x.UnitsInStock >= x.TotalPartQty)
-                    {
-                        SourceList sourceList = db.SourceList.Find(x.SourceListID);
-                        PurchaseOrderDtl purchaseOrderDtl = db.PurchaseOrderDtl.Find(x.PurchaseOrderDtlCode);
-                        sourceList.UnitsInStock = sourceList.UnitsInStock - purchaseOrderDtl.TotalPartQty;
-                        db.Entry(sourceList).State = EntityState.Modified;
-                        TempData.Add("successmessage", $"<script>Swal.fire('出貨成功')</script>");
-                    }
-                    else
-                    {
-                        PurchaseOrder po = db.PurchaseOrder.Find(purchaseOrderID);
-                        TempData.Add("failmessage", $"<script>Swal.fire('庫存不足')</script>");
-                        var query = from nn in db.PurchaseOrderDtl where nn.PurchaseOrderID == purchaseOrderID select nn;
-                        int amount = 0;
-                        foreach (var y in query)
-                        {
-                            amount = amount + (int)y.Total;
-                        }
-                        ViewBag.amount = amount;
-                        //
-                        return RedirectToAction("shipCheck", "ShipNotices", new { id = purchaseOrderID });
-                    }
-                }
-                //修改採購單狀態
-                PurchaseOrder purchaseOrder = db.PurchaseOrder.Find(purchaseOrderID);
-                purchaseOrder.PurchaseOrderStatus = "S";
-                db.Entry(purchaseOrder).State = EntityState.Modified;
-                //存進資料庫
-                db.SaveChanges();
-                //return View(purchaseOrder);
-                return RedirectToAction("Index", "ShipNotices", new { controller = "Index", action = "ShipNotices", id = purchaseOrder.PurchaseOrderID });
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //修改貨源清單庫存數量              
+            var podquery = from pod in db.PurchaseOrderDtl
+                           join sl in db.SourceList on pod.SourceListID equals sl.SourceListID
+                           where pod.PurchaseOrderID == purchaseOrderID
+                           select new { pod.TotalPartQty, sl.UnitsInStock, pod.SourceListID, pod.PurchaseOrderID, pod.PurchaseOrderDtlCode };
+            foreach (var x in podquery)
+            {
+                if (x.UnitsInStock >= x.TotalPartQty)
+                {
+                    SourceList sourceList = db.SourceList.Find(x.SourceListID);
+                    PurchaseOrderDtl purchaseOrderDtl = db.PurchaseOrderDtl.Find(x.PurchaseOrderDtlCode);
+                    sourceList.UnitsInStock = sourceList.UnitsInStock - purchaseOrderDtl.TotalPartQty;
+                    db.Entry(sourceList).State = EntityState.Modified; 
+                }
+                else
+                {
+                    PurchaseOrder po = db.PurchaseOrder.Find(purchaseOrderID);
+                    var query = from nn in db.PurchaseOrderDtl where nn.PurchaseOrderID == purchaseOrderID select nn;
+                    int amount = 0;
+                    foreach (var y in query)
+                    {
+                        amount = amount + (int)y.Total;
+                    }
+                    ViewBag.amount = amount;
+                    return Json("<script>Swal.fire('庫存不足')</script>" ,JsonRequestBehavior.AllowGet);
+                    //庫存不足時，顯示視窗警告並且導回原頁面
+                    return RedirectToAction("shipCheck", "ShipNotices", new { id = purchaseOrderID });
+                }
+            }
+
+            //修改採購單狀態
+            PurchaseOrder purchaseOrder = db.PurchaseOrder.Find(purchaseOrderID);
+            purchaseOrder.PurchaseOrderStatus = "S";
+            db.Entry(purchaseOrder).State = EntityState.Modified;
+            //新增出貨通知
+            
+            DateTime now = DateTime.Now;
+            ShipNotice shipNotice = new ShipNotice();
+            string snId = $"SN-{now:yyyyMMdd}-";
+            int count = db.ShipNotice.Where(x => x.ShipNoticeID.StartsWith(snId)).Count();
+            count++;
+            snId = $"{snId}{count:000}";
+            shipNotice.ShipNoticeID = snId;
+            shipNotice.PurchaseOrderID = purchaseOrderID;
+            shipNotice.ShipDate = now;
+            shipNotice.EmployeeID = purchaseOrder.EmployeeID;
+            var compCode = db.Employee.Where(x => x.EmployeeID == purchaseOrder.EmployeeID).First();
+            shipNotice.CompanyCode = compCode.CompanyCode;
+            shipNotice.SupplierAccountID = supplierAccount;
+            //檢查出貨通知表裡面是否有該訂單ID，如果有，顯示該筆訂單已出貨
+            //這裡找步道方法可以檢查成功
+            if (db.ShipNotice.Contains(shipNotice,shi))//
+            {
+                return Json("<script>Swal.fire('此筆訂單已出貨')</script>", JsonRequestBehavior.AllowGet);
+            }
+            //存進資料庫 
+            purchaseOrder.ShipNotice.Add(shipNotice);
+            db.SaveChanges();
+            return Json( "<script>Swal.fire('出貨成功')</script>" , JsonRequestBehavior.AllowGet);
+            return RedirectToAction("Index", "ShipNotices", new {id = purchaseOrder.PurchaseOrderID });
         }
-       
+
         //public ActionResult shipChecked([Bind(Include = "purchaseOrderID")] PurchaseOrder purchaseOrder) {
         //    if (purchaseOrder.PurchaseOrderID == null) {
         //        return HttpNotFound("purchaseOrder.PurchaseOrderID Not Found");
         //    }
-           
+
         //  return  RedirectToAction("shipChecked",new {id= purchaseOrder.PurchaseOrderID });
         //}
         protected override void Dispose(bool disposing)
