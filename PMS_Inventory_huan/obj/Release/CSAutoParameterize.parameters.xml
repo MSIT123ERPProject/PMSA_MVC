@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="DefaultConnection-Web.config Connection String" description="DefaultConnection 應用程式在 web.config 中用來存取資料庫的連接字串。" defaultValue="Data Source=.;initial catalog=PMSA;Integrated Security=True" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\a0204\\OneDrive\\Documents\\PMSA_MVC\\PMS_Inventory_huan\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
+  </parameter>
+  <parameter name="InventoryForSupplierCodeFirst-Web.config Connection String" description="InventoryForSupplierCodeFirst 應用程式在 web.config 中用來存取資料庫的連接字串。" defaultValue="data source=.;initial catalog=PMS_Inventory_huan.Models.InventoryForSupplierCodeFirst;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\a0204\\OneDrive\\Documents\\PMSA_MVC\\PMS_Inventory_huan\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='InventoryForSupplierCodeFirst']/@connectionString" />
+  </parameter>
+  <parameter name="InventoryForSupplierModelContainer-Web.config Connection String" description="InventoryForSupplierModelContainer 應用程式在 web.config 中用來存取資料庫的連接字串。" defaultValue="metadata=res://*/Models.InventoryForSupplierModelFirst.csdl|res://*/Models.InventoryForSupplierModelFirst.ssdl|res://*/Models.InventoryForSupplierModelFirst.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=.;initial catalog=PMS;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework&quot;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\a0204\\OneDrive\\Documents\\PMSA_MVC\\PMS_Inventory_huan\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='InventoryForSupplierModelContainer']/@connectionString" />
+  </parameter>
+  <parameter name="PMSAEntities-Web.config Connection String" description="PMSAEntities 應用程式在 web.config 中用來存取資料庫的連接字串。" defaultValue="metadata=res://*/Models.PMSAModel.csdl|res://*/Models.PMSAModel.ssdl|res://*/Models.PMSAModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;Server=tcp:msit123db02.database.windows.net,1433;Initial Catalog=PMSA;Persist Security Info=False;User ID=msit123admin;Password=msit123Password;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;App=EntityFramework&quot;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\a0204\\OneDrive\\Documents\\PMSA_MVC\\PMS_Inventory_huan\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='PMSAEntities']/@connectionString" />
+  </parameter>
+</parameters>

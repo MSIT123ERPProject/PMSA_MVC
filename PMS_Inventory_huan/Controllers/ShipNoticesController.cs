@@ -142,8 +142,8 @@ namespace PMS_Inventory_huan.Controllers
             {
                 return HttpNotFound("purchaseOrder Not Found or id is null");
             }
-            PurchaseOrderViewModel purchaseOrderViewModel = new PurchaseOrderViewModel();
-            purchaseOrderViewModel.failMessage = Convert.ToString(TempData["failMessage"]);
+            PurchaseOrder purchaseOrderViewModel = new PurchaseOrder();
+            //purchaseOrderViewModel.failMessage = Convert.ToString(TempData["failMessage"]);
             purchaseOrderViewModel.PurchaseOrderID = purchaseOrder.PurchaseOrderID;
             purchaseOrderViewModel.ReceiverName = purchaseOrder.ReceiverName;
             purchaseOrderViewModel.ReceiverTel = purchaseOrder.ReceiverTel;

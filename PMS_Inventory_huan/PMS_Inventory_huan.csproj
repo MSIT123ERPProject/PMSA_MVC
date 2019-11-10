@@ -335,7 +335,6 @@
     <Compile Include="Models\ShipNoticeDtl.cs">
       <DependentUpon>PMSAModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ShipNoticesViewModel.cs" />
     <Compile Include="Models\SignFlow.cs">
       <DependentUpon>PMSAModel.tt</DependentUpon>
     </Compile>
@@ -491,6 +490,7 @@
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="Scripts\dataTables_js\i18n\Chinese-traditional.json" />
+    <None Include="Properties\PublishProfiles\msit123PMSA - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
