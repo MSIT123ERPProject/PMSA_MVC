@@ -8,111 +8,37 @@
 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
     <h2>@PMS_Inventory_huan.Resources.AppResource.ShipNotice</h2>
     <!-- Topbar Search -->
-    @using (Html.BeginForm("Index", "ShipNotices", FormMethod.Get, new { @class = "d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" }))
-    {
-        <div class="input-group">
-            <input name="PurchaseOrderID" id="idSearh" type="text" class="form-control bg-light border-0 small" placeholder=@PMS_Inventory_huan.Resources.AppResource.PurchaseOrderID aria-label="Search" aria-describedby="basic-addon2">
-            <div class="input-group-append">
-                <button class="btn btn-primary" type="submit">
-                    <i class="fas fa-search fa-sm"></i>
-                </button>
+    @*@using (Html.BeginForm("Index", "ShipNotices", FormMethod.Get, new { @class = "d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" }))
+        {
+            <div class="input-group">
+                <input name="PurchaseOrderID" id="idSearh" type="text" class="form-control bg-light border-0 small" placeholder=@PMS_Inventory_huan.Resources.AppResource.PurchaseOrderID aria-label="Search" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit">
+                        <i class="fas fa-search fa-sm"></i>
+                    </button>
+                </div>
             </div>
-        </div>
-        <div class="input-group">
-            <input name="PurchaseOrderStatus" id="idSearh2" type="text" class="form-control bg-light border-0 small" placeholder=@PMS_Inventory_huan.Resources.AppResource.status . aria-label="Search" aria-describedby="basic-addon2">
-            <div class="input-group-append">
-                <button class="btn btn-primary" type="submit">
-                    <i class="fas fa-search fa-sm"></i>
-                </button>
+            <div class="input-group">
+                <input name="PurchaseOrderStatus" id="idSearh2" type="text" class="form-control bg-light border-0 small" placeholder=@PMS_Inventory_huan.Resources.AppResource.status . aria-label="Search" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit">
+                        <i class="fas fa-search fa-sm"></i>
+                    </button>
+                </div>
             </div>
-        </div>
-    }
+        }*@
 
-    <div id="idStatus" class="col-sm-2">
+    <div id="idStatus" class="col-sm-auto">
         @Html.DropDownList("selectlist", new SelectList(new[]
      {
         new SelectListItem { Text = "未答交",Value="P",Selected=false },
-        new SelectListItem { Text = "已答交", Value = "E",Selected=true },
+        new SelectListItem { Text = "未出貨", Value = "E",Selected=true },
         new SelectListItem { Text = "已出貨", Value = "S",Selected=false }
         }, "Value", "Text"),
      new { id = "idStatus", @class = "form-control" }
      )
     </div>
 </nav>
-
-@*<nav>
-    <div class="card shadow mb-4">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">@PMS_Inventory_huan.Resources.AppResource.ShipNotice</h6>
-        </div>
-        <div>
-        </div>
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-bordered" id="dataTableP" width="100%" cellspacing="0">
-                    <thead>
-                        <tr>
-                            <th>
-                                @Html.DisplayNameFor(model => model.PurchaseOrderStatus)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.PurchaseOrderID)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.ReceiverName)
-                            </th>
-
-                            <th>
-                                @Html.DisplayNameFor(model => model.ReceiverTel)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.ReceiverMobile)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.ReceiptAddress)
-                            </th>
-                            <th>
-                                @PMS_Inventory_huan.Resources.AppResource.Edit
-                            </th>
-                        </tr>
-                    </thead>
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(model => item.PurchaseOrderStatus)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(model => item.PurchaseOrderID)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(model => item.ReceiverName)
-                            </td>
-
-                            <td>
-                                @Html.DisplayFor(model => item.ReceiverTel)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(model => item.ReceiverMobile)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(model => item.ReceiptAddress)
-                            </td>
-                            <td>
-                                <a class="btn btn-primary" href="@Url.Action( "Edit", new { id = item.PurchaseOrderID })"><i class="fa fa-edit">@PMS_Inventory_huan.Resources.AppResource.Ship</i></a>|
-                                <a class="btn btn-info" href="@Url.Action("Details", new { id = item.PurchaseOrderID })"><i class="fa fa-tasks">@PMS_Inventory_huan.Resources.AppResource.Details</i></a>
-                                @Html.ActionLink(PMS_Inventory_huan.Resources.AppResource.Ship, "Edit", new { id = item.PurchaseOrderID }, new { @class = "btn btn-primary" }) |
-                                @Html.ActionLink(PMS_Inventory_huan.Resources.AppResource.Details, "Details", new { id = item.PurchaseOrderID }, new { @class = "btn btn-primary" })
-                                @Html.ActionLink(PMS_Inventory_huan.Resources.AppResource.Delete, "Delete", new { id = item.PurchaseOrderID })
-                                </td>
-                                </tr>
-                                }
-
-                                </table>
-                                </div>
-                                </div>
-                                </div>
-                                </nav>*@
 @*dropdownlist取得值得方法*@
 @*http://kevintsengtw.blogspot.com/2011/09/jquery-dropdownlist-1.html*@
 
@@ -124,7 +50,7 @@
     </div>
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-striped table-bordered" id="dataTableP" cellspacing="0" style="width:100%">
+            <table class="table table-striped table-bordered" id="dataTable" cellspacing="0" style="width:100%">
                 <thead>
                     <tr>
                         @*<th>採購單狀態</th>*@
@@ -174,15 +100,11 @@
             });
         });
 
-
-
-
-
         function shipDatatable() {
-            if ($.fn.dataTable.isDataTable("#dataTableP")) {
-                $("#dataTableP").DataTable().destroy();
+            if ($.fn.dataTable.isDataTable("#dataTable")) {
+                $("#dataTable").DataTable().destroy();
             }
-             $("#dataTableP").DataTable({
+             $("#dataTable").DataTable({
                     "ajax": {
                       "url": "@Url.Action("GetPurchaseOrderList","ShipNotices")",
                     "type" : "get",
@@ -200,7 +122,19 @@
                     {       /*按鈕程式碼想寫在這，但失敗了*/   /* 20191107 09:12 成功了，原因在於return字串沒有正確的打好，必須注意雙引號以及單引號  */
                         "data": "PurchaseOrderID",
                         "render": function (data, type, row, meta) {
-                            return '<a class="btn btn-primary" href="' + "@Url.Action( "Edit","ShipNotices")"+"?id=" + data + '">檢視</a>';
+                            if (row.PurchaseOrderStatus == "P") {
+                                /*未答交*/
+                                   return '<a class="btn btn-primary"'+' href="' + "@Url.Action( "purchaseOrderSended","ShipNotices")" + "?id=" + data + '">檢視未答交</a>';
+                             }
+                             else if(row.PurchaseOrderStatus == "E") {
+                                /*未出貨按鈕*/
+                                return '<a class="btn btn-primary"'+' href="' + "@Url.Action( "shipCheck","ShipNotices")" + "?id=" + data + '">檢視未出貨</a>';
+                            }
+                            else {
+                                /*已出貨*/
+                                return '<a class="btn btn-primary" href="' + "@Url.Action( "Edit","ShipNotices")"+"?id=" + data + '">檢視已出貨</a>';
+                            }
+
                         }
                     }
                  ],
@@ -208,7 +142,7 @@
                 "order": [[1,"desc"]],
             });
         }
-
+        /*此方法目前沒用到*/
         function shipmentStatus() {
             $.ajax({
                 url: "@Url.Action("Index","ShipNotices")",
