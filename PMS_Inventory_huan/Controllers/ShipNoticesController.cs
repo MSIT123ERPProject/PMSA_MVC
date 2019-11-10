@@ -188,7 +188,7 @@ namespace PMS_Inventory_huan.Controllers
                     SourceList sourceList = db.SourceList.Find(x.SourceListID);
                     PurchaseOrderDtl purchaseOrderDtl = db.PurchaseOrderDtl.Find(x.PurchaseOrderDtlCode);
                     sourceList.UnitsInStock = sourceList.UnitsInStock - purchaseOrderDtl.TotalPartQty;
-                    db.Entry(sourceList).State = EntityState.Modified; 
+                    db.Entry(sourceList).State = EntityState.Modified;
                 }
                 else
                 {
@@ -200,7 +200,7 @@ namespace PMS_Inventory_huan.Controllers
                         amount = amount + (int)y.Total;
                     }
                     ViewBag.amount = amount;
-                    return Json("<script>Swal.fire('庫存不足')</script>" ,JsonRequestBehavior.AllowGet);
+                    return Json("<script>Swal.fire('庫存不足')</script>", JsonRequestBehavior.AllowGet);
                     //庫存不足時，顯示視窗警告並且導回原頁面
                     return RedirectToAction("shipCheck", "ShipNotices", new { id = purchaseOrderID });
                 }
@@ -211,7 +211,7 @@ namespace PMS_Inventory_huan.Controllers
             purchaseOrder.PurchaseOrderStatus = "S";
             db.Entry(purchaseOrder).State = EntityState.Modified;
             //新增出貨通知
-            
+
             DateTime now = DateTime.Now;
             ShipNotice shipNotice = new ShipNotice();
             string snId = $"SN-{now:yyyyMMdd}-";
@@ -227,15 +227,16 @@ namespace PMS_Inventory_huan.Controllers
             shipNotice.SupplierAccountID = supplierAccount;
             //檢查出貨通知表裡面是否有該訂單ID，如果有，顯示該筆訂單已出貨
             //這裡找步道方法可以檢查成功
-            if (db.ShipNotice.Contains(shipNotice,shi))//
+            ShipNotice ship = db.ShipNotice.Where(x => x.PurchaseOrderID == purchaseOrderID).FirstOrDefault();
+            if (ship != null)
             {
                 return Json("<script>Swal.fire('此筆訂單已出貨')</script>", JsonRequestBehavior.AllowGet);
             }
             //存進資料庫 
             purchaseOrder.ShipNotice.Add(shipNotice);
             db.SaveChanges();
-            return Json( "<script>Swal.fire('出貨成功')</script>" , JsonRequestBehavior.AllowGet);
-            return RedirectToAction("Index", "ShipNotices", new {id = purchaseOrder.PurchaseOrderID });
+            return Json("<script>Swal.fire('出貨成功')</script>", JsonRequestBehavior.AllowGet);
+            return RedirectToAction("Index", "ShipNotices", new { id = purchaseOrder.PurchaseOrderID });
         }
 
         //public ActionResult shipChecked([Bind(Include = "purchaseOrderID")] PurchaseOrder purchaseOrder) {
