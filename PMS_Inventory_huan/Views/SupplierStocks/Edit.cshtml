@@ -1,12 +1,10 @@
 ﻿@model PMS_Inventory_huan.Models.SourceList
-
 @{
     ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>@PMS_Inventory_huan.Resources.AppResource.Edit</h2>
-
 
 @using (Html.BeginForm())
 {
@@ -59,20 +57,59 @@
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input id="idSave" type="submit" value="存檔" class="btn btn-primary" />
+                <input type="submit" value="存檔" class="btn btn-primary" />
             </div>
         </div>
     </div>
 }
-    <div>
-        @Html.ActionLink("回查詢頁面", "Index",null, new { @class = "btn btn-primary" })
-    </div>
-
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-        <script>
-            $("#idSave").click(function () {
-
-            });
-        </script>
-    }
+@*嘗試修改寫法*@
+<div class="col-md-offset-2 col-md-10">
+    <input id="idSave" type="submit" value="存檔" class="btn btn-primary" />
+</div>
+<div>
+    @Html.ActionLink("回查詢頁面", "Index", null, new { @class = "btn btn-primary" })
+</div>
+<div id="message"></div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $("#idSave").click(function () {
+            Swal.fire({
+                title: '確定修改此筆貨源清單庫存?',
+                text: "修改後可再修改!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '確定修改',
+                cancelButtonText:'取消'
+            }).then((result) => {
+                if (result.value) {
+                    $.ajax({
+                        url: `@Url.Action("changeUnitsInStock", "SupplierStocks")`,
+                        type: "GET",
+                        dataType: "json",
+                        data: {
+                            UnitsInStock: `@Model.UnitsInStock`,
+                            SourceListID:`@Model.SourceListID`
+                        },
+                    }).done(function (result) {
+                        //這裡不知道為甚麼走步近來
+                            $("#message").html(result);
+                        
+                   
+                            //Swal.fire('修改成功!', '數量已修改', 'success');
+                        
+                        }).fail(function () {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: '處理修改時發生錯誤',
+                                footer: ""
+                            })
+                        });
+                }
+            })
+        });
+    </script>
+}
