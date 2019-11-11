@@ -12,6 +12,9 @@ namespace PMS_Inventory_huan.Controllers
 {
     public class ShipNoticesController : BaseController
     {
+        /// <summary>
+        /// 這個控制器的方法裡面的參數 string id 一律為 採購單編號(purchaseOrderID)
+        /// </summary>
         private PMSAEntities db;
         string supplierAccount;
         string supplierCode;
@@ -101,15 +104,11 @@ namespace PMS_Inventory_huan.Controllers
             return View(purchaseOrderViewModel);
         }
         //======================================================================================
-
         /// <summary>
         ///  出貨確認
         /// </summary>
         /// <param name="shipNotice"></param>
         /// <returns></returns>
-
-
-
         //出貨確認Controller，要修改採購單狀態、以及貨源清單庫存數量
         public ActionResult shipCheck(string id)
         {
@@ -161,13 +160,11 @@ namespace PMS_Inventory_huan.Controllers
                     return RedirectToAction("shipCheck", "ShipNotices", new { id = purchaseOrderID });
                 }
             }
-
             //修改採購單狀態
             PurchaseOrder purchaseOrder = db.PurchaseOrder.Find(purchaseOrderID);
             purchaseOrder.PurchaseOrderStatus = "S";
             db.Entry(purchaseOrder).State = EntityState.Modified;
             //新增出貨通知
-
             DateTime now = DateTime.Now;
             ShipNotice shipNotice = new ShipNotice();
             string snId = $"SN-{now:yyyyMMdd}-";
@@ -182,7 +179,6 @@ namespace PMS_Inventory_huan.Controllers
             shipNotice.CompanyCode = compCode.CompanyCode;
             shipNotice.SupplierAccountID = supplierAccount;
             //檢查出貨通知表裡面是否有該訂單ID，如果有，顯示該筆訂單已出貨
-            //這裡找步道方法可以檢查成功
             ShipNotice ship = db.ShipNotice.Where(x => x.PurchaseOrderID == purchaseOrderID).FirstOrDefault();
             if (ship != null)
             {
@@ -218,6 +214,34 @@ namespace PMS_Inventory_huan.Controllers
             return View(po);
         }
 
+        private string GetStatus(string purchaseOrderStatus)
+        {
+            //N = 新增,P = 送出,C = 異動中,E = 答交,D = 整筆訂單取消,S = 出貨,R = 點交,O = 逾期,Z = 結案
+            switch (purchaseOrderStatus)
+            {
+                case "N":
+                    return "新增";
+                case "P":
+                    return "送出";
+                case "C":
+                    return "異動中";
+                case "E":
+                    return "答交";
+                case "D":
+                    return "取消";
+                case "S":
+                    return "出貨";
+                case "R":
+                    return "點交";
+                case "O":
+                    return "逾期";
+                case "Z":
+                    return "結案";
+                default:
+                    return "";
+            }
+
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

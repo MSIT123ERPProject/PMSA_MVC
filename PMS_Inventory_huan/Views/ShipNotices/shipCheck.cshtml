@@ -85,7 +85,7 @@
 <p>
    <button><a id="idshipCheck" data-wc="@Model.PurchaseOrderID">確定出貨</a> </button> 
     @*@Html.ActionLink("確定出貨", "shipChecked", new { id = Model.PurchaseOrderID }) |*@
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("回至查詢頁面", "Index")
 </p>
 <div id="message"></div>
 
@@ -117,9 +117,9 @@
                         data: { id : idship }
                     }).done(function (result) {
                         $("#message").html(result);
-                        $.ajax({
+                        //$.ajax({
 
-                        })
+                        //})
                         //Swal.fire({
                         //    position: 'top-end',
                         //    icon: 'success',

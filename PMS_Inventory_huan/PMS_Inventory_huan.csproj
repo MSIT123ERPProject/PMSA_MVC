@@ -646,7 +646,6 @@
     <Content Include="Views\PurchaseOrders\_CreatePODItemPartial.cshtml" />
     <Content Include="Views\ShipNotices\purchaseOrderSended.cshtml" />
     <Content Include="Views\ShipNotices\shipCheck.cshtml" />
-    <Content Include="Views\ShipNotices\shipChecked.cshtml" />
     <Content Include="Views\ShipNotices\shipNoticeDisplay.cshtml" />
   </ItemGroup>
   <ItemGroup>

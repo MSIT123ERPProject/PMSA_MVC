@@ -88,14 +88,17 @@ namespace PMS_Inventory_huan.Controllers
         public ActionResult changeUnitsInStock([Bind(Include = "UnitsInStock,PartNumber,SourceListOID,SourceListID")] SourceList SourceList)
         {
             int? UnitsInStock = SourceList.UnitsInStock;
-            if (UnitsInStock == null && UnitsInStock <= 0)
+            if (UnitsInStock == null || UnitsInStock <= 0)
             {
-                return Json( "<script>Swal.fire({ title: 'Custom animation with Animate.css', showClass: {  popup: 'animated fadeInDown faster' }, hideClass:      {      popup: 'animated fadeOutUp faster' }    })</script>" , JsonRequestBehavior.AllowGet);
+                return Json( "<script>Swal.fire({ title: '庫存數量不得小於零', showClass: {  popup: 'animated fadeInDown faster' }, hideClass:      {      popup: 'animated fadeOutUp faster' }    })</script>" , JsonRequestBehavior.AllowGet);
             }
             SourceList a = db.SourceList.Find(SourceList.SourceListID);
+            if ( a== null ) {
+                return HttpNotFound();
+            }
             a.UnitsInStock = (int)UnitsInStock;
-            db.Entry(a).State = EntityState.Modified;
-            db.SaveChanges();//庫存修改過的資料無法處存，卻又沒有出現錯誤訊息
+            db.Entry(a).Property(ap=>ap.UnitsInStock).IsModified =true;
+            db.SaveChanges();
             return Json(new { result = true }, JsonRequestBehavior.AllowGet);
         }
         protected override void Dispose(bool disposing)
