@@ -12,26 +12,50 @@ namespace PMS_Inventory_huan.Controllers
 {
     public class SupplierStocksController : BaseController
     {
-        private PMSAEntities db = new PMSAEntities();
-        private Utility utility = new Utility();
-
+        private PMSAEntities db;
+        private string SupplierCode;
+        private string SupplierAccount;
+        public SupplierStocksController()
+        {
+            db = new PMSAEntities();
+            SupplierCode = "S00001";
+            SupplierAccount = "SE00001";
+        }
         public ActionResult Index()
         {
-           string supplierCode= utility.GetSupplierAccountByAccountID("").SupplierCode;
-            var r = from n in db.SourceList where n.SupplierCode == supplierCode select n;
-            return View(r);
+            SupplierInfo supplierInfo = db.SupplierInfo.Find(SupplierCode);
+            ViewBag.supplierName = supplierInfo.SupplierName;
+            ViewBag.supplierCode = SupplierCode;
+            return View();
         }
-
         // GET: SupplierStocks
         [HttpPost]
         public ActionResult Index([Bind(Include = "PartNumber")] SourceList SourceList)
         {
-            string supplierCode = utility.GetSupplierAccountByAccountID("").SupplierCode;
-            IEnumerable<SourceList> result = db.SourceList.Where(s => s.PartNumber == SourceList.PartNumber && s.SupplierCode == supplierCode);
-            return View(result);
+            var qeury = from sl in db.SourceList.AsEnumerable()
+                        where sl.PartNumber == SourceList.PartNumber
+                        select sl;
+            ViewBag.supplierCode = SupplierCode;
+            return View(qeury);
+        }
+        [HttpGet]
+        public JsonResult GetSourcelistBySupplierCode(string supplierCode)
+        {
+            //注意  :   dataTable只接受Enumerable類別 ，所以要加上AsEnumerable()方法
+            var query = from sl in db.SourceList.AsEnumerable()
+                        where sl.SupplierCode == supplierCode
+                        select new SourceList
+                        {
+                            SourceListID = sl.SourceListID,
+                            PartNumber = sl.PartNumber,
+                            QtyPerUnit = sl.QtyPerUnit,
+                            UnitPrice = sl.UnitPrice,
+                            UnitsOnOrder = sl.UnitsOnOrder,
+                            UnitsInStock = sl.UnitsInStock
+                        };
+            return Json(new { data = query }, JsonRequestBehavior.AllowGet);
         }
 
-     
         //供應商庫存管理首頁，將使用者輸入的件號從資料庫找出來，等資料庫出來再來實驗
         //[HttpPost]
         //public ActionResult SupplierStocksView(int partNumber)

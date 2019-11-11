@@ -1,0 +1,163 @@
+﻿@model IEnumerable<PMS_Inventory_huan.Models.PurchaseOrder>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Html.Raw(ViewBag.failMessage)
+<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+    <h2>@PMS_Inventory_huan.Resources.AppResource.ShipNotice</h2>
+    <!-- Topbar Search -->
+    @*@using (Html.BeginForm("Index", "ShipNotices", FormMethod.Get, new { @class = "d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" }))
+        {
+            <div class="input-group">
+                <input name="PurchaseOrderID" id="idSearh" type="text" class="form-control bg-light border-0 small" placeholder=@PMS_Inventory_huan.Resources.AppResource.PurchaseOrderID aria-label="Search" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit">
+                        <i class="fas fa-search fa-sm"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="input-group">
+                <input name="PurchaseOrderStatus" id="idSearh2" type="text" class="form-control bg-light border-0 small" placeholder=@PMS_Inventory_huan.Resources.AppResource.status . aria-label="Search" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit">
+                        <i class="fas fa-search fa-sm"></i>
+                    </button>
+                </div>
+            </div>
+        }*@
+
+    <div id="idStatus" class="col-sm-auto">
+        @Html.DropDownList("selectlist", new SelectList(new[]
+     {
+        new SelectListItem { Text = "未出貨", Value = "E",Selected=true },
+        new SelectListItem { Text = "未答交",Value="P",Selected=false },
+        new SelectListItem { Text = "已出貨", Value = "S",Selected=false }
+        }, "Value", "Text"),
+     new { id = "idStatus", @class = "form-control" }
+     )
+    </div>
+</nav>
+@*dropdownlist取得值得方法*@
+@*http://kevintsengtw.blogspot.com/2011/09/jquery-dropdownlist-1.html*@
+
+<!-- DataTables Example -->
+<div class="card mb-3">
+    <div class="card-header">
+        <i class="fas fa-table"></i>
+        採購單
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered" id="dataTable" cellspacing="0" style="width:100%">
+                <thead>
+                    <tr>
+                        @*<th>採購單狀態</th>*@
+                        <th>@Html.DisplayNameFor(model => model.PurchaseOrderStatus)</th>
+                        @*<th>採購單編號</th>*@
+                        <th>@Html.DisplayNameFor(model => model.PurchaseOrderID)</th>
+                        @*<th>收貨人名稱</th>*@
+                        <th>@Html.DisplayNameFor(model => model.ReceiverName)</th>
+                        @*<th>收貨人電話</th>*@
+                        <th>@Html.DisplayNameFor(model => model.ReceiverTel)</th>
+                        @*<th>收貨人手機</th>*@
+                        <th>@Html.DisplayNameFor(model => model.ReceiverMobile)</th>
+                        @*<th>收貨人地址</th>*@
+                        <th>@Html.DisplayNameFor(model => model.ReceiptAddress)</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        @*<th>採購單狀態</th>*@
+                        <th>@Html.DisplayNameFor(model => model.PurchaseOrderStatus)</th>
+                        @*<th>採購單編號</th>*@
+                        <th>@Html.DisplayNameFor(model => model.PurchaseOrderID)</th>
+                        @*<th>收貨人名稱</th>*@
+                        <th>@Html.DisplayNameFor(model => model.ReceiverName)</th>
+                        @*<th>收貨人電話</th>*@
+                        <th>@Html.DisplayNameFor(model => model.ReceiverTel)</th>
+                        @*<th>收貨人手機</th>*@
+                        <th>@Html.DisplayNameFor(model => model.ReceiverMobile)</th>
+                        @*<th>收貨人地址</th>*@
+                        <th>@Html.DisplayNameFor(model => model.ReceiptAddress)</th>
+                        <th></th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+    <div class="card-footer small text-muted"></div>
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            shipDatatable();
+            $("#idStatus").change(function () {
+                shipDatatable();
+            });
+        });
+
+        function shipDatatable() {
+            if ($.fn.dataTable.isDataTable("#dataTable")) {
+                $("#dataTable").DataTable().destroy();
+            }
+             $("#dataTable").DataTable({
+                    "ajax": {
+                      "url": "@Url.Action("GetPurchaseOrderList","ShipNotices")",
+                    "type" : "get",
+                "dataType" :"json",
+                     "data": { "PurchaseOrderStatus": $('#idStatus option:selected').val() },
+              "contentType": "application/json;charset=utf-8",
+                              },
+                "columns": [
+                    { "data": "PurchaseOrderStatus" },
+                    {"data" : "PurchaseOrderID" },
+                    { "data": "ReceiverName" },
+                    { "data": "ReceiverTel" },
+                    { "data": "ReceiverMobile" },
+                    { "data": "ReceiptAddress" },
+                    {       /*按鈕程式碼想寫在這，但失敗了*/   /* 20191107 09:12 成功了，原因在於return字串沒有正確的打好，必須注意雙引號以及單引號  */
+                        "data": "PurchaseOrderID",
+                        "render": function (data, type, row, meta) {
+                            if (row.PurchaseOrderStatus == "P") {
+                                /*未答交*/
+                                   return '<a class="btn btn-primary"'+' href="' + "@Url.Action( "purchaseOrderSended","ShipNotices")" + "?id=" + data + '">檢視未答交</a>';
+                             }
+                             else if(row.PurchaseOrderStatus == "E") {
+                                /*未出貨按鈕*/
+                                return '<a class="btn btn-primary"'+' href="' + "@Url.Action( "shipCheck","ShipNotices")" + "?id=" + data + '">檢視未出貨</a>';
+                            }
+                            else {
+                                /*已出貨*/
+                                return '<a class="btn btn-primary" href="' + "@Url.Action( "Edits","ShipNotices")"+"?id=" + data + '">檢視已出貨</a>';
+                            }
+
+                        }
+                    }
+                 ],
+                 "lengthMenu":[[10,25,50,75,100,-1],[10,25,50,75,100,"All"]],
+                "order": [[1,"desc"]],
+            });
+        }
+        /*此方法目前沒用到*/
+        function shipmentStatus() {
+            $.ajax({
+                url: "@Url.Action("Index","ShipNotices")",
+                type: "POST",
+                data: { "PurchaseOrderStatus": $('#idStatus option:selected').val() },
+            }).done(function () {
+                Swal.fire( '搜尋成功','以下為查詢結果','success')
+            }).fail(function () {
+                Swal.fire({
+                       type: 'error',
+                       title: '查詢失敗',
+                       text: '查無訂單資料',
+                         })
+            })
+        }
+    </script>
+
+}

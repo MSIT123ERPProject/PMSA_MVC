@@ -59,30 +59,6 @@ namespace PMS_Inventory_huan.Controllers
             return View();
         }
 
-
-        // GET: ShipNotices/Details/5
-        public ActionResult Details(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            PurchaseOrder shipNotice = db.PurchaseOrder.Find(id);
-            if (shipNotice == null)
-            {
-                return HttpNotFound();
-            }
-            var query = from n in db.PurchaseOrderDtl where n.PurchaseOrderID == id select n;
-            int amount = 0;
-            foreach (var x in query)
-            {
-                amount = amount + (int)x.Total;
-            }
-            ViewBag.amount = amount;
-            return View(shipNotice);
-        }
-
-
         //按下檢視後進入此方法
 
         public ActionResult Edit([Bind(Include = "id")] string id)
@@ -98,36 +74,9 @@ namespace PMS_Inventory_huan.Controllers
             }
             else if (purchaseOrder.PurchaseOrderStatus == "S")
             {
-                return RedirectToAction("Details", "ShipNotices", new { id });
+                return RedirectToAction("shipNoticeDisplay", "ShipNotices", new { id });
             }
             return HttpNotFound("Not Found");
-            //===================================================================================
-            //PurchaseOrderViewModel purchaseOrderViewModel = new PurchaseOrderViewModel();
-
-            //if (id == null)
-            //{
-            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            //}
-            ////不知道為何找不到該ID的採購單，在INDEX的方法中明明有找出來並顯示在VIEW裡面，而同一筆卻在這找不到
-            //PurchaseOrder purchaseOrder = db.PurchaseOrder.Where(x => x.PurchaseOrderID == id).SingleOrDefault();
-            //if (purchaseOrder == null)
-            //{
-            //    return HttpNotFound("purchaseOrder Not Found");
-            //}
-            //var query = from n in db.PurchaseOrderDtl where n.PurchaseOrderID == id select n;
-            //int amount = 0;
-            //foreach (var x in query)
-            //{
-            //    amount = amount + (int)x.Total;
-            //}
-            //purchaseOrderViewModel.failMessage = Convert.ToString(TempData["failMessage"]);
-            //purchaseOrderViewModel.PurchaseOrderID = purchaseOrder.PurchaseOrderID;
-            //purchaseOrderViewModel.ReceiverName = purchaseOrder.ReceiverName;
-            //purchaseOrderViewModel.ReceiverTel = purchaseOrder.ReceiverTel;
-            //purchaseOrderViewModel.ReceiverMobile = purchaseOrder.ReceiverMobile;
-            //purchaseOrderViewModel.ReceiptAddress = purchaseOrder.ReceiptAddress;
-            //ViewBag.amount = amount;
-            //return View(purchaseOrderViewModel);
         }
         /// <summary>
         /// 此功能為亞辰負責
@@ -142,8 +91,8 @@ namespace PMS_Inventory_huan.Controllers
             {
                 return HttpNotFound("purchaseOrder Not Found or id is null");
             }
-            PurchaseOrderViewModel purchaseOrderViewModel = new PurchaseOrderViewModel();
-            purchaseOrderViewModel.failMessage = Convert.ToString(TempData["failMessage"]);
+            PurchaseOrder purchaseOrderViewModel = new PurchaseOrder();
+            //purchaseOrderViewModel.failMessage = Convert.ToString(TempData["failMessage"]);
             purchaseOrderViewModel.PurchaseOrderID = purchaseOrder.PurchaseOrderID;
             purchaseOrderViewModel.ReceiverName = purchaseOrder.ReceiverName;
             purchaseOrderViewModel.ReceiverTel = purchaseOrder.ReceiverTel;
@@ -154,7 +103,7 @@ namespace PMS_Inventory_huan.Controllers
         //======================================================================================
 
         /// <summary>
-        /// 
+        ///  出貨確認
         /// </summary>
         /// <param name="shipNotice"></param>
         /// <returns></returns>
@@ -164,8 +113,15 @@ namespace PMS_Inventory_huan.Controllers
         //出貨確認Controller，要修改採購單狀態、以及貨源清單庫存數量
         public ActionResult shipCheck(string id)
         {
-            PurchaseOrder purchaseOrder = db.PurchaseOrder.Find(id);
-            return View(purchaseOrder);
+            PurchaseOrder po = db.PurchaseOrder.Find(id);
+            var query = from nn in db.PurchaseOrderDtl where nn.PurchaseOrderID == id select nn;
+            int amount = 0;
+            foreach (var y in query)
+            {
+                amount = amount + (int)y.Total;
+            }
+            ViewBag.amount = amount;
+            return View(po);
         }
 
         [HttpGet]
@@ -192,14 +148,14 @@ namespace PMS_Inventory_huan.Controllers
                 }
                 else
                 {
-                    PurchaseOrder po = db.PurchaseOrder.Find(purchaseOrderID);
-                    var query = from nn in db.PurchaseOrderDtl where nn.PurchaseOrderID == purchaseOrderID select nn;
-                    int amount = 0;
-                    foreach (var y in query)
-                    {
-                        amount = amount + (int)y.Total;
-                    }
-                    ViewBag.amount = amount;
+                    //PurchaseOrder po = db.PurchaseOrder.Find(purchaseOrderID);
+                    //var query = from nn in db.PurchaseOrderDtl where nn.PurchaseOrderID == purchaseOrderID select nn;
+                    //int amount = 0;
+                    //foreach (var y in query)
+                    //{
+                    //    amount = amount + (int)y.Total;
+                    //}
+                    //ViewBag.amount = amount;
                     return Json("<script>Swal.fire('庫存不足')</script>", JsonRequestBehavior.AllowGet);
                     //庫存不足時，顯示視窗警告並且導回原頁面
                     return RedirectToAction("shipCheck", "ShipNotices", new { id = purchaseOrderID });
@@ -238,14 +194,30 @@ namespace PMS_Inventory_huan.Controllers
             return Json("<script>Swal.fire('出貨成功')</script>", JsonRequestBehavior.AllowGet);
             return RedirectToAction("Index", "ShipNotices", new { id = purchaseOrder.PurchaseOrderID });
         }
+        //顯示出貨通知資訊
+        public ActionResult shipNoticeDisplay(string id) {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            PurchaseOrder po = db.PurchaseOrder.Find(id);
+            if (po == null)
+            {
+                return HttpNotFound();
+            }
+            var query = from n in db.PurchaseOrderDtl where n.PurchaseOrderID == id select n;
+            int amount = 0;
+            foreach (var x in query)
+            {
+                amount = amount + (int)x.Total;
+            }
+            ViewBag.amount = amount;
+            ShipNotice sn = db.ShipNotice.Where(x => x.PurchaseOrderID == id).FirstOrDefault();
+            ViewBag.shipNoticeID = sn.ShipNoticeID;
+            ViewBag.shipDate = sn.ShipDate;
+            return View(po);
+        }
 
-        //public ActionResult shipChecked([Bind(Include = "purchaseOrderID")] PurchaseOrder purchaseOrder) {
-        //    if (purchaseOrder.PurchaseOrderID == null) {
-        //        return HttpNotFound("purchaseOrder.PurchaseOrderID Not Found");
-        //    }
-
-        //  return  RedirectToAction("shipChecked",new {id= purchaseOrder.PurchaseOrderID });
-        //}
         protected override void Dispose(bool disposing)
         {
             if (disposing)

@@ -1,8 +1,10 @@
 ﻿@model IEnumerable<PMS_Inventory_huan.Models.PurchaseOrder>
 
 @{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+                /**/
+
+                ViewBag.Title = "Index";
+                Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @Html.Raw(ViewBag.failMessage)
 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
@@ -107,10 +109,10 @@
              $("#dataTable").DataTable({
                     "ajax": {
                       "url": "@Url.Action("GetPurchaseOrderList","ShipNotices")",
-                    "type" : "get",
-                "dataType" :"json",
+                     "type" : "get",
+                     "dataType" :"json",
                      "data": { "PurchaseOrderStatus": $('#idStatus option:selected').val() },
-              "contentType": "application/json;charset=utf-8",
+                     "contentType": "application/json;charset=utf-8",
                               },
                 "columns": [
                     { "data": "PurchaseOrderStatus" },

@@ -18,6 +18,11 @@ namespace PMS_Inventory_huan
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+            routes.MapRoute(
+                name: "SupplierStocksRoute",
+                url: "{controller}/{action}/{supplierCode}",
+                defaults: new { controller = "SupplierStocks", action = "Index", supplierCode = UrlParameter.Optional }
+            );
         }
     }
 }
