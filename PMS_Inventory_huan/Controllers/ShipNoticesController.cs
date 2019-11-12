@@ -165,6 +165,11 @@ namespace PMS_Inventory_huan.Controllers
                 PurchaseOrderDtl purchaseOrderDtl = db.PurchaseOrderDtl.Find(purchaseOrderDtlTemp[i]);
                 sourceList.UnitsInStock = sourceList.UnitsInStock - purchaseOrderDtl.Qty;
                 sourceList.UnitsOnOrder = sourceList.UnitsOnOrder - purchaseOrderDtl.Qty;
+                //如果訂單書量小於零，則讓他為零
+                if (sourceList.UnitsOnOrder < 0)
+                {
+                    sourceList.UnitsOnOrder = 0;
+                }
                 db.Entry(sourceList).State = EntityState.Modified;
             }
             //修改採購單狀態
