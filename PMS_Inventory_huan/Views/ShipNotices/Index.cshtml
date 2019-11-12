@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<PMS_Inventory_huan.Models.PurchaseOrder>
 
 @{
-                /**/
+    /**/
 
-                ViewBag.Title = "Index";
-                Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @Html.Raw(ViewBag.failMessage)
 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
@@ -39,6 +39,9 @@
         }, "Value", "Text"),
      new { id = "idStatus", @class = "form-control" }
      )
+    </div>
+    <div id="idOrder" class="col-sm-auto">
+        @Html.DropDownListFor(model=>model.Where(x=>x.PurchaseOrderStatus=="E"), new { id = "idStatus", @class = "form-control" })
     </div>
 </nav>
 @*dropdownlist取得值得方法*@
@@ -101,7 +104,21 @@
                 shipDatatable();
             });
         });
-
+        function idOrder() {
+            $.ajax({
+                url: `@Url.Action("unshipOrderDtl","ShipNotices")`,
+                type: "GET",
+                data: { id= $("#idStatus option:selected").val() }
+            }).done(function (result) {
+                $("#idOrder").empty();
+                $("#idOrder").append($(`<option></option>`).val('').text('請選擇'));
+                $.each(result, function (index, item) {
+                    $("#idOrder").append($(`<option></option>`).val(item.value).text(item.text));
+                });
+                }).fail(function () {
+                    alert("idOrder ajax is fail");
+                });
+        }
         function shipDatatable() {
             if ($.fn.dataTable.isDataTable("#dataTable")) {
                 $("#dataTable").DataTable().destroy();
@@ -136,7 +153,6 @@
                                 /*已出貨*/
                                 return '<a class="btn btn-primary" href="' + "@Url.Action( "Edits","ShipNotices")"+"?id=" + data + '">檢視已出貨</a>';
                             }
-
                         }
                     }
                  ],

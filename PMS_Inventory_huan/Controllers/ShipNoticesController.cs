@@ -45,17 +45,11 @@ namespace PMS_Inventory_huan.Controllers
             return Json(new { data = query }, JsonRequestBehavior.AllowGet);
         }
 
-        //目前沒功能
-        public ActionResult IndexUnshipped(PurchaseOrder purchaseOrder)
+        //檢視未出貨訂單明細，並要可以勾選要出貨的明細
+        public ActionResult UnshipOrderDtl(PurchaseOrder purchaseOrder)
         {
-
-            if (purchaseOrder != null && purchaseOrder.PurchaseOrderID == "P")
-            {
-                IQueryable<PurchaseOrder> po = db.PurchaseOrder.Where(n => n.PurchaseOrderID == "P");
-
-                return View(po);
-            }
-            return View();
+            var q = db.PurchaseOrderDtl.Where(x => x.PurchaseOrderID == purchaseOrder.PurchaseOrderID);
+            return View(q);
         }
         public ActionResult Index()
         {

@@ -48,6 +48,13 @@ namespace PMS_Inventory_huan
             bundles.Add(new StyleBundle("~/bundles/sweetalertCSS").Include(
                 "~/Content/sweetAlert/sweetalert2.css"
                 ));
+            //highchart
+            bundles.Add(new ScriptBundle("~/bundles/highchartsJS").Include(
+                "~/Scripts/highcharts/highcharts.js"
+                ));
+            bundles.Add(new StyleBundle("~/bundles/highchartsCSS").Include(
+                "~/Content/highchart_css/highcharts.css"
+                ));
         }
     }
 }
