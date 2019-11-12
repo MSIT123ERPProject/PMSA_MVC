@@ -122,7 +122,8 @@ namespace PMS_Inventory_huan.Controllers
             ViewBag.amount = amount;
             return View(po);
         }
-
+        //按下確定出貨之後，ajax呼叫此方法修改貨源清單庫存數量及訂單數量並且新增一筆出貨通知
+        //出貨通知明細部分還沒有做
         [HttpGet]
         public ActionResult shipChecked(string id)
         {
@@ -135,30 +136,36 @@ namespace PMS_Inventory_huan.Controllers
             var podquery = from pod in db.PurchaseOrderDtl
                            join sl in db.SourceList on pod.SourceListID equals sl.SourceListID
                            where pod.PurchaseOrderID == purchaseOrderID
-                           select new { pod.TotalPartQty, sl.UnitsInStock, pod.SourceListID, pod.PurchaseOrderID, pod.PurchaseOrderDtlCode };
+                           select new { pod.Qty, sl.UnitsInStock, pod.SourceListID, pod.PurchaseOrderID, pod.PurchaseOrderDtlCode, sl.UnitsOnOrder };
+
+            List<string> sourceListsTemp = new List<string>();
+            List<string> purchaseOrderDtlTemp = new List<string>();
             foreach (var x in podquery)
             {
-                if (x.UnitsInStock >= x.TotalPartQty)
+                if (x.UnitsInStock >= x.Qty)
                 {
-                    SourceList sourceList = db.SourceList.Find(x.SourceListID);
-                    PurchaseOrderDtl purchaseOrderDtl = db.PurchaseOrderDtl.Find(x.PurchaseOrderDtlCode);
-                    sourceList.UnitsInStock = sourceList.UnitsInStock - purchaseOrderDtl.TotalPartQty;
-                    db.Entry(sourceList).State = EntityState.Modified;
+                    //將貨源清單庫存數量以及訂單數量扣除該採購單料件請購數量並存回資料庫
+                    sourceListsTemp.Add(x.SourceListID);
+                    purchaseOrderDtlTemp.Add(x.PurchaseOrderDtlCode);
+
+                    //SourceList sourceList = db.SourceList.Find(x.SourceListID);
+                    //PurchaseOrderDtl purchaseOrderDtl = db.PurchaseOrderDtl.Find(x.PurchaseOrderDtlCode);
+                    //sourceList.UnitsInStock = sourceList.UnitsInStock - purchaseOrderDtl.Qty;
+                    //sourceList.UnitsOnOrder = sourceList.UnitsOnOrder - purchaseOrderDtl.Qty;
+                    //db.Entry(sourceList).State = EntityState.Modified;
                 }
                 else
                 {
-                    //PurchaseOrder po = db.PurchaseOrder.Find(purchaseOrderID);
-                    //var query = from nn in db.PurchaseOrderDtl where nn.PurchaseOrderID == purchaseOrderID select nn;
-                    //int amount = 0;
-                    //foreach (var y in query)
-                    //{
-                    //    amount = amount + (int)y.Total;
-                    //}
-                    //ViewBag.amount = amount;
                     return Json("<script>Swal.fire('庫存不足')</script>", JsonRequestBehavior.AllowGet);
-                    //庫存不足時，顯示視窗警告並且導回原頁面
-                    return RedirectToAction("shipCheck", "ShipNotices", new { id = purchaseOrderID });
                 }
+            }
+            for (int i = 0; i < sourceListsTemp.Count(); i++)
+            {
+                SourceList sourceList = db.SourceList.Find(sourceListsTemp[i]);
+                PurchaseOrderDtl purchaseOrderDtl = db.PurchaseOrderDtl.Find(purchaseOrderDtlTemp[i]);
+                sourceList.UnitsInStock = sourceList.UnitsInStock - purchaseOrderDtl.Qty;
+                sourceList.UnitsOnOrder = sourceList.UnitsOnOrder - purchaseOrderDtl.Qty;
+                db.Entry(sourceList).State = EntityState.Modified;
             }
             //修改採購單狀態
             PurchaseOrder purchaseOrder = db.PurchaseOrder.Find(purchaseOrderID);
@@ -188,10 +195,10 @@ namespace PMS_Inventory_huan.Controllers
             purchaseOrder.ShipNotice.Add(shipNotice);
             db.SaveChanges();
             return Json("<script>Swal.fire('出貨成功')</script>", JsonRequestBehavior.AllowGet);
-            return RedirectToAction("Index", "ShipNotices", new { id = purchaseOrder.PurchaseOrderID });
         }
         //顯示出貨通知資訊
-        public ActionResult shipNoticeDisplay(string id) {
+        public ActionResult shipNoticeDisplay(string id)
+        {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
