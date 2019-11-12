@@ -23,10 +23,8 @@ namespace PMS_Inventory_huan.Controllers
             db = new PMSAEntities();
             supplierCode = "S00001";
             supplierAccount = "SE00001";
-        }
-
-        //GET: ShipNotices
-        //此方法為幫助DATATABLE查訂單資料
+        } 
+        //此方法為幫助INDEX的DATATABLE查訂單資料
         public JsonResult GetPurchaseOrderList(string PurchaseOrderStatus)
         {
             string status = PurchaseOrderStatus;
@@ -45,19 +43,37 @@ namespace PMS_Inventory_huan.Controllers
             return Json(new { data = query }, JsonRequestBehavior.AllowGet);
         }
 
-        //檢視未出貨訂單明細，並要可以勾選要出貨的明細
+        //檢視未出貨訂單明細，並要可以勾選要出貨的明細，檢視該採購單所有的產品，並可以選擇出貨那些產品
         public ActionResult UnshipOrderDtl(PurchaseOrder purchaseOrder)
         {
-            var q = db.PurchaseOrderDtl.Where(x => x.PurchaseOrderID == purchaseOrder.PurchaseOrderID);
-            return View(q);
+            return View(purchaseOrder);
+        }
+        //檢視未出貨訂單明細的datatable的AJAX取資料方法
+        public JsonResult GetPurchaseOrderDtl(string purchaseOrderID)
+        {
+            PurchaseOrder purchaseOrder = db.PurchaseOrder.Find(purchaseOrderID);
+            var q = from pod in db.PurchaseOrderDtl
+                    join po in db.PurchaseOrder on pod.PurchaseOrderID equals po.PurchaseOrderID
+                    join pn in db.Part on pod.PartNumber equals pn.PartNumber
+                    join sl in db.SourceList on pod.SourceListID equals sl.SourceListID
+                    where pod.PurchaseOrderID == purchaseOrderID
+                    select new
+                    {
+                        pod.PurchaseOrderDtlCode,
+                        pod.PartName,
+                        pod.Qty,
+                        totalPrice = sl.UnitPrice * pod.Qty * pod.QtyPerUnit,
+                        pn.PartUnit,
+                        pod.QtyPerUnit,
+                        pod.CommittedArrivalDate,
+                    };
+            return Json(new { data = q }, JsonRequestBehavior.AllowGet);
         }
         public ActionResult Index()
         {
             return View();
         }
-
         //按下檢視後進入此方法
-
         public ActionResult Edit([Bind(Include = "id")] string id)
         {
             PurchaseOrder purchaseOrder = db.PurchaseOrder.Find(id);
@@ -99,7 +115,7 @@ namespace PMS_Inventory_huan.Controllers
         }
         //======================================================================================
         /// <summary>
-        ///  出貨確認
+        ///  出貨確認********************更改寫法這裡之後可能不會用，因為出貨要改為個別出貨
         /// </summary>
         /// <param name="shipNotice"></param>
         /// <returns></returns>
@@ -195,6 +211,7 @@ namespace PMS_Inventory_huan.Controllers
             db.SaveChanges();
             return Json("<script>Swal.fire('出貨成功')</script>", JsonRequestBehavior.AllowGet);
         }
+
         //顯示出貨通知資訊
         public ActionResult shipNoticeDisplay(string id)
         {
@@ -220,6 +237,7 @@ namespace PMS_Inventory_huan.Controllers
             return View(po);
         }
 
+        //把訂單狀態換成文字敘述的方法
         private string GetStatus(string purchaseOrderStatus)
         {
             //N = 新增,P = 送出,C = 異動中,E = 答交,D = 整筆訂單取消,S = 出貨,R = 點交,O = 逾期,Z = 結案

@@ -40,9 +40,12 @@
      new { id = "idStatus", @class = "form-control" }
      )
     </div>
-    <div id="idOrder" class="col-sm-auto">
+    @*=================================================================*@
+    @*這裡想加一個採購單編號的下拉式選單還沒成功*@
+    @*<div id="idOrder" class="col-sm-auto">
         @Html.DropDownListFor(model=>model.Where(x=>x.PurchaseOrderStatus=="E"), new { id = "idStatus", @class = "form-control" })
-    </div>
+    </div>*@
+@*=============================================================================================*@
 </nav>
 @*dropdownlist取得值得方法*@
 @*http://kevintsengtw.blogspot.com/2011/09/jquery-dropdownlist-1.html*@
@@ -104,6 +107,8 @@
                 shipDatatable();
             });
         });
+
+        //用來取得下拉式選單所選取的採購單編號
         function idOrder() {
             $.ajax({
                 url: `@Url.Action("unshipOrderDtl","ShipNotices")`,
@@ -119,6 +124,7 @@
                     alert("idOrder ajax is fail");
                 });
         }
+        //顯示選取的採購單狀態的所有採購單
         function shipDatatable() {
             if ($.fn.dataTable.isDataTable("#dataTable")) {
                 $("#dataTable").DataTable().destroy();
@@ -146,8 +152,8 @@
                                    return '<a class="btn btn-primary"'+' href="' + "@Url.Action( "purchaseOrderSended","ShipNotices")" + "?id=" + data + '">檢視未答交</a>';
                              }
                              else if(row.PurchaseOrderStatus == "E") {
-                                /*未出貨按鈕*/
-                                return '<a class="btn btn-primary"'+' href="' + "@Url.Action( "shipCheck","ShipNotices")" + "?id=" + data + '">檢視未出貨</a>';
+                                /*未出貨按鈕 檢視該採購單所有的產品，並可以選擇出貨那些產品*/
+                                return '<a class="btn btn-primary"'+' href="' + "@Url.Action( "UnshipOrderDtl","ShipNotices")" + "?id=" + data + '">檢視未出貨</a>';
                             }
                             else {
                                 /*已出貨*/
