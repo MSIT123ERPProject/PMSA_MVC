@@ -23,7 +23,7 @@ namespace PMS_Inventory_huan.Controllers
             db = new PMSAEntities();
             supplierCode = "S00001";
             supplierAccount = "SE00001";
-        } 
+        }
         //此方法為幫助INDEX的DATATABLE查訂單資料
         public JsonResult GetPurchaseOrderList(string PurchaseOrderStatus)
         {
@@ -44,30 +44,30 @@ namespace PMS_Inventory_huan.Controllers
         }
 
         //檢視未出貨訂單明細，並要可以勾選要出貨的明細，檢視該採購單所有的產品，並可以選擇出貨那些產品
-        public ActionResult UnshipOrderDtl(PurchaseOrder purchaseOrder)
+        public ActionResult UnshipOrderDtl([Bind(Include = "PurchaseOrderID")]PurchaseOrder purchaseOrder)
         {
             return View(purchaseOrder);
         }
         //檢視未出貨訂單明細的datatable的AJAX取資料方法
         public JsonResult GetPurchaseOrderDtl(string purchaseOrderID)
         {
-            PurchaseOrder purchaseOrder = db.PurchaseOrder.Find(purchaseOrderID);
-            var q = from pod in db.PurchaseOrderDtl
-                    join po in db.PurchaseOrder on pod.PurchaseOrderID equals po.PurchaseOrderID
-                    join pn in db.Part on pod.PartNumber equals pn.PartNumber
-                    join sl in db.SourceList on pod.SourceListID equals sl.SourceListID
-                    where pod.PurchaseOrderID == purchaseOrderID
-                    select new
-                    {
-                        pod.PurchaseOrderDtlCode,
-                        pod.PartName,
-                        pod.Qty,
-                        totalPrice = sl.UnitPrice * pod.Qty * pod.QtyPerUnit,
-                        pn.PartUnit,
-                        pod.QtyPerUnit,
-                        pod.CommittedArrivalDate,
-                    };
-            return Json(new { data = q }, JsonRequestBehavior.AllowGet);
+            var q = (
+                from pod in db.PurchaseOrderDtl.AsEnumerable()
+                join pn in db.Part on pod.PartNumber equals pn.PartNumber
+                join sl in db.SourceList on pod.SourceListID equals sl.SourceListID
+                select new
+                {
+                    pod.PurchaseOrderID,
+                    pod.PurchaseOrderDtlCode,
+                    pod.PartName,
+                    pod.Qty,
+                    totalPrice = sl.UnitPrice * pod.Qty * pod.QtyPerUnit,
+                    pn.PartUnit,
+                    pod.QtyPerUnit,
+                    pod.CommittedArrivalDate,
+                });
+            var s = q.Where( x=>x.PurchaseOrderID ==purchaseOrderID ); 
+            return Json(s, JsonRequestBehavior.AllowGet);
         }
         public ActionResult Index()
         {

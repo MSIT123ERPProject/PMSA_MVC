@@ -10,42 +10,81 @@
 <p>
     @Html.ActionLink("出貨", "")
 </p>
-<table class="table" id="dataTable">
-    <tr>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.PurchaseOrderDtlCode }) |
-            @Html.ActionLink("Details", "Details", new { id = item.PurchaseOrderDtlCode }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.PurchaseOrderDtlCode })
-        </td>
-    </tr>
-
-
-</table>
+<div class="card mb-3">
+    <div class="card-header">
+        <i class="fas fa-table"></i>
+        出貨明細管理
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered" id="dataTable" cellspacing="0" style="width:100%">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>訂單明細編號</th>
+                        <th>產品名稱</th>
+                        <th>數量</th>
+                        <th>總額</th>
+                        <th>單位</th>
+                        <th>批量</th>
+                        <th>承諾到貨日期</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th></th>
+                        <th>訂單明細編號</th>
+                        <th>產品名稱</th>
+                        <th>數量</th>
+                        <th>總額</th>
+                        <th>單位</th>
+                        <th>批量</th>
+                        <th>承諾到貨日期</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+    <div class="card-footer small text-muted"></div>
+</div>
 
 @section scripts{
     
     <script>
-        $(ducument).ready(function () {
-
+        $(document).ready(function () {
+            purchaseOrderDtlForDataTable();
         });
         //要求SERVER端把訂單明細資料傳回並顯示在DATATABLE上面
         function purchaseOrderDtlForDataTable() {
-            $("dataTable").DataTable({
+            if ($.fn.dataTable.isDataTable("#dataTable")) {
+                $("#dataTable").DataTable().destroy();
+            }
+           let id ="@Model.PurchaseOrderID" ;
+            $("#dataTable").DataTable({
                 "ajax": {
-                    url: `@Url.Action("GetPurchaseOrderDtl","ShipNotices")`,
-                    type: "GET",
-                    dataType: "json",
-                    data: {purchaseOrderID= @Model.PurchaseOrderID }
+                    "url": `@Url.Action("GetPurchaseOrderDtl","ShipNotices")`,
+                    "type": "GET",
+                    "dataType": "json",
+                    "data": { "purchaseOrderID": id },
+                    "contentType": "application/json;charset=utf-8",
+                    cache: true
                 },
                 "columns": [
-                    { "": "" },
-                    { "": "" },
-                    { "": "" },
-                    { "": "" },
-                    { "": "" },
-                    { "": "" },
-                    {"":""},
-                ],
+                    {
+                        "data": "PurchaseOrderDtlCode",
+                        orderable: false,
+                        render : function (data, type, obj, meta) {
+                            return '<input type="checkbox" value="' + data + '">';
+                        }
+                    },
+                    { "data": "PurchaseOrderDtlCode" },
+                    { "data": "PartName" },
+                    { "data": "Qty" },
+                    { "data": "totalPrice" },
+                    { "data": "PartUnit" },
+                    { "data": "QtyPerUnit" },
+                    { "data":"CommittedArrivalDate"}
+                ]
             });
         }
 

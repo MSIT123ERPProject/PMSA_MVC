@@ -30,7 +30,7 @@
             </div>
         }*@
 
-    <div id="idStatus" class="col-sm-auto">
+    <div  class="col-sm-auto">
         @Html.DropDownList("selectlist", new SelectList(new[]
      {
         new SelectListItem { Text = "未出貨", Value = "E",Selected=true },
@@ -109,11 +109,11 @@
         });
 
         //用來取得下拉式選單所選取的採購單編號
-        function idOrder() {
+        @*function idOrder() {
             $.ajax({
                 url: `@Url.Action("unshipOrderDtl","ShipNotices")`,
                 type: "GET",
-                data: { id= $("#idStatus option:selected").val() }
+                data: { id: $("#idStatus option:selected").val() }
             }).done(function (result) {
                 $("#idOrder").empty();
                 $("#idOrder").append($(`<option></option>`).val('').text('請選擇'));
@@ -123,7 +123,7 @@
                 }).fail(function () {
                     alert("idOrder ajax is fail");
                 });
-        }
+        }*@
         //顯示選取的採購單狀態的所有採購單
         function shipDatatable() {
             if ($.fn.dataTable.isDataTable("#dataTable")) {
@@ -131,11 +131,12 @@
             }
              $("#dataTable").DataTable({
                     "ajax": {
-                      "url": "@Url.Action("GetPurchaseOrderList","ShipNotices")",
+                      "url": `@Url.Action("GetPurchaseOrderList","ShipNotices")`,
                      "type" : "get",
                      "dataType" :"json",
                      "data": { "PurchaseOrderStatus": $('#idStatus option:selected').val() },
-                     "contentType": "application/json;charset=utf-8",
+                        "contentType": "application/json;charset=utf-8",
+                        "cache": true,
                               },
                 "columns": [
                     { "data": "PurchaseOrderStatus" },
@@ -153,7 +154,7 @@
                              }
                              else if(row.PurchaseOrderStatus == "E") {
                                 /*未出貨按鈕 檢視該採購單所有的產品，並可以選擇出貨那些產品*/
-                                return '<a class="btn btn-primary"'+' href="' + "@Url.Action( "UnshipOrderDtl","ShipNotices")" + "?id=" + data + '">檢視未出貨</a>';
+                                return '<a class="btn btn-primary"'+' href="' + "@Url.Action( "UnshipOrderDtl","ShipNotices")" + "?PurchaseOrderID=" + data + '">檢視未出貨</a>';
                             }
                             else {
                                 /*已出貨*/
@@ -165,6 +166,7 @@
                  "lengthMenu":[[10,25,50,75,100,-1],[10,25,50,75,100,"All"]],
                 "order": [[1,"desc"]],
             });
+            //$.fn.dataTable.ext.errMode = 'throw';
         }
         /*此方法目前沒用到*/
         function shipmentStatus() {
