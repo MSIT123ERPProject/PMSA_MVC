@@ -83,7 +83,7 @@
     </dl>
 </div>
 <p>
-   <button><a id="idshipCheck" data-wc="@Model.PurchaseOrderID">確定出貨</a> </button> 
+    <button><a id="idshipCheck" data-wc="@Model.PurchaseOrderID">確定出貨</a> </button>
     @*@Html.ActionLink("確定出貨", "shipChecked", new { id = Model.PurchaseOrderID }) |*@
     @Html.ActionLink("回至查詢頁面", "Index")
 </p>
@@ -117,23 +117,18 @@
                         data: { id : idship }
                     }).done(function (result) {
                         $("#message").html(result);
-                        //$.ajax({
-
-                        //})
-                        //Swal.fire({
-                        //    position: 'top-end',
-                        //    icon: 'success',
-                        //    title: '出貨處理成功',
-                        //    showConfirmButton: true,
-                        //    timer: 1500
-                        //})
+                        //想寫轉網址功能，但是失敗了QQ，先來寫HIGHCHART
+                        //window.location.href = "url_to_redirect";
+                        @*let path = `@Url.Action("Index", "ShipNotices")`;*@
+                       // "<script>" + "document.location.href='" + path + "';<" + "/script>"
+                       @*@Url.Content( "~/ShipNotices/shipCheck" );*@
                     }).fail(function () {
-                        Swal.fire({
+                            Swal.fire({
                             icon: 'error',
                             title: 'Oops...',
                             text: '處理出貨時發生錯誤',
                             footer:""
-                        })
+                            })
                     });
                 }
             })

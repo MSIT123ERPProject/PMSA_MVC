@@ -61,7 +61,6 @@
 @section Scripts {
     <script>
         $("#idSave").click(function () {
-            let display;
             Swal.fire({
                 title: '確定修改此筆貨源清單庫存?',
                 text: '修改後可再修改!',
@@ -82,9 +81,14 @@
                             SourceListID:`@Model.SourceListID`
                         }
                     }).done(function (result) {
-                        //這裡不知道為甚麼走步近來
-                        if (result == true) {
-                            Swal.fire('修改成功!', '數量已修改', 'success');
+                        //AJAX 接收的變數為一個物件，裡面的屬性名稱要寫好，並在這裡正確寫出來，JAVASCRIPT才會知道你要比的是甚麼
+                        if (result.value == true) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: '修改成功',
+                                showConfirmButton: true,
+                                timer: 1500
+                            });
                         }
                         else {
                             $("#message").html(result);

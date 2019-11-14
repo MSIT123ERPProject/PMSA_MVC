@@ -99,7 +99,7 @@ namespace PMS_Inventory_huan.Controllers
             a.UnitsInStock = (int)UnitsInStock;
             db.Entry(a).Property(ap=>ap.UnitsInStock).IsModified =true;
             db.SaveChanges();
-            return Json(new { result = true }, JsonRequestBehavior.AllowGet);
+            return Json(new { value = true }, JsonRequestBehavior.AllowGet);
         }
         protected override void Dispose(bool disposing)
         {
